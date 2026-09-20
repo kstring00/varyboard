@@ -32,7 +32,7 @@ The site is a standard Next.js project at the repo root. No build settings need 
 
 1. In Vercel, **Add New Project**, import the `varyboard` GitHub repo. Framework is detected as Next.js.
 2. Under **Settings > Environment Variables**, add for Production (and Preview):
-   - `NEXT_PUBLIC_SHOP_DOMAIN` = the Shopify hostname that will serve checkout. See the note below. Production builds fail on purpose if this is missing.
+   - `NEXT_PUBLIC_SHOP_DOMAIN` = the Shopify hostname that will serve checkout. See the note below. It can be left unset while thevaryboard.com still points at Shopify. Once the domain is moved to Vercel, the production build fails on purpose until it is set.
    - `NEXT_PUBLIC_SITE_URL` = `https://thevaryboard.com` (optional, defaults to the Vercel production URL).
 3. Deploy. Every push to `main` goes live; every pull request gets a preview URL. Previews send `noindex` so Google ignores them.
 

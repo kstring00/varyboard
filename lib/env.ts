@@ -1,25 +1,43 @@
 /**
  * Environment resolution for Vercel.
  *
- * Production, preview and local builds all work without extra config, but production
- * MUST set NEXT_PUBLIC_SHOP_DOMAIN: once thevaryboard.com points at Vercel, the
- * Shopify checkout lives on a different hostname (the *.myshopify.com domain or a
- * subdomain such as shop.thevaryboard.com), and every buy button links there.
+ * Buy buttons link to the Shopify cart on NEXT_PUBLIC_SHOP_DOMAIN. Until the
+ * domain moves, thevaryboard.com itself is the Shopify host, so that is the
+ * fallback. Once thevaryboard.com is assigned to this Vercel project, checkout
+ * must live elsewhere (the *.myshopify.com domain or a subdomain such as
+ * shop.thevaryboard.com) and the variable must be set. A production build fails
+ * only in that dangerous case: the checkout host resolving to this very site.
  */
 const vercelEnv = process.env.VERCEL_ENV; // "production" | "preview" | "development" | undefined
 export const isProduction = vercelEnv === "production";
 
+const LEGACY_SHOP_HOST = "thevaryboard.com";
+
+function normalizeHost(v: string | undefined): string {
+  return (v ?? "").trim().toLowerCase().replace(/^https?:\/\//, "").replace(/\/.*$/, "").replace(/^www\./, "");
+}
+
 /** Hostname that serves the Shopify cart, without protocol. */
 export function resolveShopDomain(): string {
-  const v = process.env.NEXT_PUBLIC_SHOP_DOMAIN?.trim().replace(/^https?:\/\//, "").replace(/\/$/, "");
-  if (v) return v;
-  if (isProduction) {
+  const explicit = normalizeHost(process.env.NEXT_PUBLIC_SHOP_DOMAIN);
+  const shop = explicit || LEGACY_SHOP_HOST;
+  const productionHost = normalizeHost(process.env.VERCEL_PROJECT_PRODUCTION_URL);
+
+  if (isProduction && productionHost && productionHost === shop) {
     throw new Error(
-      "NEXT_PUBLIC_SHOP_DOMAIN is not set. Production buy buttons would point at the wrong host. " +
-        "Set it in Vercel > Project > Settings > Environment Variables (e.g. your-store.myshopify.com).",
+      `NEXT_PUBLIC_SHOP_DOMAIN resolves to "${shop}", which is this site's own production domain. ` +
+        "Buy buttons would point at this site instead of Shopify checkout. " +
+        "Set NEXT_PUBLIC_SHOP_DOMAIN in Vercel > Project > Settings > Environment Variables to the " +
+        "Shopify checkout host (e.g. your-store.myshopify.com or shop.thevaryboard.com) and redeploy.",
     );
   }
-  return "thevaryboard.com"; // local/preview fallback: the current Shopify-hosted domain
+  if (isProduction && !explicit) {
+    console.warn(
+      `[env] NEXT_PUBLIC_SHOP_DOMAIN not set; buy buttons use ${LEGACY_SHOP_HOST}. ` +
+        "Set it before pointing thevaryboard.com at Vercel.",
+    );
+  }
+  return shop;
 }
 
 /** Canonical public URL of the site, without a trailing slash. */
