@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { Header } from "@/components/site/Header";
@@ -16,7 +17,20 @@ export const metadata: Metadata = {
   },
   description:
     "The Vary Board is a patented wall-mounted training board designed by a physical therapist. Practice strength, mobility and balance exercises at home.",
-  openGraph: { siteName: brand.name, type: "website", locale: "en_US" },
+  openGraph: { siteName: brand.name, type: "website", locale: "en_US", images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${brand.name}: two boards mounted on a concrete wall` }] },
+  twitter: { card: "summary_large_image", images: ["/og.jpg"] },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: brand.legalName,
+  alternateName: brand.name,
+  url: siteUrl,
+  logo: `${siteUrl}/icon.svg`,
+  email: brand.email,
+  telephone: brand.phone,
+  contactPoint: [{ "@type": "ContactPoint", telephone: brand.phone, email: brand.email, contactType: "customer service", areaServed: "US" }],
 };
 
 export const viewport: Viewport = {
@@ -30,6 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable}`}>
       <body className="flex min-h-dvh flex-col">
+        <Script id="js-flag" strategy="beforeInteractive">{`document.documentElement.setAttribute("data-js","")`}</Script>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <MotionProvider>
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-teal-deep focus:px-5 focus:py-3 focus:text-white">
             Skip to content

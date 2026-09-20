@@ -12,7 +12,8 @@
     "assets:optimize": "node scripts/optimize-images.mjs",
     "assets:cutout": "python3 scripts/cutout.py",
     "check:placeholders": "node scripts/check-placeholders.mjs",
-    "vercel-build": "next build"
+    "vercel-build": "next build",
+    "assets:og": "node scripts/make-og.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

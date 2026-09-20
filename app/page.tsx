@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
+import { WhatItIs } from "@/components/home/WhatItIs";
+import { WhoItsFor } from "@/components/home/WhoItsFor";
+import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
+import { People } from "@/components/home/People";
+import { Proof } from "@/components/home/Proof";
+import { FitsYourSpace } from "@/components/home/FitsYourSpace";
+import { PriceCta } from "@/components/home/PriceCta";
 import { brand, formatPrice, products } from "@/content/facts";
 
 export const metadata: Metadata = {
@@ -13,8 +20,13 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      {/* Sections 2-8 (What it is, Who it's for, What you can do, The people behind it,
-          Proof, Fits your space, Price + CTA) are built one at a time after hero review. */}
+      <WhatItIs />
+      <WhoItsFor />
+      <WhatYouCanDo />
+      <People />
+      <Proof />
+      <FitsYourSpace />
+      <PriceCta />
     </>
   );
 }

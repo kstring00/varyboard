@@ -76,6 +76,23 @@ export const generatedImages = {
     ],
     "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAA0AA4BaJZQC06ED5AZHNxAAAPrpI412r0MgfJH+HXeJxd/OCgVyV7LsoH5TPOhfZulJK/WoYttlm2PTRM1bMzPVmTKq56V4b0oA"
   },
+  "hero-render-clean": {
+    "name": "hero-render-clean",
+    "file": "hero-render-clean.jpg",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      360,
+      480,
+      640,
+      768,
+      1024,
+      1280,
+      1536,
+      1672
+    ],
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoQAAkAA4BaJZQC7AEfAhCuzEIA/vZIpF3mbGXjT6ZMG7eO4JDHdEvmJJFNSt+hlzwTLo9h5vaU5Ub8t+T3UAk/BLcgBbgAAAA="
+  },
   "mantoleft": {
     "name": "mantoleft",
     "file": "mantoleft.webp",

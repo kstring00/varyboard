@@ -10,7 +10,7 @@
   --color-paper-2: #eeeae2;
   --color-ink: #17211f;
   --color-ink-2: #3b4745;
-  --color-muted: #63706e;
+  --color-muted: #55615e;
   --color-line: #d9d4ca;
   --color-teal: #85b5b2;
   --color-teal-soft: #d6e6e4;
@@ -84,6 +84,178 @@
          transition-[background-color,transform,box-shadow] duration-200 active:scale-[0.98]
          text-ink hover:bg-ink/5;
 }
+@utility link {
+  @apply inline-block py-2 -my-2 font-semibold text-teal-deep underline-offset-4 hover:underline;
+}
 @utility eyebrow {
   @apply text-sm font-semibold uppercase tracking-[0.14em] text-teal-deep;
 }
+
+/* ---------- Cinematic hero ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--color-paper);
+}
+/* Art layer. Reproduces object-fit: cover anchored right/centre with an exact aspect ratio,
+   so callouts placed in % of this box track the boards in the picture at every viewport. */
+.hero__art {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: max(100cqw, calc(100cqh * var(--hero-ar)));
+  height: max(100cqh, calc(100cqw / var(--hero-ar)));
+  transform: translateY(-50%);
+  will-change: transform;
+}
+.hero__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__art-inner { position: absolute; inset: 0; transform-origin: 62% 50%; will-change: transform; }
+.hero__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, rgb(247 246 242 / 0.55) 0%, rgb(247 246 242 / 0.35) 32%, rgb(247 246 242 / 0) 55%),
+    linear-gradient(to top, rgb(247 246 242 / 0.85) 0%, rgb(247 246 242 / 0) 26%);
+}
+.hero__panel { position: relative; aspect-ratio: 4 / 5; width: 100%; overflow: hidden; container-type: size; background: #b9b6ae; }
+.hero__copy { position: relative; z-index: 2; padding-block: 2.25rem 2.5rem; }
+.hero__eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-teal-deep); }
+.hero__title {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.96;
+  font-size: clamp(2.8rem, 12.5vw, 4.2rem);
+  color: var(--color-ink);
+}
+.hero__line { display: block; overflow: hidden; padding-bottom: 0.04em; margin-bottom: -0.04em; }
+.hero__line-inner { display: block; }
+.hero__lede { margin-top: 1.5rem; max-width: 30rem; font-size: 1.2rem; line-height: 1.55; color: var(--color-ink-2); }
+.hero__ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.hero__trust { margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 500; color: var(--color-ink-2); }
+.hero__pillars { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-ink-2); }
+.hero__foot, .hero__cue, .hero__callouts, .hero__lines { display: none; }
+
+@media (min-width: 640px) {
+  .hero__ctas { flex-direction: row; align-items: center; }
+}
+
+@media (min-width: 1024px) {
+  .hero { min-height: calc(100svh - 5rem); }
+  .hero__panel { position: absolute; inset: 0; aspect-ratio: auto; }
+  .hero__copy { max-width: 36rem; padding-block: clamp(3rem, 8vh, 6rem) clamp(6rem, 13vh, 9.5rem); }
+  .hero__title { font-size: clamp(4rem, 6.4vw, 6.6rem); }
+  .hero__lede { font-size: 1.25rem; }
+  .hero__pillars { position: absolute; left: 1px; top: 1px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
+  .hero__scrim {
+    background:
+      linear-gradient(to right, rgb(247 246 242 / 0.62) 0%, rgb(247 246 242 / 0.42) 30%, rgb(247 246 242 / 0.12) 46%, rgb(247 246 242 / 0) 58%),
+      linear-gradient(to top, rgb(247 246 242 / 0.55) 0%, rgb(247 246 242 / 0) 20%);
+  }
+  .hero__cue {
+    position: absolute; left: 1.5rem; bottom: 2rem; z-index: 3; display: flex; align-items: center; gap: 1rem;
+    font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-ink-2);
+  }
+  .hero__cue-line { position: relative; width: 1px; height: 3.25rem; background: rgb(23 33 31 / 0.25); overflow: hidden; }
+  .hero__cue-line::after { content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--color-teal-deep); animation: heroCue 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+  .hero__foot {
+    position: absolute; right: 2rem; bottom: 2rem; z-index: 3; display: flex; gap: 2.5rem;
+    font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-ink-2);
+  }
+  .hero__foot li { display: grid; gap: 0.35rem; padding-left: 1rem; border-left: 1px solid rgb(23 33 31 / 0.25); }
+  .hero__foot li span:first-child { color: var(--color-ink); font-weight: 600; }
+}
+@keyframes heroCue { 0% { top: -100%; } 55% { top: 100%; } 100% { top: 100%; } }
+
+/* Callouts: hex badge + label, connected to a glowing dot on the board by a two-segment line.
+   Coordinates are % of the art box (image space), so they stay on the boards. */
+@media (min-width: 1280px) {
+  .hero__lines { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .hero__lines polyline { fill: none; stroke: rgb(255 255 255 / 0.9); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+  .hero__callouts { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .hero__dot {
+    position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 999px; background: #fff;
+    box-shadow: 0 0 0 5px rgb(255 255 255 / 0.28), 0 0 22px 6px rgb(133 181 178 / 0.85);
+  }
+  .hero__dot::after { content: ""; position: absolute; inset: -6px; border-radius: 999px; border: 1px solid rgb(255 255 255 / 0.7); animation: heroPulse 2.6s ease-out infinite; }
+  .hero__label { position: absolute; width: 13.5rem; }
+  .hero__label--left { transform: translate(-100%, -50%); }
+  .hero__label--right { transform: translate(0, -50%); }
+  .hero__label-inner { display: flex; align-items: flex-start; gap: 0.8rem; color: #fff; text-shadow: 0 1px 10px rgb(0 0 0 / 0.35); }
+  .hero__hex {
+    display: grid; place-items: center; flex: none; width: 3.4rem; height: 3rem; color: #fff;
+    background: rgb(20 60 58 / 0.78); clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.55), 0 0 24px rgb(133 181 178 / 0.35);
+    backdrop-filter: blur(6px);
+  }
+  .hero__label-text { display: grid; gap: 0.35rem; padding-top: 0.35rem; }
+  .hero__label-title { font-size: 0.92rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
+  .hero__label-sub { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.6; color: rgb(255 255 255 / 0.85); }
+}
+@keyframes heroPulse { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(1.9); opacity: 0; } }
+
+/* Intro reveal. Elements start hidden ONLY when JS is running and motion is allowed;
+   GSAP reveals them. The 2.6s CSS fallback guarantees visibility even if a script fails. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .hero__reveal { opacity: 0; animation: heroSafety 0.01s 2.6s forwards; }
+  html[data-js] .hero__line-inner { transform: translateY(112%); animation: heroSafety 0.01s 2.6s forwards; }
+  html[data-js] .hero__lines polyline { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: heroSafety 0.01s 2.6s forwards; }
+}
+@keyframes heroSafety { to { opacity: 1; transform: none; stroke-dashoffset: 0; } }
+
+/* Header sits transparent over the hero, turns to paper once the page scrolls. */
+.site-header { transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease; }
+.site-header[data-top="true"] { background-color: transparent; border-color: transparent; backdrop-filter: none; }
+
+/* ---------- Reveal (scroll fade-up) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal[data-reveal="out"] { opacity: 0; transform: translateY(22px); }
+  .reveal[data-reveal="in"] { opacity: 1; transform: none; transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+}
+
+/* ---------- Accordion ---------- */
+.acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+.acc-item[data-open="true"] .acc-panel { grid-template-rows: 1fr; }
+.acc-panel-inner { overflow: hidden; }
+.acc-icon .acc-v { transform-origin: center; transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1); }
+.acc-item[data-open="true"] .acc-icon .acc-v { transform: rotate(90deg); }
+.acc-item[data-open="true"] .acc-icon { background: var(--color-teal-deep); border-color: var(--color-teal-deep); color: #fff; }
+@media (prefers-reduced-motion: reduce) {
+  .acc-panel, .acc-icon .acc-v { transition: none; }
+}
+
+/* ---------- What it is ---------- */
+.wii-desktop { display: none; }
+.wii-stacked { display: block; padding-block: 5rem; }
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .wii-desktop { display: block; }
+  .wii-desktop__pin { height: 100svh; min-height: 640px; }
+  .wii-stacked { display: none; }
+}
+.wii-step { display: grid; grid-template-columns: 1.5rem 1fr; gap: 1rem; opacity: 0.45; transition: opacity 0.4s ease; }
+.wii-step.is-active { opacity: 1; }
+.wii-step__rail { position: relative; width: 2px; margin-left: 0.5rem; }
+.wii-step__track { position: absolute; inset: 0; background: rgb(23 33 31 / 0.12); }
+.wii-step__progress { position: absolute; inset: 0; background: var(--color-teal-deep); transform-origin: top; transform: scaleY(0); }
+.wii-step__n { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-teal-deep); letter-spacing: 0.08em; }
+.wii-frame { position: relative; aspect-ratio: 4 / 5; max-height: 78svh; overflow: hidden; border-radius: 1.75rem; background: var(--color-paper); box-shadow: var(--shadow-soft); }
+.wii-frame--static { max-height: none; aspect-ratio: 4 / 5; }
+@media (min-width: 768px) { .wii-frame--static { aspect-ratio: 1 / 1; } }
+.wii-layer { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.wii-caption { position: absolute; left: 1rem; bottom: 1rem; border-radius: 999px; background: rgb(247 246 242 / 0.92); padding: 0.4rem 0.9rem; font-size: 0.95rem; font-weight: 600; color: var(--color-ink); }
+.wii-stage { position: absolute; inset: 0; }
+.wii-stage__wall { position: absolute; inset: 0; background: linear-gradient(180deg, #ebe8e1 0%, #ddd8ce 100%); }
+.wii-stage__floor { position: absolute; left: 0; right: 0; bottom: 0; height: 9%; background: linear-gradient(180deg, #cfc9be, #c2bcb0); }
+.wii-stack { position: absolute; left: 50%; bottom: 9%; display: flex; flex-direction: column-reverse; transform: translateX(-50%); height: 84%; }
+.wii-stack__section { height: 33.333%; width: auto; display: block; margin-top: -1px; filter: drop-shadow(6px 10px 14px rgb(23 33 31 / 0.28)); }
+.wii-stage--static .wii-stack__section { opacity: 1; }
+.wii-ruler { position: absolute; right: 12%; bottom: 9%; height: 84%; width: 1px; background: rgb(23 33 31 / 0.35); transform-origin: bottom; }
+.wii-stage--static .wii-ruler { opacity: 1; }
+.wii-ruler__line { position: absolute; left: -5px; top: 0; width: 11px; height: 1px; background: rgb(23 33 31 / 0.5); box-shadow: 0 var(--h, 0) 0 rgb(23 33 31 / 0.5); }
+.wii-ruler__top, .wii-ruler__mid { position: absolute; left: 0.75rem; white-space: nowrap; font-family: var(--font-display); font-size: 1.1rem; color: var(--color-ink); }
+.wii-ruler__top { top: -0.4rem; font-size: 1.6rem; }
+.wii-ruler__mid { top: 50%; transform: translateY(-50%); color: var(--color-ink-2); font-size: 0.95rem; }
+.wii-ruler::after { content: ""; position: absolute; left: -5px; bottom: 0; width: 11px; height: 1px; background: rgb(23 33 31 / 0.5); }
