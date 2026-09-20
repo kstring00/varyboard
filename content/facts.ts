@@ -33,6 +33,17 @@ export const founders = {
     /** Portrait supplied by the client. Path must exist before launch. */
     portrait: "/images/founders/eric-santiago.jpg",
     portraitAlt: "Dr. Eric Santiago, physical therapist and co-creator of the Vary Board",
+    /** Short lines for the home page. Built only from confirmed facts. */
+    lines: [
+      "Physical therapist and owner of Trinity Physical Therapy in Houston.",
+      "Designed the board around the exercises he teaches in the clinic, so people can keep practicing them at home.",
+    ],
+    /** Full bio for /our-story. */
+    bio: [
+      "Dr. Eric Santiago is a physical therapist and Doctor of Physical Therapy, and the owner of Trinity Physical Therapy in Houston, Texas.",
+      "He designed the Vary Board around the exercises he teaches in the clinic every day: reaching, holding, stretching, and practicing balance with something steady to hold on to. The 47 anchor points on every section come from that work, so a band or a handhold can go exactly where a person needs it.",
+      "His goal is simple: give people a way to keep practicing at home what they learned in the clinic.",
+    ],
   },
   reid: {
     name: "Reid De Leon",
@@ -42,6 +53,15 @@ export const founders = {
     role: "Co-creator, Vary Systems",
     portrait: "/images/founders/reid-de-leon.jpg",
     portraitAlt: "Reid De Leon, engineer, veteran and co-creator of the Vary Board",
+    lines: [
+      "More than 20 years of military service. Engineer and craftsman.",
+      "Turned the clinical idea into a product that can be built, mounted and used for years.",
+    ],
+    bio: [
+      "Reid De Leon served for more than 20 years in the military. He is an engineer and a craftsman.",
+      "Reid took Eric's idea from the clinic and made it something you can bolt to a wall: three modular sections of molded HDPE, each with a backer and a convex platform, that stack to a 75-inch board and work indoors or out.",
+      "The patented design is his answer to a practical question: how do you make one simple piece of equipment do the job of many, and last?",
+    ],
   },
 } as const;
 

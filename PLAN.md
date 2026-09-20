@@ -8,20 +8,20 @@ Stack: Next.js 16 (App Router) + TypeScript + Tailwind v4 + GSAP ScrollTrigger, 
 | # | Step | Status |
 |---|------|--------|
 | 0 | Foundation: facts.ts, reviews.ts skeleton, image pipeline, redirects, layout, header, footer, sticky buy bar, motion provider | done |
-| 1 | HERO: cinematic full-bleed render with layered typography, callouts and GSAP intro/scroll motion | done, awaiting review |
-| 2 | WHAT IT IS: pinned scroll scene, real board cutout stacks 1-2-3 to 75", zoom to hex anchors, handles, band clipping in | next |
-| 3 | WHO IT'S FOR: three cards (55+ / after PT / for a parent) | |
-| 4 | WHAT YOU CAN DO: Strength, Mobility, Balance photos + six use chips | |
-| 5 | THE PEOPLE BEHIND IT: Eric and Reid (portrait slots), credentials, link to /our-story | |
-| 6 | PROOF: verbatim reviews from content/reviews.ts, star summary, clinic + military testimonials featured | |
-| 7 | FITS YOUR SPACE: parallax gallery of real installs, 3x3 ft note, link to /install | |
-| 8 | PRICE + CTA: Standard vs XT, Board + Bands, shipping, discount, FAQ accordion, final CTA | |
-| 9 | Product pages: /vary-board, /vary-board-xt, /resistance-bands (Product schema) | |
-| 10 | /professionals (clinic benefits, 6-in-1, spec sheet slot, "Request clinic pricing / demo" form) | |
-| 11 | /our-story, /install (video + steps slot), /faq (FAQPage schema), /contact | |
-| 12 | /shipping, /warranty, /returns, /privacy, /terms, custom 404 | |
-| 13 | SEO: per-page titles/descriptions, OG image, sitemap.xml, robots.txt | |
-| 14 | Launch checklist run + HANDOFF.md | |
+| 1 | HERO: cinematic full-bleed render with layered typography, callouts and GSAP intro/scroll motion | done |
+| 2 | WHAT IT IS: pinned scroll scene, real board cutout stacks 1-2-3 to 75", zoom to hex anchors, handles, band clipping in | done |
+| 3 | WHO IT'S FOR: three cards (55+ / after PT / for a parent) | done |
+| 4 | WHAT YOU CAN DO: Strength, Mobility, Balance photos + six use chips | done |
+| 5 | THE PEOPLE BEHIND IT: Eric and Reid (portrait slots), credentials, link to /our-story | done |
+| 6 | PROOF: verbatim reviews from content/reviews.ts, star summary, clinic + military testimonials featured | built; hidden until reviews are pasted |
+| 7 | FITS YOUR SPACE: parallax gallery of real installs, 3x3 ft note, link to /install | done |
+| 8 | PRICE + CTA: Standard vs XT, Board + Bands, shipping, discount, FAQ accordion, final CTA | done |
+| 9 | Product pages: /vary-board, /vary-board-xt, /resistance-bands (Product schema) | done |
+| 10 | /professionals (clinic benefits, 6-in-1, spec sheet slot, "Request clinic pricing / demo" form) | done |
+| 11 | /our-story, /install (video + steps slot), /faq (FAQPage schema), /contact | done |
+| 12 | /shipping, /warranty, /returns, /privacy, /terms, custom 404 | done |
+| 13 | SEO: per-page titles/descriptions, OG image, sitemap.xml, robots.txt | done |
+| 14 | Launch checklist run + HANDOFF.md | done |
 
 ## Architecture
 
@@ -47,7 +47,7 @@ Stack: Next.js 16 (App Router) + TypeScript + Tailwind v4 + GSAP ScrollTrigger, 
 - Tap targets 48px minimum. Pinch-zoom allowed. No layout shift: every image has intrinsic size + blur placeholder; motion is layered on after first paint.
 - Motion: scroll-scrubbed only. No scroll-jacking. Lighter parallax on phones. Static under reduced motion.
 
-## Section 2 approach (next up)
+## Section 2 approach (as built)
 
 Pinned `WhatItIs` section (GSAP `pin: true`, scrub). Three copies of `public/images/cutouts/board-section.png` slide in and stack to a 75" board with a height ruler; then the camera zooms on the hex anchor points using the pool close-up photo; then the band-clipping detail. Captions: one idea per step. On phones the pin is replaced by a normal stacked layout with light fade-ins; under reduced motion it is a static three-panel layout.
 
