@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { PhoneLink } from "./PhoneLink";
 import { buyLinks } from "@/lib/commerce";
@@ -17,8 +17,18 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [atTop, setAtTop] = useState(true);
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/75">
+    <header
+      data-top={atTop && !open}
+      className="site-header sticky top-0 z-40 border-b border-line/70 bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/75"
+    >
       <div className="container-site flex h-16 items-center justify-between gap-3 md:h-20">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

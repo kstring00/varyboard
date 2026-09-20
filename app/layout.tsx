@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { Header } from "@/components/site/Header";
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable}`}>
       <body className="flex min-h-dvh flex-col">
+        <Script id="js-flag" strategy="beforeInteractive">{`document.documentElement.setAttribute("data-js","")`}</Script>
         <MotionProvider>
           <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-teal-deep focus:px-5 focus:py-3 focus:text-white">
             Skip to content

@@ -3,8 +3,8 @@ import { generatedImages, type GeneratedImageName } from "./images.generated";
 /**
  * Every image on the site, with descriptive alt text. Add a line here when a new
  * photo is dropped into public/images/originals and `npm run assets:optimize` is run.
- * All photos are real photos supplied by Vary Systems. No AI imagery. (The hero's real-time
- * 3D scene is built from measured product geometry; see components/home/hero3d.)
+ * Photos are supplied by Vary Systems. The hero render was supplied by the client as the
+ * approved hero image.
  */
 export interface SiteImage {
   key: GeneratedImageName;
@@ -23,6 +23,11 @@ function img(key: GeneratedImageName, alt: string, scene: SiteImage["scene"]): S
 }
 
 export const images = {
+  heroRender: img(
+    "hero-render-clean",
+    "A Vary Board and a taller Vary Board XT mounted on a concrete wall beside an open terrace looking out over calm water and rocky hills",
+    "hero",
+  ),
   heroRoom: img(
     "varysystems-modernroom-r1-1",
     "A Vary Board mounted on a white wall beside a tall grid window, with a blue resistance band clipped to one of its anchor points",

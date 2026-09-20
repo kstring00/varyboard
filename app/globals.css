@@ -88,112 +88,121 @@
   @apply text-sm font-semibold uppercase tracking-[0.14em] text-teal-deep;
 }
 
-/* ---------- 3D hero ---------- */
-.hero3d {
-  min-height: calc(100svh - 4rem);
-}
-@media (min-width: 768px) {
-  .hero3d { min-height: calc(100svh - 5rem); }
-}
-.hero3d__panel {
+/* ---------- Cinematic hero ---------- */
+.hero {
   position: relative;
-  aspect-ratio: 4 / 5;
-  width: 100%;
+  isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(100deg, #e9e7e1 0%, #cfccc4 55%, #b9b5ad 100%);
+  background: var(--color-paper);
 }
-.hero3d__scrim {
+/* Art layer. Reproduces object-fit: cover anchored right/centre with an exact aspect ratio,
+   so callouts placed in % of this box track the boards in the picture at every viewport. */
+.hero__art {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to top, rgb(247 246 242) 0%, rgb(247 246 242 / 0) 28%);
+  top: 50%;
+  right: 0;
+  width: max(100cqw, calc(100cqh * var(--hero-ar)));
+  height: max(100cqh, calc(100cqw / var(--hero-ar)));
+  transform: translateY(-50%);
+  will-change: transform;
 }
-.hero3d__copy {
-  padding-block: 2.5rem 3rem;
+.hero__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero__art-inner { position: absolute; inset: 0; transform-origin: 62% 50%; will-change: transform; }
+.hero__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, rgb(247 246 242 / 0.55) 0%, rgb(247 246 242 / 0.35) 32%, rgb(247 246 242 / 0) 55%),
+    linear-gradient(to top, rgb(247 246 242 / 0.85) 0%, rgb(247 246 242 / 0) 26%);
 }
-.hero3d__facts {
-  display: none;
+.hero__panel { position: relative; aspect-ratio: 4 / 5; width: 100%; overflow: hidden; container-type: size; background: #b9b6ae; }
+.hero__copy { position: relative; z-index: 2; padding-block: 2.25rem 2.5rem; }
+.hero__eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-teal-deep); }
+.hero__title {
+  margin-top: 1rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.96;
+  font-size: clamp(2.8rem, 12.5vw, 4.2rem);
+  color: var(--color-ink);
 }
-.hero3d__orbit {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .hero3d__panel {
-    position: absolute;
-    inset: 0;
-    aspect-ratio: auto;
-  }
-  .hero3d__scrim {
-    background:
-      linear-gradient(to right, rgb(247 246 242 / 0.96) 0%, rgb(247 246 242 / 0.86) 30%, rgb(247 246 242 / 0.35) 48%, rgb(247 246 242 / 0) 60%),
-      linear-gradient(to top, rgb(247 246 242 / 0.7) 0%, rgb(247 246 242 / 0) 22%);
-  }
-  .hero3d__copy {
-    max-width: 34rem;
-    padding-block: 4rem 6.5rem;
-  }
-  .hero3d__facts {
-    position: absolute;
-    left: 1rem;
-    right: 1rem;
-    bottom: 1.6rem;
-    display: flex;
-    gap: 2.5rem;
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-  }
-  .hero3d__facts li { display: grid; gap: 0.2rem; padding-left: 1rem; border-left: 1px solid rgb(23 33 31 / 0.25); }
-  .hero3d__facts li span:first-child { font-weight: 600; color: var(--color-ink); }
-  .hero3d__orbit {
-    position: absolute;
-    right: 1.75rem;
-    bottom: 2rem;
-    display: grid;
-    justify-items: center;
-    gap: 0.6rem;
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-    writing-mode: horizontal-tb;
-    text-align: center;
-    pointer-events: none;
-  }
-  .hero3d__orbit > span:first-child { max-width: 4rem; line-height: 1.5; }
-  .hero3d__orbit-line { width: 1px; height: 4rem; background: rgb(23 33 31 / 0.35); }
-  .hero3d__orbit-ring { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 1px solid rgb(23 33 31 / 0.35); border-radius: 999px; letter-spacing: 0.05em; }
-}
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .hero3d__facts { display: none; }
+.hero__line { display: block; overflow: hidden; padding-bottom: 0.04em; margin-bottom: -0.04em; }
+.hero__line-inner { display: block; }
+.hero__lede { margin-top: 1.5rem; max-width: 30rem; font-size: 1.2rem; line-height: 1.55; color: var(--color-ink-2); }
+.hero__ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.hero__trust { margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 500; color: var(--color-ink-2); }
+.hero__pillars { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-ink-2); }
+.hero__foot, .hero__cue, .hero__callouts, .hero__lines { display: none; }
+
+@media (min-width: 640px) {
+  .hero__ctas { flex-direction: row; align-items: center; }
 }
 
-/* Callouts on the model (desktop only, decorative: the same text lives in the DOM) */
-.hero-callout-wrap { pointer-events: none; }
-.hero-callout { position: relative; width: 0; height: 0; display: none; }
-@media (min-width: 1280px) { .hero-callout { display: block; } }
-.hero-callout__dot {
-  position: absolute; left: -7px; top: -7px; width: 14px; height: 14px; border-radius: 999px;
-  background: #fff; box-shadow: 0 0 0 4px rgb(255 255 255 / 0.35), 0 0 18px 4px rgb(133 181 178 / 0.8);
+@media (min-width: 1024px) {
+  .hero { min-height: calc(100svh - 5rem); }
+  .hero__panel { position: absolute; inset: 0; aspect-ratio: auto; }
+  .hero__copy { max-width: 36rem; padding-block: clamp(3rem, 8vh, 6rem) clamp(6rem, 13vh, 9.5rem); }
+  .hero__title { font-size: clamp(4rem, 6.4vw, 6.6rem); }
+  .hero__lede { font-size: 1.25rem; }
+  .hero__pillars { position: absolute; left: 1px; top: 1px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
+  .hero__scrim {
+    background:
+      linear-gradient(to right, rgb(247 246 242 / 0.62) 0%, rgb(247 246 242 / 0.42) 30%, rgb(247 246 242 / 0.12) 46%, rgb(247 246 242 / 0) 58%),
+      linear-gradient(to top, rgb(247 246 242 / 0.55) 0%, rgb(247 246 242 / 0) 20%);
+  }
+  .hero__cue {
+    position: absolute; left: 1.5rem; bottom: 2rem; z-index: 3; display: flex; align-items: center; gap: 1rem;
+    font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--color-ink-2);
+  }
+  .hero__cue-line { position: relative; width: 1px; height: 3.25rem; background: rgb(23 33 31 / 0.25); overflow: hidden; }
+  .hero__cue-line::after { content: ""; position: absolute; left: 0; top: -100%; width: 100%; height: 100%; background: var(--color-teal-deep); animation: heroCue 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+  .hero__foot {
+    position: absolute; right: 2rem; bottom: 2rem; z-index: 3; display: flex; gap: 2.5rem;
+    font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--color-ink-2);
+  }
+  .hero__foot li { display: grid; gap: 0.35rem; padding-left: 1rem; border-left: 1px solid rgb(23 33 31 / 0.25); }
+  .hero__foot li span:first-child { color: var(--color-ink); font-weight: 600; }
 }
-.hero-callout__line {
-  position: absolute; top: 0; height: 1px; width: 120px; background: rgb(255 255 255 / 0.9); transform-origin: 0 0;
+@keyframes heroCue { 0% { top: -100%; } 55% { top: 100%; } 100% { top: 100%; } }
+
+/* Callouts: hex badge + label, connected to a glowing dot on the board by a two-segment line.
+   Coordinates are % of the art box (image space), so they stay on the boards. */
+@media (min-width: 1280px) {
+  .hero__lines { display: block; position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .hero__lines polyline { fill: none; stroke: rgb(255 255 255 / 0.9); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+  .hero__callouts { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .hero__dot {
+    position: absolute; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 999px; background: #fff;
+    box-shadow: 0 0 0 5px rgb(255 255 255 / 0.28), 0 0 22px 6px rgb(133 181 178 / 0.85);
+  }
+  .hero__dot::after { content: ""; position: absolute; inset: -6px; border-radius: 999px; border: 1px solid rgb(255 255 255 / 0.7); animation: heroPulse 2.6s ease-out infinite; }
+  .hero__label { position: absolute; width: 13.5rem; }
+  .hero__label--left { transform: translate(-100%, -50%); }
+  .hero__label--right { transform: translate(0, -50%); }
+  .hero__label-inner { display: flex; align-items: flex-start; gap: 0.8rem; color: #fff; text-shadow: 0 1px 10px rgb(0 0 0 / 0.35); }
+  .hero__hex {
+    display: grid; place-items: center; flex: none; width: 3.4rem; height: 3rem; color: #fff;
+    background: rgb(20 60 58 / 0.78); clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.55), 0 0 24px rgb(133 181 178 / 0.35);
+    backdrop-filter: blur(6px);
+  }
+  .hero__label-text { display: grid; gap: 0.35rem; padding-top: 0.35rem; }
+  .hero__label-title { font-size: 0.92rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
+  .hero__label-sub { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; line-height: 1.6; color: rgb(255 255 255 / 0.85); }
 }
-.hero-callout--left .hero-callout__line { left: 0; transform: rotate(-150deg); }
-.hero-callout--right .hero-callout__line { left: 0; transform: rotate(-30deg); }
-.hero-callout__label {
-  position: absolute; display: flex; align-items: flex-start; gap: 0.75rem; width: 13rem; color: #fff;
-  text-shadow: 0 1px 8px rgb(0 0 0 / 0.35);
+@keyframes heroPulse { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(1.9); opacity: 0; } }
+
+/* Intro reveal. Elements start hidden ONLY when JS is running and motion is allowed;
+   GSAP reveals them. The 2.6s CSS fallback guarantees visibility even if a script fails. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-js] .hero__reveal { opacity: 0; animation: heroSafety 0.01s 2.6s forwards; }
+  html[data-js] .hero__line-inner { transform: translateY(112%); animation: heroSafety 0.01s 2.6s forwards; }
+  html[data-js] .hero__lines polyline { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: heroSafety 0.01s 2.6s forwards; }
 }
-/* line end for 120px at 150deg / -30deg is (±104px, -60px); centre the label on that point */
-.hero-callout--left .hero-callout__label { right: 104px; top: -60px; transform: translateY(-50%); }
-.hero-callout--right .hero-callout__label { left: 104px; top: -60px; transform: translateY(-50%); }
-.hero-callout__hex {
-  display: grid; place-items: center; width: 3.1rem; height: 2.75rem; flex: none; color: #fff;
-  background: rgb(31 95 91 / 0.85); clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.5);
-}
-.hero-callout__text { display: grid; gap: 0.25rem; padding-top: 0.2rem; }
-.hero-callout__title { font-size: 0.86rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; }
-.hero-callout__sub { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.55; color: rgb(255 255 255 / 0.85); max-width: 11rem; }
+@keyframes heroSafety { to { opacity: 1; transform: none; stroke-dashoffset: 0; } }
+
+/* Header sits transparent over the hero, turns to paper once the page scrolls. */
+.site-header { transition: background-color 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease; }
+.site-header[data-top="true"] { background-color: transparent; border-color: transparent; backdrop-filter: none; }
