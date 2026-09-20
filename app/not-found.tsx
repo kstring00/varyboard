@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <section className="container-site py-24 md:py-32">
       <p className="eyebrow">404</p>
-      <h1 className="mt-3 max-w-2xl text-[2.4rem] font-medium leading-[1.05] sm:text-[3.2rem]">That page isn&apos;t on the wall.</h1>
+      <h1 className="mt-3 max-w-2xl text-[1.97rem] font-medium leading-[1.05] sm:text-[2.62rem]">That page isn&apos;t on the wall.</h1>
       <p className="mt-5 max-w-xl text-xl text-ink-2">The link may be old. Here is where most people want to go.</p>
       <ul className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2">
         {[

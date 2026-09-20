@@ -103,13 +103,13 @@ export function WhatItIs() {
       {/* Desktop pinned layout */}
       <div className="wii-desktop" data-pin-wrap>
         <div className="wii-desktop__pin" data-pin>
-          <div className="container-site grid h-full items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+          <div className="container-site grid h-full items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
             <div>
               <p className="eyebrow">What it is</p>
-              <h2 id="wii-title" className="mt-3 text-[2.3rem] font-medium leading-[1.08] lg:text-[2.9rem]">
+              <h2 id="wii-title" className="mt-3 text-[1.89rem] font-medium leading-[1.08] lg:text-[2.38rem]">
                 A wall of anchor points, built in sections.
               </h2>
-              <ol className="mt-10 space-y-8">
+              <ol className="mt-8 space-y-7">
                 {STEPS.map((s, i) => (
                   <li key={s.n} data-step className="wii-step">
                     <div className="wii-step__rail">
@@ -118,7 +118,7 @@ export function WhatItIs() {
                     </div>
                     <div>
                       <span className="wii-step__n">{s.n}</span>
-                      <h3 className="mt-1 text-2xl font-medium">{s.title}</h3>
+                      <h3 className="mt-1 text-xl font-medium">{s.title}</h3>
                       <p className="mt-2 max-w-md text-lg text-ink-2">{s.body}</p>
                     </div>
                   </li>
@@ -144,7 +144,7 @@ export function WhatItIs() {
       <div className="wii-stacked container-site">
         <Reveal>
           <p className="eyebrow">What it is</p>
-          <h2 className="mt-3 text-[2.1rem] font-medium leading-[1.08] sm:text-[2.6rem]">A wall of anchor points, built in sections.</h2>
+          <h2 className="mt-3 text-[1.72rem] font-medium leading-[1.08] sm:text-[2.13rem]">A wall of anchor points, built in sections.</h2>
         </Reveal>
         <ol className="mt-8 space-y-12">
           {STEPS.map((s, i) => (
@@ -156,7 +156,7 @@ export function WhatItIs() {
               </div>
               <div>
                 <span className="wii-step__n">{s.n}</span>
-                <h3 className="mt-1 text-2xl font-medium">{s.title}</h3>
+                <h3 className="mt-1 text-xl font-medium">{s.title}</h3>
                 <p className="mt-2 text-lg text-ink-2">{s.body}</p>
               </div>
             </Reveal>

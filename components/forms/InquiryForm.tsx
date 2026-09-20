@@ -32,8 +32,8 @@ export function InquiryForm({ kind, page }: { kind: FormKind; page: string }) {
 
   if (state.status === "ok") {
     return (
-      <div role="status" className="rounded-2xl border border-teal/60 bg-teal-soft/60 p-7">
-        <h3 className="text-2xl font-medium">Message sent</h3>
+      <div role="status" className="rounded-2xl border border-teal/60 bg-teal-soft/60 p-6">
+        <h3 className="text-xl font-medium">Message sent</h3>
         <p className="mt-2 text-lg text-ink-2">{state.message}</p>
         <p className="mt-4 text-ink-2">
           Need something sooner? Call{" "}

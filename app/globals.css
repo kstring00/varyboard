@@ -21,11 +21,11 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
 
-  --text-base: 1.125rem; /* 18px minimum */
+  --text-base: 1rem; /* 17px, set on html below */
   --text-base--line-height: 1.6;
-  --text-lg: 1.25rem;
+  --text-lg: 1.1rem;
   --text-lg--line-height: 1.55;
-  --text-xl: 1.375rem;
+  --text-xl: 1.2rem;
   --text-xl--line-height: 1.5;
 
   --radius-xl: 1.25rem;
@@ -36,7 +36,7 @@
 
 @layer base {
   html {
-    font-size: 18px;
+    font-size: 17px;
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -128,13 +128,13 @@
   text-transform: uppercase;
   letter-spacing: 0.005em;
   line-height: 0.96;
-  font-size: clamp(2.8rem, 12.5vw, 4.2rem);
+  font-size: clamp(2.4rem, 11vw, 3.5rem);
   color: var(--color-ink);
 }
 .hero__line { display: block; overflow: hidden; padding-bottom: 0.04em; margin-bottom: -0.04em; }
 .hero__line-inner { display: block; }
-.hero__lede { margin-top: 1.5rem; max-width: 30rem; font-size: 1.2rem; line-height: 1.55; color: var(--color-ink-2); }
-.hero__ctas { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.hero__lede { margin-top: 1.25rem; max-width: 28rem; font-size: 1.1rem; line-height: 1.55; color: var(--color-ink-2); }
+.hero__ctas { margin-top: 1.6rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .hero__trust { margin-top: 1.25rem; display: flex; align-items: center; gap: 0.5rem; font-size: 1rem; font-weight: 500; color: var(--color-ink-2); }
 .hero__pillars { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-ink-2); }
 .hero__foot, .hero__cue, .hero__callouts, .hero__lines { display: none; }
@@ -144,11 +144,11 @@
 }
 
 @media (min-width: 1024px) {
-  .hero { min-height: calc(100svh - 5rem); }
+  .hero { min-height: calc(100svh - 4.5rem); }
   .hero__panel { position: absolute; inset: 0; aspect-ratio: auto; }
-  .hero__copy { max-width: 36rem; padding-block: clamp(3rem, 8vh, 6rem) clamp(6rem, 13vh, 9.5rem); }
-  .hero__title { font-size: clamp(4rem, 6.4vw, 6.6rem); }
-  .hero__lede { font-size: 1.25rem; }
+  .hero__copy { max-width: 32rem; padding-block: clamp(3rem, 8vh, 5rem) clamp(5rem, 12vh, 8rem); }
+  .hero__title { font-size: clamp(3.1rem, 5.1vw, 5rem); }
+  .hero__lede { font-size: 1.15rem; }
   .hero__pillars { position: absolute; left: 1px; top: 1px; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); margin: 0; }
   .hero__scrim {
     background:
@@ -229,7 +229,7 @@
 
 /* ---------- What it is ---------- */
 .wii-desktop { display: none; }
-.wii-stacked { display: block; padding-block: 5rem; }
+.wii-stacked { display: block; padding-block: 3.5rem; }
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   .wii-desktop { display: block; }
   .wii-desktop__pin { height: 100svh; min-height: 640px; }
@@ -240,7 +240,7 @@
 .wii-step__rail { position: relative; width: 2px; margin-left: 0.5rem; }
 .wii-step__track { position: absolute; inset: 0; background: rgb(23 33 31 / 0.12); }
 .wii-step__progress { position: absolute; inset: 0; background: var(--color-teal-deep); transform-origin: top; transform: scaleY(0); }
-.wii-step__n { font-family: var(--font-display); font-size: 1.1rem; color: var(--color-teal-deep); letter-spacing: 0.08em; }
+.wii-step__n { font-family: var(--font-display); font-size: 1rem; color: var(--color-teal-deep); letter-spacing: 0.08em; }
 .wii-frame { position: relative; aspect-ratio: 4 / 5; max-height: 78svh; overflow: hidden; border-radius: 1.75rem; background: var(--color-paper); box-shadow: var(--shadow-soft); }
 .wii-frame--static { max-height: none; aspect-ratio: 4 / 5; }
 @media (min-width: 768px) { .wii-frame--static { aspect-ratio: 1 / 1; } }

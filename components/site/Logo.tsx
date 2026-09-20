@@ -12,7 +12,7 @@ export function Logo({ className = "" }: { className?: string }) {
           <polygon points="14,20 16.6,21.5 16.6,24.5 14,26 11.4,24.5 11.4,21.5" />
         </g>
       </svg>
-      <span className="whitespace-nowrap font-display text-lg font-semibold tracking-tight sm:text-xl">{brand.name}</span>
+      <span className="whitespace-nowrap font-display text-lg font-semibold tracking-tight">{brand.name}</span>
     </Link>
   );
 }

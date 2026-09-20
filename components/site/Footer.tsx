@@ -64,7 +64,7 @@ export function Footer() {
           </nav>
         ))}
       </div>
-      <div className="container-site mt-12 border-t border-line pt-6 text-[0.95rem] text-muted">
+      <div className="container-site mt-10 border-t border-line pt-6 text-[0.95rem] text-muted">
         <p>{disclaimer}</p>
         <p className="mt-2">
           &copy; {currentYear} {brand.legalName}. {brand.name} is patented. All rights reserved.

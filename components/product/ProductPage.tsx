@@ -59,7 +59,7 @@ export function ProductPage({
     <article>
       <JsonLd data={jsonLd} />
       <section className="bg-paper">
-        <div className="container-site grid gap-10 py-10 md:py-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start lg:gap-14">
+        <div className="container-site grid gap-10 py-10 md:py-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
           <div className="grid gap-4">
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-paper-2 shadow-soft sm:aspect-[5/4] lg:aspect-[4/5]">
               <Image src={image.src} alt={image.alt} fill priority sizes="(min-width: 1024px) 55vw, 100vw" placeholder="blur" blurDataURL={image.blurDataURL} className="object-cover" />
@@ -75,11 +75,11 @@ export function ProductPage({
             )}
           </div>
 
-          <div className="lg:sticky lg:top-28">
+          <div className="lg:sticky lg:top-24">
             <p className="eyebrow">{product.name}</p>
-            <h1 className="mt-3 text-[2.4rem] font-medium leading-[1.05] sm:text-[3rem]">{headline}</h1>
+            <h1 className="mt-3 text-[1.97rem] font-medium leading-[1.05] sm:text-[2.46rem]">{headline}</h1>
             <p className="mt-4 text-xl text-ink-2">{intro}</p>
-            <p className="mt-6 font-display text-5xl font-medium">{formatPrice(product.price)}</p>
+            <p className="mt-6 font-display text-4xl font-medium">{formatPrice(product.price)}</p>
             <div className="mt-6 flex flex-col gap-3">
               <a href={buyHref} className="btn-primary text-lg">
                 {buyLabel}
@@ -119,11 +119,11 @@ export function ProductPage({
       {children}
 
       {product.specs.length > 0 && (
-        <section aria-labelledby="specs-title" className="bg-paper-2 py-16 md:py-24">
+        <section aria-labelledby="specs-title" className="bg-paper-2 py-12 md:py-12">
           <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.4fr]">
             <Reveal>
               <p className="eyebrow">Specifications</p>
-              <h2 id="specs-title" className="mt-3 text-[2.1rem] font-medium leading-[1.08] sm:text-[2.6rem]">
+              <h2 id="specs-title" className="mt-3 text-[1.72rem] font-medium leading-[1.08] sm:text-[2.13rem]">
                 The details.
               </h2>
               <p className="mt-4 text-lg text-ink-2">
@@ -144,10 +144,10 @@ export function ProductPage({
         </section>
       )}
 
-      <section aria-labelledby="pfaq-title" className="bg-paper py-16 md:py-24">
+      <section aria-labelledby="pfaq-title" className="bg-paper py-12 md:py-12">
         <div className="container-site max-w-3xl">
           <Reveal>
-            <h2 id="pfaq-title" className="text-[2.1rem] font-medium leading-[1.08] sm:text-[2.6rem]">
+            <h2 id="pfaq-title" className="text-[1.72rem] font-medium leading-[1.08] sm:text-[2.13rem]">
               Good to know.
             </h2>
           </Reveal>
@@ -165,10 +165,10 @@ export function ProductPage({
         </div>
       </section>
 
-      <section className="bg-paper-2 py-16">
-        <div className="container-site flex flex-col items-start gap-5 rounded-3xl bg-ink p-8 text-paper md:flex-row md:items-center md:justify-between md:p-12">
+      <section className="bg-paper-2 py-12">
+        <div className="container-site flex flex-col items-start gap-5 rounded-3xl bg-ink p-6 text-paper md:flex-row md:items-center md:justify-between md:p-10">
           <div>
-            <h2 className="text-3xl font-medium">{product.name}</h2>
+            <h2 className="text-2xl font-medium">{product.name}</h2>
             <p className="mt-1 text-xl text-paper/80">
               {formatPrice(product.price)} · {shipping.flatRateLine.toLowerCase()}
             </p>
@@ -194,8 +194,8 @@ export function UsesStrip() {
   return (
     <section className="bg-paper pb-4">
       <div className="container-site">
-        <Reveal className="rounded-3xl border border-line bg-white/60 p-8">
-          <h2 className="text-2xl font-medium">Six kinds of practice, one board</h2>
+        <Reveal className="rounded-3xl border border-line bg-white/60 p-6">
+          <h2 className="text-xl font-medium">Six kinds of practice, one board</h2>
           <ul className="mt-4 flex flex-wrap gap-3">
             {board.uses.map((u) => (
               <li key={u} className="rounded-full bg-teal-soft px-5 py-2.5 font-medium text-teal-deeper">

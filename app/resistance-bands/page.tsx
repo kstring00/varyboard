@@ -33,7 +33,7 @@ export default function BandsPage() {
             { t: `3 × 22" loops`, d: "Longer loops for rows, presses and pulls from any anchor height." },
             { t: "Latex free", d: "Kind to skin and easy to wipe down between uses." },
           ].map((c, i) => (
-            <Reveal key={c.t} delay={i * 80} className="rounded-2xl border border-line bg-white/60 p-7">
+            <Reveal key={c.t} delay={i * 80} className="rounded-2xl border border-line bg-white/60 p-6">
               <h2 className="text-xl font-medium">{c.t}</h2>
               <p className="mt-2 text-ink-2">{c.d}</p>
             </Reveal>

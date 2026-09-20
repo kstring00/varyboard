@@ -26,7 +26,7 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      <section aria-labelledby="why-title" className="py-16 md:py-24">
+      <section aria-labelledby="why-title" className="py-12 md:py-12">
         <div className="container-site max-w-3xl">
           <Reveal>
             <SectionHeading eyebrow="Why we built it" title={<span id="why-title">The best exercises are the ones you keep doing.</span>} />
@@ -38,17 +38,17 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      <section aria-labelledby="who-title" className="bg-paper-2 py-16 md:py-24">
+      <section aria-labelledby="who-title" className="bg-paper-2 py-12 md:py-12">
         <div className="container-site">
           <Reveal>
             <SectionHeading eyebrow="Who we are" title={<span id="who-title">Two people, one idea.</span>} />
           </Reveal>
-          <div className="mt-12 grid gap-12">
+          <div className="mt-10 grid gap-10">
             {[founders.eric, founders.reid].map((p, i) => (
               <Reveal key={p.name} className={`grid gap-8 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>
                 <Portrait person={p} />
                 <div>
-                  <h3 className="text-3xl font-medium">{p.name}</h3>
+                  <h3 className="text-2xl font-medium">{p.name}</h3>
                   <p className="mt-1 text-lg font-semibold text-teal-deep">{p.credentialsSpelledOut}</p>
                   <p className="text-ink-2">{p.role}</p>
                   <div className="mt-5 space-y-4 text-xl text-ink-2">
@@ -63,7 +63,7 @@ export default function OurStoryPage() {
         </div>
       </section>
 
-      <section aria-labelledby="how-title" className="py-16 md:py-24">
+      <section aria-labelledby="how-title" className="py-12 md:py-12">
         <div className="container-site grid gap-10 lg:grid-cols-2 lg:items-center">
           <Reveal>
             <SectionHeading eyebrow="How it's made" title={<span id="how-title">Simple on purpose.</span>} />

@@ -163,13 +163,13 @@ export function HeroCinematic() {
             ))}
           </ul>
           <div className="hero__ctas">
-            <a href={buyLinks.board} className="btn-primary hero__reveal px-7 text-lg" data-reveal="cta">
+            <a href={buyLinks.board} className="btn-primary hero__reveal whitespace-nowrap px-6 text-[1.05rem]" data-reveal="cta">
               Get the Vary Board ({price})
               <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </a>
-            <Link href="#how-it-works" className="btn-secondary hero__reveal px-7 text-lg" data-reveal="cta">
+            <Link href="#how-it-works" className="btn-secondary hero__reveal whitespace-nowrap px-6 text-[1.05rem]" data-reveal="cta">
               See how it works
             </Link>
           </div>

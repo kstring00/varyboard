@@ -25,16 +25,16 @@ const CARDS = [
 
 export function WhoItsFor() {
   return (
-    <section aria-labelledby="who-title" className="bg-paper py-20 md:py-28">
+    <section aria-labelledby="who-title" className="bg-paper py-14 md:py-20">
       <div className="container-site">
         <Reveal>
           <SectionHeading eyebrow="Who it's for" title={<span id="who-title">Made for people who want to keep moving well.</span>} />
         </Reveal>
-        <ul className="mt-12 grid gap-5 md:grid-cols-3">
+        <ul className="mt-10 grid gap-5 md:grid-cols-3">
           {CARDS.map((c, i) => (
-            <Reveal as="li" key={c.title} delay={i * 90} className="group flex flex-col rounded-2xl border border-line bg-white/70 p-7 shadow-soft transition-transform hover:-translate-y-1 motion-reduce:transition-none">
-              <span className="font-display text-4xl text-teal">0{i + 1}</span>
-              <h3 className="mt-4 text-2xl font-medium leading-snug">{c.title}</h3>
+            <Reveal as="li" key={c.title} delay={i * 90} className="group flex flex-col rounded-2xl border border-line bg-white/70 p-6 shadow-soft transition-transform hover:-translate-y-1 motion-reduce:transition-none">
+              <span className="font-display text-3xl text-teal">0{i + 1}</span>
+              <h3 className="mt-4 text-xl font-medium leading-snug">{c.title}</h3>
               <p className="mt-3 flex-1 text-lg text-ink-2">{c.body}</p>
               <Link href={c.href} className="mt-6 inline-flex min-h-12 items-center gap-2 font-semibold text-teal-deep no-underline">
                 {c.cta}
