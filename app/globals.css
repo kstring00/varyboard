@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/*
+  Palette: calm, premium, high contrast for a 55+ audience.
+  Teal #85b5b2 stays the brand accent. It is used for highlights, chips and glows,
+  never as a text-on-white color (contrast is too low). Buttons use deep teal.
+*/
+@theme {
+  --color-paper: #f7f6f2;
+  --color-paper-2: #eeeae2;
+  --color-ink: #17211f;
+  --color-ink-2: #3b4745;
+  --color-muted: #63706e;
+  --color-line: #d9d4ca;
+  --color-teal: #85b5b2;
+  --color-teal-soft: #d6e6e4;
+  --color-teal-deep: #1f5f5b;
+  --color-teal-deeper: #17494a;
+  --color-sand: #e7dccb;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+
+  --text-base: 1.125rem; /* 18px minimum */
+  --text-base--line-height: 1.6;
+  --text-lg: 1.25rem;
+  --text-lg--line-height: 1.55;
+  --text-xl: 1.375rem;
+  --text-xl--line-height: 1.5;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+
+  --shadow-soft: 0 1px 2px rgb(23 33 31 / 0.06), 0 12px 40px -12px rgb(23 33 31 / 0.18);
+}
+
+@layer base {
+  html {
+    font-size: 18px;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    overflow-x: clip;
+  }
+  h1, h2, h3 {
+    @apply font-display tracking-tight text-balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-teal-deep);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-site {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+/* 48px minimum tap targets on every button */
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 font-semibold no-underline
+         transition-[background-color,transform,box-shadow] duration-200 active:scale-[0.98];
+}
+@utility btn-primary {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 font-semibold no-underline
+         transition-[background-color,transform,box-shadow] duration-200 active:scale-[0.98]
+         bg-teal-deep text-white shadow-soft hover:bg-teal-deeper;
+}
+@utility btn-secondary {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 font-semibold no-underline
+         transition-[background-color,transform,box-shadow] duration-200 active:scale-[0.98]
+         border-2 border-ink/15 bg-white/70 text-ink hover:border-teal-deep hover:bg-white;
+}
+@utility btn-ghost {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 font-semibold no-underline
+         transition-[background-color,transform,box-shadow] duration-200 active:scale-[0.98]
+         text-ink hover:bg-ink/5;
+}
+@utility eyebrow {
+  @apply text-sm font-semibold uppercase tracking-[0.14em] text-teal-deep;
+}
