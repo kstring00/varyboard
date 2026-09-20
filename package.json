@@ -11,7 +11,8 @@
     "assets:fetch": "node scripts/fetch-assets.mjs",
     "assets:optimize": "node scripts/optimize-images.mjs",
     "assets:cutout": "python3 scripts/cutout.py",
-    "check:placeholders": "node scripts/check-placeholders.mjs"
+    "check:placeholders": "node scripts/check-placeholders.mjs",
+    "vercel-build": "next build"
   },
   "dependencies": {
     "gsap": "^3.15.0",
@@ -29,5 +30,8 @@
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

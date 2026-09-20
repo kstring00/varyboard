@@ -1,10 +1,11 @@
 import { products, type ProductId } from "@/content/facts";
+import { resolveShopDomain } from "./env";
 
 /**
  * Buy buttons are plain links to Shopify cart permalinks. No cart UI on our side.
  * https://{shop}/cart/{variantId}:{qty}[,{variantId}:{qty}]
  */
-const shopDomain = process.env.NEXT_PUBLIC_SHOP_DOMAIN ?? "thevaryboard.com";
+const shopDomain = resolveShopDomain();
 
 export type CartLine = { id: ProductId; qty?: number };
 

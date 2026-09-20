@@ -1,2 +1,4 @@
-export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://thevaryboard.com").replace(/\/$/, "");
+import { resolveSiteUrl } from "./env";
+
+export const siteUrl = resolveSiteUrl();
 export const currentYear = new Date().getFullYear();
