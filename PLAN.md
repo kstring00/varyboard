@@ -8,7 +8,7 @@ Stack: Next.js 16 (App Router) + TypeScript + Tailwind v4 + GSAP ScrollTrigger, 
 | # | Step | Status |
 |---|------|--------|
 | 0 | Foundation: facts.ts, reviews.ts skeleton, image pipeline, redirects, layout, header, footer, sticky buy bar, motion provider | done |
-| 1 | HERO | done, awaiting review |
+| 1 | HERO: real-time 3D scene (react-three-fiber), procedural board from photo measurements, photo fallback | done, awaiting review |
 | 2 | WHAT IT IS: pinned scroll scene, real board cutout stacks 1-2-3 to 75", zoom to hex anchors, handles, band clipping in | next |
 | 3 | WHO IT'S FOR: three cards (55+ / after PT / for a parent) | |
 | 4 | WHAT YOU CAN DO: Strength, Mobility, Balance photos + six use chips | |
@@ -32,6 +32,13 @@ Stack: Next.js 16 (App Router) + TypeScript + Tailwind v4 + GSAP ScrollTrigger, 
 - `lib/commerce.ts` — Shopify cart permalinks. Buy buttons are plain links. No cart UI.
 - `components/motion/MotionProvider.tsx` — motion mode: `full` (desktop), `light` (phones), `none` (prefers-reduced-motion). Every animated section reads this and renders its static layout first.
 - `scripts/` — `fetch-assets.mjs` (download store photos), `optimize-images.mjs` (AVIF/WebP, responsive sizes, blur), `cutout.py` (rembg board cutouts), `check-placeholders.mjs` (launch gate).
+
+## 3D hero
+
+- `components/home/hero3d/geometry.ts` builds one 25" x 8" x ~3" section from the photos: grey backer with flanges and screw holes, dark recessed pocket plate, convex teal honeycomb platform with 47 flat-top hex through-holes (16 / 15 / 16), handrails on posts. Shared geometry, instanced per section.
+- `VaryBoardModel.tsx` stacks 3 (Vary Board) or 4 (XT) sections. If `public/models/varyboard.glb` exists it is loaded instead and scaled to the board height.
+- `HeroScene.tsx` composes both boards on a concrete wall in a three-quarter view from the left, key light from the window side, drag-to-orbit within limits (desktop only), scroll-scrubbed parallax, bloom + vignette on desktop only.
+- `Hero3D.tsx` shows a real photo poster first (LCP), fades the scene in when ready, and keeps the photo for reduced-motion, no-WebGL, save-data or 2 GB-memory devices. The 3D bundle (~310 KB gzip) is a separate lazy chunk.
 
 ## Design
 

@@ -20,6 +20,10 @@ Weight, depth, what "100 lb max capacity" means, colors, warranty and returns te
 
 Open `content/reviews.ts` and add one entry to the `reviews` array, copied word for word from the review export. Set `featured: true` to show it on the home page. The star average is calculated from the array. Never edit a review's wording.
 
+## Replace the 3D board with a real model
+
+The hero builds the board procedurally from measured dimensions. If a real 3D model is ever produced, save it as `public/models/varyboard.glb` (one 3-section board, any scale, front facing +Z, wall at the back) and redeploy. The site detects the file and uses it automatically. Delete the file to go back to the procedural build.
+
 ## Add a photo
 
 1. Put the original, full-resolution file in `public/images/originals/`.

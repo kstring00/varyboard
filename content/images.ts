@@ -3,7 +3,8 @@ import { generatedImages, type GeneratedImageName } from "./images.generated";
 /**
  * Every image on the site, with descriptive alt text. Add a line here when a new
  * photo is dropped into public/images/originals and `npm run assets:optimize` is run.
- * All photos are real photos supplied by Vary Systems. No AI imagery, no 3D.
+ * All photos are real photos supplied by Vary Systems. No AI imagery. (The hero's real-time
+ * 3D scene is built from measured product geometry; see components/home/hero3d.)
  */
 export interface SiteImage {
   key: GeneratedImageName;
