@@ -19,7 +19,7 @@ export function Proof() {
   const shown = [...reviews].sort((a, b) => priority(a) - priority(b) || b.date.localeCompare(a.date)).slice(0, 6);
 
   return (
-    <section aria-labelledby="proof-title" className="bg-paper-2 py-14 md:py-20">
+    <section aria-labelledby="proof-title" className="bg-paper-2 py-12 md:py-16">
       <div className="container-site">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading eyebrow="What people say" title={<span id="proof-title">Real reviews, in their words.</span>} />

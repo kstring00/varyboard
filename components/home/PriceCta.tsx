@@ -9,7 +9,7 @@ import { buyLinks } from "@/lib/commerce";
 export function PriceCta() {
   const bundle = products.board.price + products.bands.price;
   return (
-    <section id="pricing" aria-labelledby="price-title" className="bg-paper-2 py-14 md:py-20">
+    <section id="pricing" aria-labelledby="price-title" className="bg-paper-2 py-12 md:py-16">
       <div className="container-site">
         <Reveal>
           <SectionHeading align="center" eyebrow="Get yours" title={<span id="price-title">Two sizes. One simple choice.</span>} intro={`${shipping.flatRateLine}. ${discounts.heroesLine}`} />

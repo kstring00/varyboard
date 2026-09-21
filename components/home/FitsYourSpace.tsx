@@ -46,7 +46,7 @@ export function FitsYourSpace() {
   }, [mode]);
 
   return (
-    <section ref={root} aria-labelledby="space-title" className="overflow-hidden bg-paper py-14 md:py-20">
+    <section ref={root} aria-labelledby="space-title" className="overflow-hidden bg-paper py-12 md:py-16">
       <div className="container-site">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading eyebrow="Fits your space" title={<span id="space-title">On the wall. Out of the way.</span>} intro={`It mounts flat to any solid wall, indoors or out. Leave about ${board.minSpacePerUser} of clear floor in front and you are set.`} />

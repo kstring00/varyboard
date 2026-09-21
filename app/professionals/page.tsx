@@ -64,7 +64,7 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="six-title" className="bg-ink py-12 text-paper md:py-24">
+      <section aria-labelledby="six-title" className="bg-ink py-12 text-paper md:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <Reveal>
             <SectionHeading tone="dark" eyebrow="6-in-1" title={<span id="six-title">Six pieces of equipment. One board.</span>} intro="Everything on the list below happens on the same wall, at whatever height the patient needs." />

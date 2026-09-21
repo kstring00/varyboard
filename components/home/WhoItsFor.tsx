@@ -25,7 +25,7 @@ const CARDS = [
 
 export function WhoItsFor() {
   return (
-    <section aria-labelledby="who-title" className="bg-paper py-14 md:py-20">
+    <section aria-labelledby="who-title" className="bg-paper py-12 md:py-16">
       <div className="container-site">
         <Reveal>
           <SectionHeading eyebrow="Who it's for" title={<span id="who-title">Made for people who want to keep moving well.</span>} />

@@ -18,18 +18,18 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header sticky top-0 z-40 border-b">
-      <div className="container-site flex h-16 items-center justify-between gap-3 md:h-[4.5rem]">
+      <div className="container-site flex h-16 items-center justify-between gap-3 md:h-[4rem]">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {nav.map((n) => (
-            <Link key={n.href} href={n.href} className="btn-ghost px-4 text-[1rem]">
+            <Link key={n.href} href={n.href} className="btn-ghost px-3 text-[0.92rem]">
               {n.label}
             </Link>
           ))}
         </nav>
         <div className="flex items-center gap-1 sm:gap-2">
-          <PhoneLink compact className="px-2 text-[1rem] text-ink-2 hover:text-ink sm:px-3" />
-          <Link href="/#pricing" className="btn-primary header-cta hidden px-5 text-[1rem] sm:inline-flex">
+          <PhoneLink compact className="px-2 text-[0.92rem] text-ink-2 hover:text-ink sm:px-3" />
+          <Link href="/#pricing" className="btn-primary header-cta hidden px-5 text-[0.92rem] sm:inline-flex">
             Shop · from {formatPrice(products.board.price)}
           </Link>
           <button

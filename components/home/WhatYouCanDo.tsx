@@ -12,7 +12,7 @@ const PILLARS = [
 
 export function WhatYouCanDo() {
   return (
-    <section aria-labelledby="do-title" className="bg-ink py-20 text-paper md:py-28">
+    <section aria-labelledby="do-title" className="bg-ink py-14 text-paper md:py-20">
       <div className="container-site">
         <Reveal>
           <SectionHeading tone="dark" eyebrow="What you can do" title={<span id="do-title">Strength. Mobility. Balance. One wall.</span>} intro="Six kinds of practice, all on the same board. Your therapist can show you which ones are right for you." />
