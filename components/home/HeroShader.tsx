@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { HexShaderBackground } from "@/components/ui/hex-shader";
 import { HexEdge } from "@/components/HexEdge";
-import { useMotionMode } from "@/components/motion/MotionProvider";
+import { useEffect, useState } from "react";
 import { board, formatPrice, products, shipping } from "@/content/facts";
 import { buyLinks } from "@/lib/commerce";
 
@@ -11,11 +11,25 @@ import { buyLinks } from "@/lib/commerce";
  * Hero: plaster ground, honeycomb shader, copy only. No photo, no dark ground.
  * HexEdge at the bottom dissolves into the deep pine section beneath.
  */
+/** Shader density: 12 on desktop, 9 under 768px. Plain width query, no motion gating. */
+function useShaderDensity() {
+  // The prop never reaches the DOM, so reading the media query in the initializer causes no
+  // hydration mismatch and avoids remounting the canvas after first paint.
+  const [density, setDensity] = useState(() => (typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches ? 9 : 12));
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const apply = () => setDensity(mq.matches ? 9 : 12);
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+  return density;
+}
+
 export function HeroShader() {
-  const mode = useMotionMode();
+  const density = useShaderDensity();
   return (
     <section aria-labelledby="hero-title" className="hero" style={{ "--section-bg": "var(--color-pine)", "--ink": "var(--color-ink)" } as React.CSSProperties}>
-      <HexShaderBackground variant="light" density={mode === "light" ? 9 : 12} intensity={0.42} timeScale={0.35} className="absolute inset-0" />
+      <HexShaderBackground variant="light" density={density} intensity={0.42} timeScale={0.35} className="absolute inset-0" />
       <div className="hero__wash" aria-hidden="true" />
 
       <div className="hero__inner">
