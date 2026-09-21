@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useActionState, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useActionState, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { submitInquiry, type FormState } from "@/app/actions/forms";
 import { GOALS, REGIONS, type Goal, type Region } from "@/content/exercises";
 import { brand, formatPrice, products } from "@/content/facts";
 import { buyLinks } from "@/lib/commerce";
-import { CAUTION_MESSAGE, buildPlan, planToText, type Plan } from "@/lib/plan";
+import { CAUTION_MESSAGE, PLAN_ANCHOR, buildPlan, goalFromHash, planToText, type Plan } from "@/lib/plan";
 
 /**
  * PlanBuilder: tap a part of the body, pick a goal, add an optional note, build a plan.
@@ -38,6 +38,8 @@ export function PlanBuilder() {
   const [formState, formAction, pending] = useActionState(submitInquiry, initialForm);
   const hotspotRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const planRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const figureRef = useRef<HTMLDivElement>(null);
   const uid = useId();
   const regionLabel = useMemo(() => REGIONS.find((r) => r.id === region)?.label ?? "", [region]);
   const canBuild = Boolean(region && goal);
@@ -57,6 +59,21 @@ export function PlanBuilder() {
     }
   };
 
+  /* Deep link: #how-it-works?goal=… pre-selects the goal, scrolls here and focuses the figure. */
+  useEffect(() => {
+    const apply = () => {
+      const g = goalFromHash(window.location.hash);
+      if (!g) return;
+      setGoal(g);
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      sectionRef.current?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+      figureRef.current?.focus({ preventScroll: true });
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
+
   const build = () => {
     if (!region || !goal) return;
     const p = buildPlan({ region, goal, note });
@@ -66,7 +83,7 @@ export function PlanBuilder() {
   };
 
   return (
-    <section id="how-it-works" aria-labelledby="plan-title" className="plan">
+    <section id={PLAN_ANCHOR} ref={sectionRef} aria-labelledby="plan-title" className="plan">
       <div className="container-site">
         <header className="plan__head">
           <p className="eyebrow">Build your plan</p>
@@ -79,7 +96,7 @@ export function PlanBuilder() {
         <div className="plan__grid">
           {/* Body map */}
           <div className="plan__map" role="group" aria-label="Choose an area of the body">
-            <div className="plan__figure">
+            <div ref={figureRef} tabIndex={-1} className="plan__figure">
               <Image src="/images/body-map.png" alt="" width={444} height={1400} sizes="(min-width: 1024px) 26vw, 60vw" className="plan__body" />
               {HOTSPOTS.map((h, i) => {
                 const r = REGIONS.find((x) => x.id === h.id)!;
@@ -160,6 +177,7 @@ export function PlanBuilder() {
               </div>
             </div>
 
+            <p className="plan__pre">Plans are general exercise guidance from a licensed physical therapist, not a diagnosis or treatment. If you are recovering from surgery or injury, follow your own clinician&rsquo;s advice first.</p>
             <div className="plan__actions">
               <button type="button" className="btn-primary text-lg" onClick={build} disabled={!canBuild} data-build>
                 Build my plan

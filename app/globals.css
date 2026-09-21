@@ -246,6 +246,7 @@
 .plan__chip-line { font-size: 0.85rem; opacity: 0.85; }
 .plan__note { margin-top: 0.6rem; width: 100%; min-height: 3rem; border-radius: 0.9rem; border: 1.5px solid rgb(31 42 40 / 0.18); background: rgb(255 255 255 / 0.6); padding: 0.7rem 0.9rem; font: inherit; color: var(--color-ink); }
 .plan__note:focus { outline: 2px solid var(--color-pine); outline-offset: 2px; }
+.plan__pre { padding-left: 2.8rem; font-size: 0.9rem; color: var(--color-ink-2); max-width: 40rem; }
 .plan__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding-left: 2.8rem; }
 .plan__actions .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 .plan__result { margin-top: 2.5rem; scroll-margin-top: 5rem; border-top: 1px solid rgb(31 42 40 / 0.12); padding-top: 2rem; }
@@ -282,6 +283,7 @@
   .plan__chips { grid-template-columns: 1fr; }
   .plan__email-form { grid-template-columns: 1fr; }
   .plan__actions { padding-left: 0; }
+  .plan__pre { padding-left: 0; }
   .plan__item-head { grid-template-columns: 2.25rem 1fr; }
   .plan__item-reps { grid-column: 2; }
 }

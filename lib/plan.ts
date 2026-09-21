@@ -62,3 +62,22 @@ export function buildPlan({ region, goal, note }: PlanInput): Plan {
 export function planToText(plan: Plan): string {
   return plan.items.map((i, n) => `${n + 1}. ${i.exercise.name} (${i.role}) — ${i.exercise.reps}. Anchor row ${i.exercise.anchorRow}, ${i.exercise.anchorLandmark}. ${i.gentle ? "Gentle form: " + i.exercise.easier : ""}`).join("\n");
 }
+
+/* ---------- Deep link: pre-select a goal in the builder ----------
+ * Pattern: #how-it-works?goal=strength | mobility | balance
+ * The builder reads it on load and on hashchange, scrolls itself into view,
+ * selects the goal and focuses the body figure. Same-page links from
+ * "Who it's for" use planGoalHash(); goalFromHash() parses it back.
+ */
+export const PLAN_ANCHOR = "how-it-works";
+
+export function planGoalHash(goal: Goal): string {
+  return `#${PLAN_ANCHOR}?goal=${goal}`;
+}
+
+export function goalFromHash(hash: string): Goal | null {
+  const m = /^#how-it-works\?(.*)$/.exec(hash);
+  if (!m) return null;
+  const g = new URLSearchParams(m[1]).get("goal");
+  return g === "strength" || g === "mobility" || g === "balance" ? g : null;
+}
