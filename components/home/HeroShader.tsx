@@ -6,6 +6,7 @@ import { HexEdge } from "@/components/HexEdge";
 import { useEffect, useState } from "react";
 import { board, formatPrice, products, shipping } from "@/content/facts";
 import { buyLinks } from "@/lib/commerce";
+import { BoardPanel } from "./BoardPanel";
 
 /**
  * Hero: plaster ground, honeycomb shader, copy only. No photo, no dark ground.
@@ -28,20 +29,17 @@ function useShaderDensity() {
 export function HeroShader() {
   const density = useShaderDensity();
   return (
-    <section aria-labelledby="hero-title" className="hero" style={{ "--section-bg": "var(--color-pine)", "--ink": "var(--color-ink)" } as React.CSSProperties}>
+    <section aria-labelledby="hero-title" className="hero" style={{ "--section-bg": "var(--color-plaster-hero)", "--ink": "var(--color-ink)" } as React.CSSProperties}>
       <HexShaderBackground variant="light" density={density} intensity={0.42} timeScale={0.35} className="absolute inset-0" />
       <div className="hero__wash" aria-hidden="true" />
 
-      <div className="hero__inner">
+      <div className="hero__inner hero__inner--split">
         <div className="hero__copy">
           <p className="hero__eyebrow">Designed by a physical therapist · Patented</p>
           <h1 id="hero-title" className="hero__title">
-            Strength.
-            <br />
-            Mobility.
-            <br />
-            Balance.
+            Vary Board
           </h1>
+          <p className="hero__pillars">Strength · Mobility · Balance</p>
           <p className="hero__sub">
             The Vary Board is a wall-mounted training board for adults who want to stay strong, mobile and steady at home. Hold on, clip in a band, and practice the movements that keep you independent.
           </p>
@@ -64,6 +62,9 @@ export function HeroShader() {
             <li>Indoor / outdoor</li>
             <li>{board.minSpacePerUser} is all you need</li>
           </ul>
+        </div>
+        <div className="hero__panel">
+          <BoardPanel />
         </div>
       </div>
 
