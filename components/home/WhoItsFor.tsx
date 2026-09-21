@@ -7,7 +7,7 @@ const CARDS: { goal: Goal; title: string; body: string; cta: string }[] = [
   {
     goal: "strength",
     title: "Strength",
-    body: "Bands and bodyweight against a wall that does not move. For the person who wants to keep lifting groceries, grandkids and themselves without thinking about it.",
+    body: "Bands and bodyweight against a wall that does not move. For anyone who wants to keep lifting groceries, kids and themselves without thinking about it.",
     cta: "Build a strength plan",
   },
   {
@@ -38,7 +38,7 @@ export function WhoItsFor() {
                 The board does the rest.
               </span>
             }
-            intro="Adults 40 and up use the Vary Board for strength, mobility and balance. Tap the figure below, choose a goal, and get a ten-minute plan built for you."
+            intro="People of every age and fitness level use the Vary Board for strength, mobility and balance. Tap the figure below, choose a goal, and get a ten-minute plan built for you."
           />
         </Reveal>
         <ul className="mt-10 grid gap-5 md:grid-cols-3">

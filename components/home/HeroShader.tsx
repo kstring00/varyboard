@@ -41,7 +41,7 @@ export function HeroShader() {
           </h1>
           <p className="hero__pillars">Strength · Mobility · Balance</p>
           <p className="hero__sub">
-            The Vary Board is a wall-mounted training board for adults who want to stay strong, mobile and steady at home. Hold on, clip in a band, and practice the movements that keep you independent.
+            The Vary Board is a wall-mounted training board for anyone who wants to stay strong, mobile and steady at home. Hold on, clip in a band, and practice the movements that keep you independent.
           </p>
           <div className="hero__ctas">
             <a href={buyLinks.board} className="hero__btn hero__btn--primary">

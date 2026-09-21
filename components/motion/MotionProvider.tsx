@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /**
- * Motion rules for a 55+, mobile-heavy audience:
+ * Motion rules for a mobile-heavy audience of every age:
  *  - scroll-scrubbed only, never scroll-jacked
  *  - prefers-reduced-motion => static layout (no GSAP at all)
  *  - lighter parallax on small screens
