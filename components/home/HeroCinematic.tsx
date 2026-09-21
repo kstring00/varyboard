@@ -9,6 +9,7 @@ import { useMotionMode } from "@/components/motion/MotionProvider";
 import { images } from "@/content/images";
 import { board, formatPrice, founders, products } from "@/content/facts";
 import { buyLinks } from "@/lib/commerce";
+import { HexEdge } from "@/components/HexEdge";
 
 const art = images.heroRender;
 const AR = art.width / art.height;
@@ -94,7 +95,7 @@ export function HeroCinematic() {
   }, [mode]);
 
   return (
-    <section ref={root} aria-labelledby="hero-title" className="hero" style={{ "--hero-ar": AR } as React.CSSProperties}>
+    <section ref={root} aria-labelledby="hero-title" className="hero" style={{ "--hero-ar": AR, "--section-bg": "var(--color-paper-2)", "--ink": "var(--color-ink)" } as React.CSSProperties}>
       <div className="hero__panel">
         <div className="hero__art" data-art>
           <div className="hero__art-inner" data-art-inner>
@@ -199,6 +200,7 @@ export function HeroCinematic() {
           </span>
         </li>
       </ul>
+      <HexEdge />
       <div id="hero-end" aria-hidden="true" className="h-px" />
     </section>
   );
