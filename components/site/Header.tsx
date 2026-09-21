@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Logo } from "./Logo";
 import { PhoneLink } from "./PhoneLink";
 import { formatPrice, products } from "@/content/facts";
@@ -16,22 +16,8 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [overDark, setOverDark] = useState(false);
-  useEffect(() => {
-    const onScroll = () => {
-      const hero = document.querySelector("[data-dark-hero]");
-      setOverDark(Boolean(hero) && (hero as HTMLElement).getBoundingClientRect().bottom > 72);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
   return (
-    <header data-theme={overDark && !open ? "dark" : "light"} className="site-header sticky top-0 z-40 border-b">
+    <header className="site-header sticky top-0 z-40 border-b">
       <div className="container-site flex h-16 items-center justify-between gap-3 md:h-[4.5rem]">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
