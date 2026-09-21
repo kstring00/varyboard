@@ -99,7 +99,7 @@ export function WhatItIs() {
   }, [mode]);
 
   return (
-    <section ref={root} id="how-it-works" aria-labelledby="wii-title" className="wii bg-paper-2">
+    <section ref={root} id="how-it-works" aria-labelledby="wii-title" className="wii bg-plaster">
       {/* Desktop pinned layout */}
       <div className="wii-desktop" data-pin-wrap>
         <div className="wii-desktop__pin" data-pin>

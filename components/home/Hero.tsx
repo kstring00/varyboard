@@ -1,9 +1,6 @@
-import { HeroCinematic } from "./HeroCinematic";
+import { HeroShader } from "./HeroShader";
 
-/**
- * HERO. Full-bleed approved render of the boards, with the typography, callouts and
- * motion layered in HTML/CSS/GSAP. Static (no motion) under prefers-reduced-motion.
- */
+/** HERO: honeycomb shader ground, the real board cutout, honeycomb bottom edge. */
 export function Hero() {
-  return <HeroCinematic />;
+  return <HeroShader />;
 }

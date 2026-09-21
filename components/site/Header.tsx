@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { PhoneLink } from "./PhoneLink";
-import { buyLinks } from "@/lib/commerce";
 import { formatPrice, products } from "@/content/facts";
 
 const nav = [
@@ -17,18 +16,22 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [atTop, setAtTop] = useState(true);
+  const [overDark, setOverDark] = useState(false);
   useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY < 24);
+    const onScroll = () => {
+      const hero = document.querySelector("[data-dark-hero]");
+      setOverDark(Boolean(hero) && (hero as HTMLElement).getBoundingClientRect().bottom > 72);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
   return (
-    <header
-      data-top={atTop && !open}
-      className="site-header sticky top-0 z-40 border-b border-line/70 bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/75"
-    >
+    <header data-theme={overDark && !open ? "dark" : "light"} className="site-header sticky top-0 z-40 border-b">
       <div className="container-site flex h-16 items-center justify-between gap-3 md:h-[4.5rem]">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
@@ -40,9 +43,9 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-1 sm:gap-2">
           <PhoneLink compact className="px-2 text-[1rem] text-ink-2 hover:text-ink sm:px-3" />
-          <a href={buyLinks.board} className="btn-primary hidden px-5 text-[1rem] sm:inline-flex">
-            Buy {formatPrice(products.board.price)}
-          </a>
+          <Link href="/#pricing" className="btn-primary header-cta hidden px-5 text-[1rem] sm:inline-flex">
+            Shop · from {formatPrice(products.board.price)}
+          </Link>
           <button
             type="button"
             className="btn-ghost min-w-12 px-3 lg:hidden"
@@ -64,9 +67,9 @@ export function Header() {
               {n.label}
             </Link>
           ))}
-          <a href={buyLinks.board} className="btn-primary my-3 sm:hidden">
-            Buy the Vary Board {formatPrice(products.board.price)}
-          </a>
+          <Link href="/#pricing" onClick={() => setOpen(false)} className="btn-primary my-3 sm:hidden">
+            Shop · from {formatPrice(products.board.price)}
+          </Link>
         </nav>
       </div>
     </header>
