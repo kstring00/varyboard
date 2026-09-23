@@ -15,6 +15,8 @@
     "check:intake": "tsx scripts/check-intake.ts",
     "audit:content": "tsx scripts/audit-content.ts",
     "audit:safety": "node scripts/audit-safety.mjs",
+    "review:export": "tsx scripts/export-review.ts",
+    "review:import": "tsx scripts/import-review.ts",
     "prebuild": "npm run check:placeholders && npm run audit:safety && npm run check:intake && npm run audit:content",
     "vercel-build": "next build",
     "assets:og": "node scripts/make-og.mjs"

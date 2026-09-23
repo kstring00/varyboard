@@ -262,7 +262,8 @@ export interface Reflect {
   truth: Reviewed;
 }
 
-const truth = (value: string): Reviewed => ({ value, reviewedByEric: false });
+/** A reviewed line. The second argument is written by scripts/import-review.ts once Eric approves it. */
+const truth = (value: string, reviewedByEric = false): Reviewed => ({ value, reviewedByEric });
 
 /** Keyed `${concern}.${situation}` for concerns whose Step 3 is a situation list. */
 export const REFLECT: Record<string, Reflect> = {
