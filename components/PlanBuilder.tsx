@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useActionState, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useActionState, useEffect, useId, useMemo, useRef, useState } from "react";
+import { BodyMap } from "@/components/plan/BodyMap";
+import { PlanItemCard } from "@/components/plan/PlanItemCard";
 import { submitInquiry, type FormState } from "@/app/actions/forms";
 import { GOALS, REGIONS, type Goal, type Region } from "@/content/exercises";
 import { brand, formatPrice, products } from "@/content/facts";
@@ -11,21 +12,10 @@ import { CAUTION_MESSAGE, PLAN_ANCHOR, buildPlan, goalFromHash, planToText, type
 
 /**
  * PlanBuilder: tap a part of the body, pick a goal, add an optional note, build a plan.
- * Body map = the supplied figure (public/images/body-map.png) with six hexagon hotspots plus
- * "Whole body · Balance". Hotspots are real buttons: Tab reaches them, arrow keys move between
- * them, Enter/Space selects. Plan logic lives in lib/plan.ts (buildPlan), the single place a
- * server route will later replace. Wellness language only; not medical advice.
+ * The body map (components/plan/BodyMap) is shared with Step 3 of the "Find your plan" intake
+ * at /plan, which is the guided front door to this builder. Plan logic lives in lib/plan.ts
+ * (buildPlan), the single place a server route will later replace. Wellness language only.
  */
-
-/* Hotspot geometry: percent of the figure box (left, top). Tuned to the supplied figure. */
-const HOTSPOTS: { id: Region; x: number; y: number; side: "left" | "right" }[] = [
-  { id: "shoulders", x: 71, y: 19, side: "right" },
-  { id: "arms", x: 12, y: 50, side: "left" },
-  { id: "core", x: 50, y: 34, side: "right" },
-  { id: "hips", x: 50, y: 49, side: "left" },
-  { id: "knees", x: 60, y: 68, side: "right" },
-  { id: "ankles", x: 40, y: 91, side: "left" },
-];
 
 const initialForm: FormState = { status: "idle" };
 
@@ -36,28 +26,12 @@ export function PlanBuilder() {
   const [plan, setPlan] = useState<Plan | null>(null);
   const [emailOpen, setEmailOpen] = useState(false);
   const [formState, formAction, pending] = useActionState(submitInquiry, initialForm);
-  const hotspotRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const planRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const figureRef = useRef<HTMLDivElement>(null);
   const uid = useId();
   const regionLabel = useMemo(() => REGIONS.find((r) => r.id === region)?.label ?? "", [region]);
   const canBuild = Boolean(region && goal);
-
-  const onHotspotKey = (i: number) => (e: KeyboardEvent) => {
-    const n = REGIONS.length; // six hotspots + whole body
-    const map: Record<string, number> = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
-    if (e.key in map) {
-      e.preventDefault();
-      hotspotRefs.current[(i + map[e.key] + n) % n]?.focus();
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      hotspotRefs.current[0]?.focus();
-    } else if (e.key === "End") {
-      e.preventDefault();
-      hotspotRefs.current[n - 1]?.focus();
-    }
-  };
 
   /* Deep link: #how-it-works?goal=… pre-selects the goal, scrolls here and focuses the figure. */
   useEffect(() => {
@@ -91,54 +65,18 @@ export function PlanBuilder() {
             Where do you want to feel stronger?
           </h2>
           <p className="plan__lede">Tap a part of the body, choose a goal, and we will put together a short practice on the board. Bring it to your physical therapist, or start gently at home.</p>
+          <p className="plan__front">
+            Not sure where to start?{" "}
+            <Link href="/plan" className="link">
+              Answer three quick questions
+            </Link>{" "}
+            and we will build the plan around your situation.
+          </p>
         </header>
 
         <div className="plan__grid">
           {/* Body map */}
-          <div className="plan__map" role="group" aria-label="Choose an area of the body">
-            <div ref={figureRef} tabIndex={-1} className="plan__figure">
-              <Image src="/images/body-map.png" alt="" width={444} height={1400} sizes="(min-width: 1024px) 26vw, 60vw" className="plan__body" />
-              {HOTSPOTS.map((h, i) => {
-                const r = REGIONS.find((x) => x.id === h.id)!;
-                const on = region === h.id;
-                return (
-                  <button
-                    key={h.id}
-                    ref={(el) => {
-                      hotspotRefs.current[i] = el;
-                    }}
-                    type="button"
-                    className={`plan__hot plan__hot--${h.side}`}
-                    style={{ left: `${h.x}%`, top: `${h.y}%` }}
-                    aria-pressed={on}
-                    aria-label={r.label}
-                    onClick={() => setRegion(h.id)}
-                    onKeyDown={onHotspotKey(i)}
-                    data-region={h.id}
-                  >
-                    <span className="plan__hex" aria-hidden="true" />
-                    <span className="plan__hot-label" aria-hidden="true">
-                      {r.short}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-            <button
-              ref={(el) => {
-                hotspotRefs.current[6] = el;
-              }}
-              type="button"
-              className="plan__whole"
-              aria-pressed={region === "whole"}
-              onClick={() => setRegion("whole")}
-              onKeyDown={onHotspotKey(6)}
-              data-region="whole"
-            >
-              <span className="plan__hex" aria-hidden="true" />
-              Whole body · Balance
-            </button>
-          </div>
+          <BodyMap value={region} onSelect={setRegion} figureRef={figureRef} />
 
           {/* Controls */}
           <div className="plan__controls">
@@ -212,70 +150,9 @@ export function PlanBuilder() {
             )}
 
             <ol className="plan__list">
-              {plan.items.map((item, n) => {
-                const e = item.exercise;
-                return (
-                  <li key={e.id} className="plan__item">
-                    <div className="plan__item-head">
-                      <span className="plan__item-n">{n + 1}</span>
-                      <div>
-                        <span className="plan__item-role">{item.role}</span>
-                        <h4 className="plan__item-name">{e.name}</h4>
-                      </div>
-                      <span className="plan__item-reps">{item.gentle ? "Gentle form" : e.reps}</span>
-                    </div>
-                    <dl className="plan__meta">
-                      <div>
-                        <dt>Anchor</dt>
-                        <dd>
-                          Row {e.anchorRow} · {e.anchorLandmark}
-                        </dd>
-                      </div>
-                      <div>
-                        <dt>Band</dt>
-                        <dd>{e.band === "none" ? "No band" : e.band}</dd>
-                      </div>
-                      <div>
-                        <dt>Rail</dt>
-                        <dd>{e.rail ? "Hand on the rail" : "Hands free"}</dd>
-                      </div>
-                      <div>
-                        <dt>Position</dt>
-                        <dd className="capitalize">{e.position}</dd>
-                      </div>
-                    </dl>
-                    <p className="plan__setup">{e.setup}</p>
-                    <ol className="plan__steps">
-                      {e.steps.map((s) => (
-                        <li key={s}>{s}</li>
-                      ))}
-                    </ol>
-                    {item.gentle && (
-                      <p className="plan__gentle">
-                        <strong>Gentle form:</strong> {e.easier}
-                      </p>
-                    )}
-                    <p className="plan__cue">
-                      <strong>Cue:</strong> {e.cue}
-                    </p>
-                    <details className="plan__more">
-                      <summary>Why this, and how to adjust</summary>
-                      <p>
-                        <strong>Why:</strong> {e.why}
-                      </p>
-                      <p>
-                        <strong>Easier:</strong> {e.easier}
-                      </p>
-                      <p>
-                        <strong>Harder:</strong> {e.harder}
-                      </p>
-                      <p>
-                        <strong>Stop if:</strong> {e.stop}
-                      </p>
-                    </details>
-                  </li>
-                );
-              })}
+              {plan.items.map((item, n) => (
+                <PlanItemCard key={item.exercise.id} item={item} n={n + 1} />
+              ))}
             </ol>
 
             <div className="plan__cta">

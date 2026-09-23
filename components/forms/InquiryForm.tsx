@@ -58,19 +58,19 @@ export function InquiryForm({ kind, page }: { kind: FormKind; page: string }) {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <Field id={id("name")} label="Your name" error={e.name}>
-          <input id={id("name")} name="name" type="text" autoComplete="name" required className={input} aria-invalid={Boolean(e.name)} aria-describedby={e.name ? `${id("name")}-error` : undefined} />
+          <input id={id("name")} name="name" type="text" autoComplete="name" required defaultValue={state.values?.name} className={input} aria-invalid={Boolean(e.name)} aria-describedby={e.name ? `${id("name")}-error` : undefined} />
         </Field>
         <Field id={id("email")} label="Email" error={e.email}>
-          <input id={id("email")} name="email" type="email" autoComplete="email" required className={input} aria-invalid={Boolean(e.email)} aria-describedby={e.email ? `${id("email")}-error` : undefined} />
+          <input id={id("email")} name="email" type="email" autoComplete="email" required defaultValue={state.values?.email} className={input} aria-invalid={Boolean(e.email)} aria-describedby={e.email ? `${id("email")}-error` : undefined} />
         </Field>
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field id={id("phone")} label="Phone (optional)" error={e.phone}>
-          <input id={id("phone")} name="phone" type="tel" autoComplete="tel" className={input} />
+          <input id={id("phone")} name="phone" type="tel" autoComplete="tel" defaultValue={state.values?.phone} className={input} />
         </Field>
         {kind === "clinic" ? (
           <Field id={id("org")} label="Clinic or organization" error={e.org}>
-            <input id={id("org")} name="org" type="text" autoComplete="organization" required className={input} aria-invalid={Boolean(e.org)} aria-describedby={e.org ? `${id("org")}-error` : undefined} />
+            <input id={id("org")} name="org" type="text" autoComplete="organization" required defaultValue={state.values?.org} className={input} aria-invalid={Boolean(e.org)} aria-describedby={e.org ? `${id("org")}-error` : undefined} />
           </Field>
         ) : (
           <Field id={id("interest")} label="What can we help with?">
@@ -86,7 +86,7 @@ export function InquiryForm({ kind, page }: { kind: FormKind; page: string }) {
       {kind === "clinic" && (
         <div className="grid gap-5 sm:grid-cols-2">
           <Field id={id("role")} label="Your role">
-            <input id={id("role")} name="role" type="text" autoComplete="organization-title" className={input} />
+            <input id={id("role")} name="role" type="text" autoComplete="organization-title" defaultValue={state.values?.role} className={input} />
           </Field>
           <Field id={id("interest")} label="I'm interested in">
             <select id={id("interest")} name="interest" className={input} defaultValue="pricing">
@@ -98,7 +98,7 @@ export function InquiryForm({ kind, page }: { kind: FormKind; page: string }) {
         </div>
       )}
       <Field id={id("message")} label={kind === "clinic" ? "Tell us about your clinic" : "Message"} error={e.message}>
-        <textarea id={id("message")} name="message" rows={5} required className={input} aria-invalid={Boolean(e.message)} aria-describedby={e.message ? `${id("message")}-error` : undefined} placeholder={kind === "clinic" ? "How many boards, where they would go, and anything else we should know." : undefined} />
+        <textarea id={id("message")} name="message" rows={5} required defaultValue={state.values?.message} className={input} aria-invalid={Boolean(e.message)} aria-describedby={e.message ? `${id("message")}-error` : undefined} placeholder={kind === "clinic" ? "How many boards, where they would go, and anything else we should know." : undefined} />
       </Field>
 
       {state.status === "error" && (

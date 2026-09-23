@@ -44,15 +44,18 @@ export function HeroShader() {
             The Vary Board is a wall-mounted training board for anyone who wants to stay strong, mobile and steady at home. Hold on, clip in a band, and practice the movements that keep you independent.
           </p>
           <div className="hero__ctas">
-            <a href={buyLinks.board} className="hero__btn hero__btn--primary">
-              Get the Vary Board · {formatPrice(products.board.price)}
-            </a>
+            <Link href="/plan" className="hero__btn hero__btn--primary">
+              Find your plan
+            </Link>
             <Link href="#how-it-works" className="hero__btn hero__btn--secondary">
               See how it works
             </Link>
           </div>
           <p className="hero__note">
-            {shipping.flatRateLine} · Over 6&apos;3&quot;?{" "}
+            <a href={buyLinks.board} className="hero__note-link">
+              Get the Vary Board · {formatPrice(products.board.price)}
+            </a>{" "}
+            · {shipping.flatRateLine} · Over 6&apos;3&quot;?{" "}
             <Link href={products.boardXT.path} className="hero__note-link">
               See the {products.boardXT.name}
             </Link>

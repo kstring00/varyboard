@@ -8,6 +8,7 @@ import { formatPrice, products } from "@/content/facts";
 
 const nav = [
   { href: "/#how-it-works", label: "How it works" },
+  { href: "/plan", label: "Find your plan" },
   { href: "/vary-board", label: "Vary Board" },
   { href: "/professionals", label: "For clinics" },
   { href: "/our-story", label: "Our story" },
@@ -22,7 +23,7 @@ export function Header() {
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {nav.map((n) => (
-            <Link key={n.href} href={n.href} className="btn-ghost px-3 text-[0.92rem]">
+            <Link key={n.href} href={n.href} className="btn-ghost min-w-11 px-3 text-[0.92rem]">
               {n.label}
             </Link>
           ))}

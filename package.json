@@ -12,6 +12,10 @@
     "assets:optimize": "node scripts/optimize-images.mjs",
     "assets:cutout": "python3 scripts/cutout.py",
     "check:placeholders": "node scripts/check-placeholders.mjs",
+    "check:intake": "tsx scripts/check-intake.ts",
+    "audit:content": "tsx scripts/audit-content.ts",
+    "audit:safety": "node scripts/audit-safety.mjs",
+    "prebuild": "npm run check:placeholders && npm run audit:safety && npm run check:intake && npm run audit:content",
     "vercel-build": "next build",
     "assets:og": "node scripts/make-og.mjs"
   },
@@ -30,6 +34,7 @@
     "eslint-config-next": "^16.3.5",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5.9.0"
   },
   "engines": {

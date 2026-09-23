@@ -55,7 +55,7 @@ export function Footer() {
             <ul className="mt-3">
               {c.links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="inline-flex min-h-11 items-center text-ink-2 no-underline hover:text-ink">
+                  <Link href={l.href} className="inline-flex min-h-11 min-w-11 items-center text-ink-2 no-underline hover:text-ink">
                     {l.label}
                   </Link>
                 </li>

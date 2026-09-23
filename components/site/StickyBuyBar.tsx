@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { buyLinks } from "@/lib/commerce";
 import { formatPrice, products } from "@/content/facts";
 
@@ -12,6 +13,7 @@ import { formatPrice, products } from "@/content/facts";
 export function StickyBuyBar() {
   const [show, setShow] = useState(false);
   const [which, setWhich] = useState<"board" | "boardXT">("board");
+  const pathname = usePathname();
 
   useEffect(() => {
     const sentinel = document.getElementById("hero-end");
@@ -26,6 +28,8 @@ export function StickyBuyBar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // The plan pages carry exactly one primary CTA each; the bar would be a second one.
+  if (pathname.startsWith("/plan")) return null;
   const product = products[which];
   const href = which === "board" ? buyLinks.board : buyLinks.boardXT;
   const seg = (id: "board" | "boardXT", label: string) => (

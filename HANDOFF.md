@@ -47,12 +47,24 @@ The home page hero uses `public/images/originals/hero-render-clean.jpg`. Replace
 - Written install steps: add entries to `content/install.ts`. The install page shows them under the video once there is at least one.
 - Clinic spec sheet: save the PDF as `public/downloads/vary-board-spec-sheet.pdf`. The download button on the professionals page appears automatically.
 
+## Find your plan (the intake at /plan)
+
+Three one-tap questions (`for`, `c`, `s` or `area` in the URL) lead to `/plan/result`, a shareable plan page. All copy is in `content/intake.ts`; movements come from `content/exercises.ts`; the logic is `lib/intake.ts`.
+
+- `npm run audit:content` lists every line Eric has not reviewed (`reviewedByEric: false` in intake.ts, `approved: false` in exercises.ts). It fails **production** builds only. Preview builds deploy and show a yellow "Draft, not reviewed by Eric" banner on any affected page. Flip the flags to `true` as Eric signs each item off.
+- `npm run audit:safety` fails every build on diagnosis, cure, guarantee, "free" near VA, lifespan claims, or a statistic without a `source`.
+- `npm run check:intake` fails every build if any valid combination lacks content.
+- Comeback / recovery plans ask "My doctor or PT has cleared me to exercise" on the page, every time it opens. It is never stored in the link.
+- `content/config.ts` holds the military discount mechanism (currently `unknown`, so the mil lane shows the phone number), the VA packet PDF slot (`public/docs/va-provider-packet.pdf`) and the email provider note. Prices stay in `content/facts.ts`; see `priceCandidates` there for the two figures to confirm.
+- "Email me my plan" needs `RESEND_API_KEY` (Resend, under Eric's account) plus `FORM_FROM_EMAIL`, or `FORM_WEBHOOK_URL`. The plan is sent to the visitor with a copy to info@.
+- Blake Cook's testimonial: paste it into `content/reviews.ts` with `context: "Veteran"` (or similar) and the mil lane's plan page shows it automatically.
+
 ## Forms (contact and clinic requests)
 
 Both forms post to a small server function (`app/actions/forms.ts`) with spam protection. Set ONE of these in Vercel > Project > Settings > Environment Variables so messages reach you:
 
 - `FORM_WEBHOOK_URL`: any service that accepts a JSON POST (Formspree, Zapier, Make, n8n). Simplest option.
-- `RESEND_API_KEY` plus `FORM_FROM_EMAIL`: sends an email to info@varysystems.com through Resend.
+- `RESEND_API_KEY` plus `FORM_FROM_EMAIL`: sends an email through Resend (the account should be Eric's; the key lives only in Vercel env vars). Contact and clinic messages go to info@varysystems.com; "Email me my plan" goes to the visitor with a copy to info@.
 
 Until one is set, the form tells the visitor it could not send and shows the phone number and email instead. Test after setting it: send a message from /contact and confirm it arrives.
 
