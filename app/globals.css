@@ -851,4 +851,7 @@ button.link { display: inline-block; padding-block: 0.75rem; margin-block: -0.75
 .aud-team { width: 100%; }
 .aud-team__panel { margin-top: 12px; }
 @media (prefers-reduced-motion: reduce) { .aud-card:target { animation: none; box-shadow: 0 0 0 3px #62bba6, var(--shadow-soft); } }
-.wycd .ix-draft, .aud .ix-draft { margin-bottom: 1.25rem; }
+.container-site > .ix-draft { margin-bottom: 1.25rem; }
+/* Proof: list-only reviews, plain text under the cards (never a card). */
+.proof-more { list-style: none; margin: 1.75rem 0 0; padding: 0; max-width: 60rem; display: grid; gap: 0.6rem; color: var(--color-ink-2); }
+.proof-more__by { display: block; margin-top: 0.15rem; color: var(--color-muted); font-size: 0.95rem; }

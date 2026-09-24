@@ -8,6 +8,8 @@
  *     Keep the {you} {your} {my} {I} tokens: they become "they/their" on the "someone I care about" lane.
  *   - "try today" rows share one flag per movement: all of that movement's rows need Y for it to flip.
  *   - "exercise" rows carry the movement's name only; edit the other fields in content/exercises.ts.
+ *   - "review" rows are a question about a customer review (e.g. keep or remove?). Y = keep.
+ *     Reviews are never edited; to remove one, delete it from content/reviews.ts.
  * Then: npm run review:import
  */
 import { writeFileSync } from "node:fs";

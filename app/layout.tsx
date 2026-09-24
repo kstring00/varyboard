@@ -6,6 +6,7 @@ import { Footer } from "@/components/site/Footer";
 import { StickyBuyBar } from "@/components/site/StickyBuyBar";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { brand } from "@/content/facts";
+import { isLaunched } from "@/lib/env";
 import { siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
     "The Vary Board is a patented wall-mounted training board designed by a physical therapist. Practice strength, mobility and balance exercises at home.",
   openGraph: { siteName: brand.name, type: "website", locale: "en_US", images: [{ url: "/og.jpg", width: 1200, height: 630, alt: `${brand.name}: two boards mounted on a concrete wall` }] },
   twitter: { card: "summary_large_image", images: ["/og.jpg"] },
+  // Until launch every page says noindex (robots.txt and the X-Robots-Tag header in proxy.ts say the same).
+  ...(isLaunched ? {} : { robots: { index: false, follow: false, nocache: true } }),
 };
 
 const organizationJsonLd = {

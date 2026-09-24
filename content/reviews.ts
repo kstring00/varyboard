@@ -18,12 +18,18 @@ export interface Review {
   context?: string;
   verified?: boolean;
   featured?: boolean;
+  /**
+   * Shown only in the plain review list at the end of the homepage reviews section: never as a
+   * card, never in the hero, on an audience card, on a plan page or next to a CTA.
+   */
+  listOnly?: boolean;
+  /** An open question for Eric. Listed by audit:content and review:export until reviewedByEric is true. */
+  ericQuestion?: { question: string; reviewedByEric: boolean };
 }
 
 /**
  * Testimonials from the thevaryboard.com homepage (Shopify theme), copied word for word,
  * typos and capitals included. No ratings or dates: the source shows none.
- * D. Muhammad's testimonial is also on that page; paste it here verbatim when available.
  */
 export const reviews: Review[] = [
   {
@@ -31,6 +37,11 @@ export const reviews: Review[] = [
     author: "Ashley Workman",
     body: "This versatile device changed the physical therapy game. This single piece of equipment replaced 3 separate other pieces in my outpatient orthopedic physical therapy clinic. It is a space saver with potential to help perform resistance exercise, joint mobilizations, balance exercise, and stretching exercises, while also providing a comfortable and sturdy hand held assist.",
     context: "Physical therapy clinic",
+  },
+  {
+    id: "d-muhammad",
+    author: "D. Muhammad",
+    body: "The Vary Board is exactly what I have been looking for! It will provide an effective means to attach all my resistance bands and allows me to perform my exercises with precision and accuracy.",
   },
   {
     id: "blake-cook",
@@ -43,6 +54,8 @@ export const reviews: Review[] = [
     id: "j-white",
     author: "J. White",
     body: "The Vary Board will allow my parents to improve their strength and balance in a safe and easy-to-use way. I want to help them maintain their quality of life and reduce their risk of falls.",
+    listOnly: true,
+    ericQuestion: { question: "keep or remove? (fall-risk wording)", reviewedByEric: false },
   },
   {
     id: "b-castillo",
@@ -57,6 +70,16 @@ export const reviews: Review[] = [
 ];
 
 export const reviewById = (id: string) => reviews.find((r) => r.id === id);
+
+/** May this review appear on a card, in the hero, on an audience card or on a plan page? */
+export const canFeature = (r: Review) => !r.listOnly;
+
+/** Reviews Eric still has an open question about, for audit:content and the Draft banner. */
+export function openReviewQuestions(): string[] {
+  return reviews.filter((r) => r.ericQuestion && !r.ericQuestion.reviewedByEric).map((r) => `review:${r.id}: ${r.ericQuestion!.question}`);
+}
+
+for (const r of reviews) if (r.listOnly && r.featured) throw new Error(`content/reviews.ts: ${r.id} is listOnly and cannot be featured`);
 
 /** Star summary over the reviews that carry a rating. count 0 = show no stars at all. */
 export function reviewSummary(list: Review[] = reviews) {

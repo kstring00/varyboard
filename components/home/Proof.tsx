@@ -1,11 +1,13 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Stars } from "@/components/ui/Stars";
-import { reviews, reviewSummary } from "@/content/reviews";
+import { DraftBanner } from "@/components/plan/DraftBanner";
+import { canFeature, openReviewQuestions, reviews, reviewSummary } from "@/content/reviews";
 
 /**
  * PROOF. Real reviews only, verbatim from content/reviews.ts. Renders nothing while
  * that file is empty. Clinic and military reviews are featured first when present.
+ * List-only reviews never get a card: they sit in a plain list under the cards.
  */
 export function Proof() {
   if (reviews.length === 0) return null;
@@ -16,11 +18,13 @@ export function Proof() {
     if (/veteran|military|army|navy|marine|air force/.test(c)) return 1;
     return r.featured ? 2 : 3;
   };
-  const shown = [...reviews].sort((a, b) => priority(a) - priority(b) || (b.date ?? "").localeCompare(a.date ?? "")).slice(0, 6);
+  const listOnly = reviews.filter((r) => !canFeature(r));
+  const shown = reviews.filter(canFeature).sort((a, b) => priority(a) - priority(b) || (b.date ?? "").localeCompare(a.date ?? "")).slice(0, 6);
 
   return (
     <section aria-labelledby="proof-title" className="bg-paper-2 py-12 md:py-16">
       <div className="container-site">
+        <DraftBanner items={openReviewQuestions()} />
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading eyebrow="What people say" title={<span id="proof-title">Real reviews, in their words.</span>} />
           {summary.count > 0 && (
@@ -46,6 +50,15 @@ export function Proof() {
             </Reveal>
           ))}
         </ul>
+        {listOnly.length > 0 && (
+          <ul className="proof-more" aria-label="More from customers">
+            {listOnly.map((r) => (
+              <li key={r.id}>
+                <q>{r.body}</q> <span className="proof-more__by">{r.author}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

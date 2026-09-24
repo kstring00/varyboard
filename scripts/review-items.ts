@@ -36,7 +36,7 @@ export interface ReviewItem {
   /** Group id: rows that share one reviewed flag (try-today fields). Equals id for single-field items. */
   group: string;
   lane: string;
-  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience";
+  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience" | "review";
   text: string;
   reviewed: boolean;
   file: string;
@@ -49,6 +49,7 @@ export const FILES = {
   exercises: path.join(process.cwd(), "content", "exercises.ts"),
   genres: path.join(process.cwd(), "content", "genres.ts"),
   audiences: path.join(process.cwd(), "content", "audiences.ts"),
+  reviews: path.join(process.cwd(), "content", "reviews.ts"),
 };
 
 /** Absolute path for a repo-relative content file an item came from. */
@@ -194,6 +195,22 @@ export function collectItems(): ReviewItem[] {
   };
   keyed("content/genres.ts", FILES.genres, "GENRE_LIST", "genre");
   keyed("content/audiences.ts", FILES.audiences, "AUDIENCES", "audience");
+
+  // reviews.ts: an open ericQuestion on a review. Y = keep (question closed). Reviews are never
+  // edited: the importer refuses text in "Eric's edit" for these rows; to remove, delete the entry.
+  const rv = parse(FILES.reviews);
+  const rlist = topLevel(rv.sf, "reviews") as ts.ArrayLiteralExpression;
+  for (const el of rlist.elements) {
+    if (!ts.isObjectLiteralExpression(el)) continue;
+    const q = prop(el, "ericQuestion");
+    if (!q || !ts.isObjectLiteralExpression(q)) continue;
+    const rid = (prop(el, "id") as ts.StringLiteral).text;
+    const body = prop(el, "body")!;
+    const question = (prop(q, "question") as ts.StringLiteral).text;
+    const { reviewed, flag } = boolProp(q, "reviewedByEric");
+    const id = `review:${rid}`;
+    items.push({ id, group: id, lane: "all", type: "review", text: `${question}: "${(body as ts.StringLiteral).text}"`, reviewed, file: "content/reviews.ts", textSpan: strSpan(body), flag });
+  }
   return items;
 }
 

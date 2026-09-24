@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { images } from "@/content/images";
-import { reviews } from "@/content/reviews";
+import { canFeature, reviews } from "@/content/reviews";
 import { HeroShader, type HeroAssets } from "./HeroShader";
 
 /**
@@ -20,7 +20,8 @@ const slot = (file: string) => (existsSync(path.join(HERO_DIR, file)) ? `/images
 
 /** One short real review line. Never edited: the title if there is one, else a body under 160 chars. */
 function heroReview() {
-  const r = reviews.find((x) => x.featured) ?? reviews[0];
+  const pool = reviews.filter(canFeature);
+  const r = pool.find((x) => x.featured) ?? pool[0];
   if (!r) return null;
   const text = r.title?.trim() || (r.body.length <= 160 ? r.body.trim() : "");
   return text ? { text, author: r.author, rating: r.rating } : null;

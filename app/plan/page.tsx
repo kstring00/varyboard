@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Step1, Step2, Step3 } from "@/components/plan/Steps";
 import { t } from "@/content/intake";
+import { isLaunched } from "@/lib/env";
 import { laneLabel, parseIntake, stepQuestion, type IntakeParams } from "@/lib/intake";
 
 /**
@@ -13,7 +14,7 @@ type Props = { searchParams: Promise<IntakeParams> };
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const parsed = parseIntake(await searchParams);
   if ("redirect" in parsed || parsed.step === 1) {
-    return { title: "Find your plan | Who is this for?", description: "Three quick questions about your life, and a ten-minute Vary Board plan built around the answers. No jargon, no sign-up.", robots: { index: true } };
+    return { title: "Find your plan | Who is this for?", description: "Three quick questions about your life, and a ten-minute Vary Board plan built around the answers. No jargon, no sign-up.", ...(isLaunched ? { robots: { index: true } } : {}) };
   }
   if (parsed.step === 2) {
     return { title: `Find your plan for ${laneLabel(parsed.lane).toLowerCase()} | ${stepQuestion(parsed.lane)}`, description: `Step 2 of 3. Tell us what is getting harder and we will match it to the six kinds of practice on the Vary Board.` };

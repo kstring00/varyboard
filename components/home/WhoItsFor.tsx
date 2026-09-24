@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AUDIENCES, audienceAnchor, unreviewedAudiences, type Audience, type AudienceKey } from "@/content/audiences";
 import { vaPacket } from "@/content/config";
 import { fillFacts, genreByKey } from "@/content/genres";
-import { reviewById, type Review } from "@/content/reviews";
+import { canFeature, reviewById, type Review } from "@/content/reviews";
 import type { AudienceIcon } from "@/content/audience";
 import { TeamPricing } from "./TeamPricing";
 
@@ -80,6 +80,7 @@ export function WhoItsFor() {
           {AUDIENCES.map((a) => {
             const review = a.proofReviewId ? reviewById(a.proofReviewId) : undefined;
             if (a.proofReviewId && !review) throw new Error(`content/audiences.ts: ${a.key} points at review "${a.proofReviewId}", which is not in content/reviews.ts`);
+            if (review && !canFeature(review)) throw new Error(`content/audiences.ts: ${a.key} points at "${review.id}", which is list-only and cannot sit on a card`);
             return (
               <li key={a.key} id={audienceAnchor(a.key)} className="aud-card" data-audience={a.key}>
                 <div className="aud-card__head">

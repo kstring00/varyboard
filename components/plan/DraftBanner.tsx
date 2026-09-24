@@ -9,7 +9,7 @@ export function DraftBanner({ items }: { items: string[] }) {
   if (isProduction || items.length === 0) return null;
   return (
     <div className="ix-draft no-print" role="note" data-draft>
-      <strong>Draft, not reviewed by Eric.</strong> {items.length} item{items.length === 1 ? "" : "s"} on this page still need review. Run <code>npm run audit:content</code> for the list.
+      <strong>Draft, not reviewed by Eric.</strong> {items.length} item{items.length === 1 ? "" : "s"} on this page still need{items.length === 1 ? "s" : ""} review. Run <code>npm run audit:content</code> for the list.
     </div>
   );
 }

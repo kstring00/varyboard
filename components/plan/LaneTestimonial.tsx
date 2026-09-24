@@ -1,6 +1,8 @@
 import { Stars } from "@/components/ui/Stars";
 import type { Lane } from "@/content/intake";
-import { reviews, type Review } from "@/content/reviews";
+import { canFeature, reviews as allReviews, type Review } from "@/content/reviews";
+
+const reviews = allReviews.filter(canFeature);
 
 /**
  * One real review matched to the lane by the reviewer's own stated context.
