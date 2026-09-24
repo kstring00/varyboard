@@ -40,7 +40,13 @@ To pull the remaining photos from the old Shopify store, run `npm run assets:fet
 
 ## Change the hero image
 
-The home page hero uses `public/images/originals/hero-render-clean.jpg`. Replace that file with a new one of the same framing, run `npm run assets:optimize` and `npm run assets:og`, and update the alt text for `heroRender` in `content/images.ts`. The three callout dots are positioned in image pixels at the top of `components/home/HeroCinematic.tsx`; adjust them if the boards move.
+The home hero shows the real board in a layered parallax on the right. Three asset slots, all real photos, never illustrations or generated images:
+
+- `public/images/hero/board-cutout.png`: the board with its background removed (transparent PNG). Until it exists the hero falls back to the real close-up `public/images/originals/board-closeup.webp`.
+- `public/images/hero/hand-band.png`: the hand and band from the same photo, if they can be separated. Optional; renders nothing when missing.
+- `public/images/hero/leaf.png`: a real foreground leaf, blurred in CSS. Optional; renders nothing when missing.
+
+Drop the files in and redeploy; `components/home/Hero.tsx` checks which exist at build time. The alt text for the cutout lives in that file. The one short review under the buttons comes from `content/reviews.ts` (a featured review's title, or a body under 160 characters) and renders nothing while that file is empty.
 
 ## Add the install steps and the spec sheet
 
@@ -110,7 +116,7 @@ Old Shopify URLs (`/products/vb`, `/pages/our-story`, `/cart/...` and so on) red
 
 | Check | Result |
 |---|---|
-| What / who / why clear in 5 s; one dominant CTA per page | Yes: hero headline, sub-line, three pillars, "Get the Vary Board ($199)" |
+| What / who / why clear in 5 s; one dominant CTA per page | Yes: "One wall. Six ways to move better.", the six genres, the 3 × 3 ft subhead, "Find your plan" |
 | Phone tappable on every page | Yes: header and footer `tel:` links on all 15 routes |
 | Real-phone mobile check | 390 px emulation: no horizontal overflow on any route, 18 px base type, 48 px tap targets |
 | Images compressed and sized | AVIF/WebP via next/image plus pre-generated sets; hero LCP image preloaded |

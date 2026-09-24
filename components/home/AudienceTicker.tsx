@@ -285,6 +285,13 @@ export function AudienceTicker() {
 
   return (
     <nav ref={rootRef} aria-label="Who the Vary Board serves" className={`ticker ${reduced ? "ticker--static" : ""}`} data-ticker data-paused={paused || undefined}>
+      <div ref={viewportRef} className="ticker__viewport">
+        <div ref={trackRef} className="ticker__track">
+          <List onLinkClick={onLinkClick} />
+          {!reduced && <List hidden onLinkClick={onLinkClick} />}
+          {!reduced && <List hidden onLinkClick={onLinkClick} />}
+        </div>
+      </div>
       {!reduced && (
         <button type="button" className="ticker__btn" onClick={() => setPaused((v) => !v)} aria-pressed={paused} aria-label={paused ? "Play the audience list motion" : "Pause the audience list motion"} data-ticker-toggle>
           {paused ? (
@@ -298,13 +305,6 @@ export function AudienceTicker() {
           )}
         </button>
       )}
-      <div ref={viewportRef} className="ticker__viewport">
-        <div ref={trackRef} className="ticker__track">
-          <List onLinkClick={onLinkClick} />
-          {!reduced && <List hidden onLinkClick={onLinkClick} />}
-          {!reduced && <List hidden onLinkClick={onLinkClick} />}
-        </div>
-      </div>
     </nav>
   );
 }

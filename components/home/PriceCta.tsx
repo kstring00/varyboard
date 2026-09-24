@@ -13,6 +13,11 @@ export function PriceCta() {
       <div className="container-site">
         <Reveal>
           <SectionHeading align="center" eyebrow="Get yours" title={<span id="price-title">Two sizes. One simple choice.</span>} intro={`${shipping.flatRateLine}. ${discounts.heroesLine}`} />
+          <ul className="facts-line mt-6" aria-label="At a glance">
+            <li>{board.anchorPointsPerSection} anchor points per section</li>
+            <li>Indoor / outdoor</li>
+            <li>{board.minSpacePerUser} is all you need</li>
+          </ul>
         </Reveal>
 
         <div className="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
