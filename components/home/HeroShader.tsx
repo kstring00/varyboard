@@ -14,6 +14,7 @@ import { AudienceTicker } from "./AudienceTicker";
  * Structure: .hero__stage (shader, wash, copy, HexEdge dissolve) then the audience ticker as
  * the hero's closing element, floating on the same plaster. The hexagon edge is the only boundary.
  * Live text always sits above the canvases (.hero__inner z-index 5 > HexEdge 4 > wash 1).
+ * The dissolve is static (no scroll coupling); the stage is only as tall as its content.
  */
 /** Shader density: 12 on desktop, 9 under 768px. Plain width query, no motion gating. */
 function useShaderDensity() {
@@ -75,7 +76,7 @@ export function HeroShader() {
         </div>
       </div>
 
-      <HexEdge heightPct={60} />
+      <HexEdge heightPct={42} scrollLinked={false} />
       </div>
       <AudienceTicker />
       <div id="hero-end" aria-hidden="true" className="absolute bottom-0 left-0 h-px w-px" />

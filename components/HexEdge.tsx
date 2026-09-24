@@ -38,6 +38,8 @@ export interface HexEdgeProps {
   heightPct?: number;
   /** Seed for the stable per-cell jitter. */
   seed?: number;
+  /** false = the front never moves: the at-rest dissolve is drawn once and only redrawn on resize. */
+  scrollLinked?: boolean;
 }
 
 /** Small, fast, deterministic hash -> [0, 1). Same (col,row,seed) always gives the same value. */
@@ -58,6 +60,7 @@ export function HexEdge({
   jitter = 1.6,
   heightPct = 85,
   seed = 7,
+  scrollLinked = true,
 }: HexEdgeProps) {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -178,7 +181,7 @@ export function HexEdge({
       rows = Math.ceil(H / rowPitch) + 1;
       readColors();
       updateTarget();
-      if (reduce) current = target;
+      if (reduce || !scrollLinked) current = target;
       draw();
     };
 
@@ -195,7 +198,7 @@ export function HexEdge({
     };
 
     const updateTarget = () => {
-      target = Math.min(1, Math.max(0, window.scrollY / (heroH * reach)));
+      target = scrollLinked ? Math.min(1, Math.max(0, window.scrollY / (heroH * reach))) : 0;
     };
 
     const onScroll = () => {
@@ -217,7 +220,7 @@ export function HexEdge({
       build();
       ro = new ResizeObserver(scheduleBuild);
       ro.observe(hero);
-      window.addEventListener("scroll", onScroll, { passive: true });
+      if (scrollLinked) window.addEventListener("scroll", onScroll, { passive: true });
       window.addEventListener("resize", scheduleBuild);
     };
     const hasIdle = "requestIdleCallback" in window;
@@ -231,7 +234,7 @@ export function HexEdge({
       if (raf) cancelAnimationFrame(raf);
       if (buildRaf) cancelAnimationFrame(buildRaf);
     };
-  }, [cell, feather, reach, outline, ticks, tickLen, jitter, seed]);
+  }, [cell, feather, reach, outline, ticks, tickLen, jitter, seed, scrollLinked]);
 
   return (
     <canvas

@@ -110,14 +110,13 @@
 .hero { position: relative; background: var(--color-plaster-hero); color: var(--color-ink); }
 .hero__stage {
   position: relative; isolation: isolate; overflow: hidden; contain: paint;
-  min-height: calc(100svh - 4rem - 3.5rem); min-height: max(540px, calc(100svh - 4rem - 3.5rem));
   display: flex; align-items: center;
 }
 .hero__wash {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(90deg, rgb(242 240 235 / 0.92) 0%, rgb(242 240 235 / 0.55) 40%, rgb(242 240 235 / 0) 65%);
 }
-.hero__inner { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 3rem 4.5rem; }
+.hero__inner { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 3rem 3.75rem; }
 .hero__copy { max-width: 560px; }
 .hero__eyebrow { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-pine); }
 .hero__title {
@@ -186,7 +185,7 @@
   .hero__facts li:nth-child(3) { margin-left: 0.75rem; padding-left: 0.75rem; border-left: 1px solid rgb(31 42 40 / 0.25); }
 }
 @media (max-width: 768px) {
-  .hero__inner { padding-block: 2.5rem 4rem; }
+  .hero__inner { padding-block: 2.5rem 3.25rem; }
   .hero__title { font-size: clamp(48px, 13vw, 68px); }
   .hero__sub { font-size: 1.1rem; }
   .hero__wash { background: linear-gradient(90deg, rgb(242 240 235 / 0.92) 0%, rgb(242 240 235 / 0.74) 55%, rgb(242 240 235 / 0.52) 100%); }
@@ -195,10 +194,12 @@
 /* Header: plaster, ink text */
 .site-header {
   color: var(--color-ink); background-color: #f2f0eb; border-color: rgb(31 42 40 / 0.08);
-  /* Own compositor layer and stacking context: the hero's WebGL and 2D canvases repaint every
-     frame and must never be composited over the pinned header during async scroll. */
-  isolation: isolate; transform: translateZ(0); backface-visibility: hidden;
+  /* Fixed, not sticky: sticky offsets are recomputed per engine against the containing scrollport
+     and lagged behind the hero canvases in Firefox/WebKit. Fixed is positioned by the compositor
+     in every engine. .site-header-space holds its 4rem in the flow so nothing shifts. */
+  position: fixed; inset-inline: 0; top: 0; isolation: isolate;
 }
+.site-header-space { height: 4rem; flex: none; }
 
 
 /* ---------- Reveal (scroll fade-up) ---------- */

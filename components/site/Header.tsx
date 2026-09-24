@@ -18,8 +18,10 @@ const nav = [
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="site-header sticky top-0 z-40 border-b">
-      <div className="container-site flex h-16 items-center justify-between gap-3 md:h-[4rem]">
+    <>
+    <div className="site-header-space" aria-hidden="true" />
+    <header className="site-header z-40 border-b">
+      <div className="container-site flex h-16 items-center justify-between gap-3">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           {nav.map((n) => (
@@ -60,5 +62,6 @@ export function Header() {
         </nav>
       </div>
     </header>
+    </>
   );
 }
