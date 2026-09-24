@@ -9,16 +9,12 @@ Status on 2026-09-24: thevaryboard.com and www.thevaryboard.com still point at S
 1. **`vercel-build` must run the content gate before the domain moves to Vercel.** Today it is plain `next build`, which skips every check in `prebuild` (placeholders, safety, intake, content review). Change it to `"vercel-build": "npm run build"` (or set Vercel's Build Command to `npm run build`). Not enabled yet on purpose: with Eric's review list open, every production deploy would fail.
 2. Eric works through `content/review.csv` until `npm run audit:content` prints "every content item is reviewed", including the open review question (J. White, fall-risk wording).
 3. `NEXT_PUBLIC_SHOP_DOMAIN` set to the Shopify checkout host (see "Domains and the Shopify cutover").
-4. Move the domain (same section), then set `SITE_LAUNCHED=true` for Production and redeploy. That lifts the password gate and the noindex on production only; previews stay gated and noindex.
-5. Remove Vercel Deployment Protection from Production if it was turned on (below), and submit the sitemap (see "After launch").
+4. Move the domain (same section), then set `SITE_LAUNCHED=true` for Production and redeploy. That lifts the noindex on production only; previews stay noindex.
+5. Submit the sitemap (see "After launch").
 
-## Pre-launch protection
+## Pre-launch noindex
 
-Until launch every deployment is private and unindexed:
-
-- **Password.** `proxy.ts` asks for a password on every Vercel deployment, production and previews: HTTP Basic auth against `SITE_PASSWORD` (any user name, or set `SITE_USER` to require one). Set `SITE_PASSWORD` (and `SITE_USER` if you use one) under Vercel > Project > Settings > Environment Variables for Production and Preview, then redeploy. If `SITE_PASSWORD` is missing, Vercel deployments show a "not open yet" page (HTTP 503) instead of the site, so nothing is ever public by accident. Local `npm run dev` / `npm start` stay open.
-- **Noindex.** Until `SITE_LAUNCHED=true` on production: `robots.txt` disallows everything, every page carries `<meta name="robots" content="noindex, nofollow">`, and every response carries `X-Robots-Tag: noindex, nofollow, noarchive`. Previews never index, launched or not.
-- **Vercel's own Deployment Protection** (Vercel > Project > Settings > Deployment Protection) can be added on top. "Vercel Authentication" limits deployments to your Vercel team. "Password Protection" is a paid option (Enterprise, or Pro with the Advanced Deployment Protection add-on). The in-code gate above does the same job on any plan.
+The site is open to anyone with a link, but nothing is indexed until launch. Until `SITE_LAUNCHED=true` on production: `robots.txt` disallows everything, every page carries `<meta name="robots" content="noindex, nofollow">`, and every response carries `X-Robots-Tag: noindex, nofollow, noarchive` (`proxy.ts`). Previews never index, launched or not.
 
 ## Change a price, spec or contact detail
 
@@ -131,9 +127,8 @@ Until one is set, the form tells the visitor it could not send and shows the pho
    - `NEXT_PUBLIC_SHOP_DOMAIN`: the Shopify hostname that serves checkout. See the cutover note below. Can stay unset while thevaryboard.com still points at Shopify; required once the domain moves. The build fails on purpose if the checkout host would be the site itself.
    - `NEXT_PUBLIC_SITE_URL`: `https://thevaryboard.com` (optional, defaults to the Vercel production URL).
    - One of the form variables above.
-   - `SITE_PASSWORD` (and optionally `SITE_USER`): the pre-launch password, Production and Preview. Required until launch; see "Pre-launch protection".
    - `SITE_LAUNCHED`: leave unset until launch day, then `true` for Production only.
-3. Every push to `main` deploys to production behind the password; every pull request gets a preview URL behind the same password. Nothing is indexed until launch.
+3. Every push to `main` goes live on the production URL; every pull request gets a preview URL. Nothing is indexed until launch.
 
 ### Domains and the Shopify cutover
 
