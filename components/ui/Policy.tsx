@@ -18,7 +18,7 @@ export function Policy({ eyebrow, title, intro, updated, children }: { eyebrow: 
 export function PolicySection({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section>
-      <h2 className="text-2xl font-medium text-ink">{title}</h2>
+      <h2 className="text-xl font-medium text-ink">{title}</h2>
       <div className="mt-3 space-y-3">{children}</div>
     </section>
   );

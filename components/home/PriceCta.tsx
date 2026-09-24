@@ -9,19 +9,24 @@ import { buyLinks } from "@/lib/commerce";
 export function PriceCta() {
   const bundle = products.board.price + products.bands.price;
   return (
-    <section id="pricing" aria-labelledby="price-title" className="bg-paper-2 py-20 md:py-28">
+    <section id="pricing" aria-labelledby="price-title" className="bg-paper-2 py-12 md:py-16">
       <div className="container-site">
         <Reveal>
           <SectionHeading align="center" eyebrow="Get yours" title={<span id="price-title">Two sizes. One simple choice.</span>} intro={`${shipping.flatRateLine}. ${discounts.heroesLine}`} />
+          <ul className="facts-line mt-6" aria-label="At a glance">
+            <li>{board.anchorPointsPerSection} anchor points per section</li>
+            <li>Indoor / outdoor</li>
+            <li>{board.minSpacePerUser} is all you need</li>
+          </ul>
         </Reveal>
 
-        <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
           {/* Standard */}
-          <Reveal className="relative flex flex-col rounded-3xl border-2 border-teal-deep bg-white p-8 shadow-soft">
+          <Reveal className="relative flex flex-col rounded-3xl border-2 border-teal-deep bg-white p-6 shadow-soft">
             <span className="absolute -top-3.5 left-8 rounded-full bg-teal-deep px-3 py-1 text-sm font-semibold uppercase tracking-wider text-white">Most people</span>
-            <h3 className="text-3xl font-medium">{products.board.name}</h3>
+            <h3 className="text-2xl font-medium">{products.board.name}</h3>
             <p className="mt-1 text-ink-2">{board.heightGuidance.standard}</p>
-            <p className="mt-5 font-display text-5xl font-medium">{formatPrice(products.board.price)}</p>
+            <p className="mt-5 font-display text-4xl font-medium">{formatPrice(products.board.price)}</p>
             <ul className="mt-6 space-y-2 text-lg">
               {products.board.specs.slice(0, 3).map((s) => (
                 <li key={s.label} className="flex justify-between gap-4 border-b border-line py-2">
@@ -38,10 +43,10 @@ export function PriceCta() {
             </Link>
           </Reveal>
           {/* XT */}
-          <Reveal delay={90} className="flex flex-col rounded-3xl border border-line bg-white/70 p-8">
-            <h3 className="text-3xl font-medium">{products.boardXT.name}</h3>
+          <Reveal delay={90} className="flex flex-col rounded-3xl border border-line bg-white/70 p-6">
+            <h3 className="text-2xl font-medium">{products.boardXT.name}</h3>
             <p className="mt-1 text-ink-2">{board.heightGuidance.xt}</p>
-            <p className="mt-5 font-display text-5xl font-medium">{formatPrice(products.boardXT.price)}</p>
+            <p className="mt-5 font-display text-4xl font-medium">{formatPrice(products.boardXT.price)}</p>
             <ul className="mt-6 space-y-2 text-lg">
               {products.boardXT.specs.slice(0, 3).map((s) => (
                 <li key={s.label} className="flex justify-between gap-4 border-b border-line py-2">
@@ -72,7 +77,7 @@ export function PriceCta() {
           </a>
         </Reveal>
 
-        <div className="mx-auto mt-16 max-w-3xl">
+        <div className="mx-auto mt-12 max-w-3xl">
           <Reveal>
             <h3 className="text-2xl font-medium">Quick answers</h3>
           </Reveal>
@@ -86,8 +91,8 @@ export function PriceCta() {
           </Reveal>
         </div>
 
-        <Reveal className="mx-auto mt-16 max-w-3xl rounded-3xl bg-ink px-8 py-12 text-center text-paper">
-          <h3 className="text-3xl font-medium">Ready when you are.</h3>
+        <Reveal className="mx-auto mt-12 max-w-3xl rounded-3xl bg-ink px-7 py-10 text-center text-paper">
+          <h3 className="text-2xl font-medium">Ready when you are.</h3>
           <p className="mt-3 text-xl text-paper/80">
             {board.trustLine} {shipping.flatRateLine}.
           </p>

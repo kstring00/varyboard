@@ -48,15 +48,15 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="benefits-title" className="py-16 md:py-24">
+      <section aria-labelledby="benefits-title" className="py-12 md:py-12">
         <div className="container-site">
           <Reveal>
             <SectionHeading eyebrow="Why clinics use it" title={<span id="benefits-title">More practice per square foot.</span>} />
           </Reveal>
           <ul className="mt-10 grid gap-5 md:grid-cols-2">
             {BENEFITS.map((b, i) => (
-              <Reveal as="li" key={b.t} delay={i * 70} className="rounded-2xl border border-line bg-white/60 p-7">
-                <h3 className="text-2xl font-medium">{b.t}</h3>
+              <Reveal as="li" key={b.t} delay={i * 70} className="rounded-2xl border border-line bg-white/60 p-6">
+                <h3 className="text-xl font-medium">{b.t}</h3>
                 <p className="mt-2 text-lg text-ink-2">{b.d}</p>
               </Reveal>
             ))}
@@ -64,7 +64,7 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="six-title" className="bg-ink py-16 text-paper md:py-24">
+      <section aria-labelledby="six-title" className="bg-ink py-12 text-paper md:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <Reveal>
             <SectionHeading tone="dark" eyebrow="6-in-1" title={<span id="six-title">Six pieces of equipment. One board.</span>} intro="Everything on the list below happens on the same wall, at whatever height the patient needs." />
@@ -82,15 +82,15 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="sizes-title" className="py-16 md:py-24">
+      <section aria-labelledby="sizes-title" className="py-12 md:py-12">
         <div className="container-site">
           <Reveal>
             <SectionHeading eyebrow="Sizes" title={<span id="sizes-title">Two heights for one treatment floor.</span>} />
           </Reveal>
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {[products.board, products.boardXT].map((p, i) => (
-              <Reveal key={p.id} delay={i * 80} className="rounded-2xl border border-line bg-white/60 p-7">
-                <h3 className="text-2xl font-medium">{p.name}</h3>
+              <Reveal key={p.id} delay={i * 80} className="rounded-2xl border border-line bg-white/60 p-6">
+                <h3 className="text-xl font-medium">{p.name}</h3>
                 <p className="mt-1 text-ink-2">{p.summary}</p>
                 <p className="mt-3 text-lg">
                   Retail {formatPrice(p.price)} · SKU {p.sku}
@@ -104,7 +104,7 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section id="request" aria-labelledby="request-title" className="scroll-mt-24 bg-paper-2 py-16 md:py-24">
+      <section id="request" aria-labelledby="request-title" className="scroll-mt-24 bg-paper-2 py-12 md:py-12">
         <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.4fr]">
           <Reveal>
             <SectionHeading eyebrow="Request" title={<span id="request-title">Clinic pricing or a demo.</span>} intro="Tell us about your clinic and we will follow up with pricing for multiple boards or arrange a demo." />
@@ -119,7 +119,7 @@ export default function ProfessionalsPage() {
               </a>
             </p>
           </Reveal>
-          <Reveal className="rounded-3xl border border-line bg-white p-6 shadow-soft md:p-8">
+          <Reveal className="rounded-3xl border border-line bg-white p-6 shadow-soft md:p-6">
             <InquiryForm kind="clinic" page="/professionals" />
           </Reveal>
         </div>

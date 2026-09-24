@@ -28,7 +28,7 @@ export function Portrait({ person, size = "lg" }: { person: (typeof founders)[ke
   // Portrait not supplied yet: a quiet monogram tile. Never a stock photo, never an invented person.
   return (
     <div className={`grid ${box} place-items-center rounded-2xl bg-teal-soft text-teal-deep shadow-soft`} role="img" aria-label={`${person.name} (portrait coming)`}>
-      <span className="font-display text-7xl font-medium">{initials}</span>
+      <span className="font-display text-5xl font-medium">{initials}</span>
     </div>
   );
 }
@@ -36,12 +36,12 @@ export function Portrait({ person, size = "lg" }: { person: (typeof founders)[ke
 export function People() {
   const people = [founders.eric, founders.reid];
   return (
-    <section aria-labelledby="people-title" className="bg-paper py-20 md:py-28">
+    <section aria-labelledby="people-title" className="bg-paper py-12 md:py-16">
       <div className="container-site">
         <Reveal>
           <SectionHeading eyebrow="The people behind it" title={<span id="people-title">A physical therapist and an engineer. One idea.</span>} intro="Eric wanted his patients to keep practicing at home. Reid knew how to build something that would last. The Vary Board is what they made together." />
         </Reveal>
-        <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-10">
           {people.map((p, i) => (
             <Reveal key={p.name} delay={i * 120} className="grid gap-6 sm:grid-cols-[minmax(0,200px)_1fr] sm:items-start">
               <Portrait person={p} />

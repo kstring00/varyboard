@@ -19,7 +19,7 @@ export function Proof() {
   const shown = [...reviews].sort((a, b) => priority(a) - priority(b) || b.date.localeCompare(a.date)).slice(0, 6);
 
   return (
-    <section aria-labelledby="proof-title" className="bg-paper-2 py-20 md:py-28">
+    <section aria-labelledby="proof-title" className="bg-paper-2 py-12 md:py-16">
       <div className="container-site">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading eyebrow="What people say" title={<span id="proof-title">Real reviews, in their words.</span>} />
@@ -30,9 +30,9 @@ export function Proof() {
             </span>
           </div>
         </Reveal>
-        <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {shown.map((r, i) => (
-            <Reveal as="li" key={r.id} delay={i * 70} className="flex flex-col rounded-2xl border border-line bg-white/80 p-7 shadow-soft">
+            <Reveal as="li" key={r.id} delay={i * 70} className="flex flex-col rounded-2xl border border-line bg-white/80 p-6 shadow-soft">
               <Stars value={r.rating} />
               {r.title && <h3 className="mt-3 text-xl font-medium">{r.title}</h3>}
               <blockquote className="mt-3 flex-1 text-lg text-ink-2">“{r.body}”</blockquote>

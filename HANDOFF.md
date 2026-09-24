@@ -40,19 +40,38 @@ To pull the remaining photos from the old Shopify store, run `npm run assets:fet
 
 ## Change the hero image
 
-The home page hero uses `public/images/originals/hero-render-clean.jpg`. Replace that file with a new one of the same framing, run `npm run assets:optimize` and `npm run assets:og`, and update the alt text for `heroRender` in `content/images.ts`. The three callout dots are positioned in image pixels at the top of `components/home/HeroCinematic.tsx`; adjust them if the boards move.
+The home hero shows the real board in a layered parallax on the right. Three asset slots, all real photos, never illustrations or generated images:
+
+- `public/images/hero/board-cutout.png`: the board with its background removed (transparent PNG). Until it exists the hero falls back to the real close-up `public/images/originals/board-closeup.webp`.
+- `public/images/hero/hand-band.png`: the hand and band from the same photo, if they can be separated. Optional; renders nothing when missing.
+- `public/images/hero/leaf.png`: a real foreground leaf, blurred in CSS. Optional; renders nothing when missing.
+
+Drop the files in and redeploy; `components/home/Hero.tsx` checks which exist at build time. The alt text for the cutout lives in that file. The one short review under the buttons comes from `content/reviews.ts` (a featured review's title, or a body under 160 characters) and renders nothing while that file is empty.
 
 ## Add the install steps and the spec sheet
 
 - Written install steps: add entries to `content/install.ts`. The install page shows them under the video once there is at least one.
 - Clinic spec sheet: save the PDF as `public/downloads/vary-board-spec-sheet.pdf`. The download button on the professionals page appears automatically.
 
+## Find your plan (the intake at /plan)
+
+Three one-tap questions (`for`, `c`, `s` or `area` in the URL) lead to `/plan/result`, a shareable plan page. All copy is in `content/intake.ts`; movements come from `content/exercises.ts`; the logic is `lib/intake.ts`.
+
+- `npm run audit:content` lists every line Eric has not reviewed (`reviewedByEric: false` in intake.ts, `approved: false` in exercises.ts). It fails **production** builds only. Preview builds deploy and show a yellow "Draft, not reviewed by Eric" banner on any affected page. Flip the flags to `true` as Eric signs each item off.
+- `npm run audit:safety` fails every build on diagnosis, cure, guarantee, "free" near VA, lifespan claims, or a statistic without a `source`.
+- `npm run check:intake` fails every build if any valid combination lacks content.
+- Comeback / recovery plans ask "My doctor or PT has cleared me to exercise" on the page, every time it opens. It is never stored in the link.
+- `content/config.ts` holds the military discount mechanism (currently `unknown`, so the mil lane shows the phone number), the VA packet PDF slot (`public/docs/va-provider-packet.pdf`) and the email provider note. Prices stay in `content/facts.ts`; see `priceCandidates` there for the two figures to confirm.
+- "Email me my plan" needs `RESEND_API_KEY` (Resend, under Eric's account) plus `FORM_FROM_EMAIL`, or `FORM_WEBHOOK_URL`. The plan is sent to the visitor with a copy to info@.
+- **Eric's review round trip.** `npm run review:export` writes every unreviewed line to `content/review.csv` (columns: id, lane, type, current text, approve (Y/N), Eric's edit). Eric puts Y in the approve column and any rewording in the last column, keeping the `{you}` `{your}` `{my}` `{I}` tokens. `npm run review:import` writes it back: approved rows get `reviewedByEric: true` (exercises get `approved: true`) and edits replace the text in place. "try today" rows share one flag per movement, so all of that movement's rows need Y. Exercise rows carry the name only; other exercise fields are edited in `content/exercises.ts`. After importing run `npm run check:intake && npm run audit:safety && npm run audit:content`, then commit both the content files and the regenerated CSV.
+- Blake Cook's testimonial: paste it into `content/reviews.ts` with `context: "Veteran"` (or similar) and the mil lane's plan page shows it automatically.
+
 ## Forms (contact and clinic requests)
 
 Both forms post to a small server function (`app/actions/forms.ts`) with spam protection. Set ONE of these in Vercel > Project > Settings > Environment Variables so messages reach you:
 
 - `FORM_WEBHOOK_URL`: any service that accepts a JSON POST (Formspree, Zapier, Make, n8n). Simplest option.
-- `RESEND_API_KEY` plus `FORM_FROM_EMAIL`: sends an email to info@varysystems.com through Resend.
+- `RESEND_API_KEY` plus `FORM_FROM_EMAIL`: sends an email through Resend (the account should be Eric's; the key lives only in Vercel env vars). Contact and clinic messages go to info@varysystems.com; "Email me my plan" goes to the visitor with a copy to info@.
 
 Until one is set, the form tells the visitor it could not send and shows the phone number and email instead. Test after setting it: send a message from /contact and confirm it arrives.
 
@@ -97,7 +116,7 @@ Old Shopify URLs (`/products/vb`, `/pages/our-story`, `/cart/...` and so on) red
 
 | Check | Result |
 |---|---|
-| What / who / why clear in 5 s; one dominant CTA per page | Yes: hero headline, sub-line, three pillars, "Get the Vary Board ($199)" |
+| What / who / why clear in 5 s; one dominant CTA per page | Yes: "One wall. Six ways to move better.", the six genres, the 3 × 3 ft subhead, "Find your plan" |
 | Phone tappable on every page | Yes: header and footer `tel:` links on all 15 routes |
 | Real-phone mobile check | 390 px emulation: no horizontal overflow on any route, 18 px base type, 48 px tap targets |
 | Images compressed and sized | AVIF/WebP via next/image plus pre-generated sets; hero LCP image preloaded |

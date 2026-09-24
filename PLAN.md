@@ -10,7 +10,7 @@ Stack: Next.js 16 (App Router) + TypeScript + Tailwind v4 + GSAP ScrollTrigger, 
 | 0 | Foundation: facts.ts, reviews.ts skeleton, image pipeline, redirects, layout, header, footer, sticky buy bar, motion provider | done |
 | 1 | HERO: cinematic full-bleed render with layered typography, callouts and GSAP intro/scroll motion | done |
 | 2 | WHAT IT IS: pinned scroll scene, real board cutout stacks 1-2-3 to 75", zoom to hex anchors, handles, band clipping in | done |
-| 3 | WHO IT'S FOR: three cards (55+ / after PT / for a parent) | done |
+| 3 | WHO IT'S FOR: three cards (Strength / Mobility / Balance) that pre-select a goal in the plan builder | done |
 | 4 | WHAT YOU CAN DO: Strength, Mobility, Balance photos + six use chips | done |
 | 5 | THE PEOPLE BEHIND IT: Eric and Reid (portrait slots), credentials, link to /our-story | done |
 | 6 | PROOF: verbatim reviews from content/reviews.ts, star summary, clinic + military testimonials featured | built; hidden until reviews are pasted |

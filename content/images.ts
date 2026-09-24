@@ -23,6 +23,11 @@ function img(key: GeneratedImageName, alt: string, scene: SiteImage["scene"]): S
 }
 
 export const images = {
+  boardCloseup: img(
+    "board-closeup",
+    "Close-up of the Vary Board: a teal honeycomb platform with hexagonal anchor points, mounted on a grey backer with side rails",
+    "detail",
+  ),
   heroRender: img(
     "hero-render-clean",
     "A Vary Board and a taller Vary Board XT mounted on a concrete wall beside an open terrace looking out over calm water and rocky hills",

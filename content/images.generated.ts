@@ -76,6 +76,20 @@ export const generatedImages = {
     ],
     "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAA0AA4BaJZQC06ED5AZHNxAAAPrpI412r0MgfJH+HXeJxd/OCgVyV7LsoH5TPOhfZulJK/WoYttlm2PTRM1bMzPVmTKq56V4b0oA"
   },
+  "board-closeup": {
+    "name": "board-closeup",
+    "file": "board-closeup.webp",
+    "width": 952,
+    "height": 1269,
+    "widths": [
+      360,
+      480,
+      640,
+      768,
+      952
+    ],
+    "blur": "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACwAwCdASoQABUAPu1iqU2ppaOiMAgBMB2JZQDCgBiZZwyJ4SxdAAD+OwEVYqo25owZPaQ49rLVvaWjH37GMLYWSbG9jZ+pAjMndMvqGVjDqgQOKhl/0wF6A/ffKBt2ul5+D9TcuJbOynJQuf74WcLaMrPCCclXAdBwvGcrmlpAAA=="
+  },
   "hero-render-clean": {
     "name": "hero-render-clean",
     "file": "hero-render-clean.jpg",

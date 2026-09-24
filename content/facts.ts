@@ -81,6 +81,18 @@ export interface Product {
   specs: { label: string; value: string }[];
 }
 
+/**
+ * CONFIRM_WITH_ERIC: board prices.
+ *   Built here (from the launch brief): Vary Board $199, Vary Board XT $399.
+ *   The old site's FAQ said: Vary Board $199.99, XT $299.99.
+ * These are the only two candidates we have seen. Change the `price` fields below once Eric
+ * confirms; every page, cart link and plan CTA reads from here.
+ */
+export const priceCandidates = {
+  fromBrief: { board: 199, boardXT: 399 },
+  fromOldFaq: { board: 199.99, boardXT: 299.99 },
+} as const;
+
 export const products: Record<ProductId, Product> = {
   board: {
     id: "board",
