@@ -6,16 +6,21 @@ import { REGIONS, type Region } from "@/content/exercises";
 
 /**
  * The body map: the supplied figure (public/images/body-map.png) with six hexagon hotspots
- * plus "Whole body · Balance". Shared by the homepage plan builder and Step 3 of the intake.
+ * plus "Whole body · Balance". Step 3 of the intake for comeback, mil and athlete lanes.
  * Hotspots are real buttons: Tab reaches them, arrow keys move between them, Enter/Space
  * selects. Percent coordinates are tuned to the supplied figure.
  */
+/*
+ * Markers sit on the body point; labels hang off a short leader line to one side. Right-side
+ * labels (shoulders, core, hips, knees) are at least 14% apart vertically, left-side labels
+ * (arms, ankles) 41% apart, so no label can meet another label or marker at any width.
+ */
 const HOTSPOTS: { id: Region; x: number; y: number; side: "left" | "right" }[] = [
   { id: "shoulders", x: 71, y: 19, side: "right" },
-  { id: "arms", x: 12, y: 50, side: "left" },
   { id: "core", x: 50, y: 34, side: "right" },
-  { id: "hips", x: 50, y: 49, side: "left" },
+  { id: "hips", x: 50, y: 49, side: "right" },
   { id: "knees", x: 60, y: 68, side: "right" },
+  { id: "arms", x: 12, y: 50, side: "left" },
   { id: "ankles", x: 40, y: 91, side: "left" },
 ];
 

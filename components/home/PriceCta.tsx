@@ -4,6 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { board, brand, discounts, formatPrice, products, shipping } from "@/content/facts";
 import { homeFaq } from "@/content/faq";
+import { FaqAnswer } from "@/components/ui/FaqAnswer";
 import { buyLinks } from "@/lib/commerce";
 
 export function PriceCta() {
@@ -82,7 +83,7 @@ export function PriceCta() {
             <h3 className="text-2xl font-medium">Quick answers</h3>
           </Reveal>
           <Reveal className="mt-5">
-            <Accordion items={homeFaq.map((f) => ({ id: f.id, title: f.q, content: <p>{f.a}</p> }))} defaultOpen={[homeFaq[0].id]} />
+            <Accordion items={homeFaq.map((f) => ({ id: f.id, title: f.q, content: <FaqAnswer item={f} /> }))} defaultOpen={[homeFaq[0].id]} />
           </Reveal>
           <Reveal className="mt-4">
             <Link href="/faq" className="inline-flex min-h-12 items-center font-semibold text-teal-deep no-underline">

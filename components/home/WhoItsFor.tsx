@@ -1,9 +1,8 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { GoalLink } from "@/components/home/GoalLink";
-import type { Goal } from "@/content/exercises";
+import Link from "next/link";
 
-const CARDS: { goal: Goal; title: string; body: string; cta: string }[] = [
+const CARDS: { goal: string; title: string; body: string; cta: string }[] = [
   {
     goal: "strength",
     title: "Strength",
@@ -38,7 +37,7 @@ export function WhoItsFor() {
                 The board does the rest.
               </span>
             }
-            intro="People of every age and fitness level use the Vary Board for strength, mobility and balance. Tap the figure below, choose a goal, and get a ten-minute plan built for you."
+            intro="People of every age and fitness level use the Vary Board for strength, mobility and balance. Say who it is for, tell us what is getting harder, and get a ten-minute plan built for you."
           />
         </Reveal>
         <ul className="mt-10 grid gap-5 md:grid-cols-3">
@@ -47,12 +46,12 @@ export function WhoItsFor() {
               <span className="font-display text-3xl text-teal">0{i + 1}</span>
               <h3 className="mt-4 whitespace-nowrap text-xl font-medium leading-snug">{c.title}</h3>
               <p className="mt-3 flex-1 text-lg text-ink-2">{c.body}</p>
-              <GoalLink goal={c.goal} className="mt-6 inline-flex min-h-12 items-center gap-2 font-semibold text-teal-deep no-underline">
+              <Link href="#find-your-plan" className="mt-6 inline-flex min-h-12 items-center gap-2 font-semibold text-teal-deep no-underline" data-goal-link={c.goal}>
                 {c.cta}
                 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
-              </GoalLink>
+              </Link>
             </Reveal>
           ))}
         </ul>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Accordion } from "@/components/ui/Accordion";
+import { FaqAnswer } from "@/components/ui/FaqAnswer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { board, brand, discounts, formatPrice, products, shipping, type Product } from "@/content/facts";
@@ -152,7 +153,7 @@ export function ProductPage({
             </h2>
           </Reveal>
           <Reveal className="mt-6">
-            <Accordion items={items.map((f) => ({ id: f.id, title: f.q, content: <p>{f.a}</p> }))} />
+            <Accordion items={items.map((f) => ({ id: f.id, title: f.q, content: <FaqAnswer item={f} /> }))} />
           </Reveal>
           <Reveal className="mt-6 flex flex-wrap gap-4">
             <Link href="/faq" className="btn-secondary">
@@ -160,6 +161,9 @@ export function ProductPage({
             </Link>
             <Link href="/install" className="btn-ghost">
               How it installs
+            </Link>
+            <Link href="/fit" className="btn-ghost" data-fit-link>
+              See if it fits your room
             </Link>
           </Reveal>
         </div>

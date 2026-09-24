@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Accordion } from "@/components/ui/Accordion";
+import { FaqAnswer } from "@/components/ui/FaqAnswer";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { PageIntro } from "@/components/ui/PageIntro";
 import { brand, formatPrice, products } from "@/content/facts";
@@ -24,7 +25,7 @@ export default function FaqPage() {
       <JsonLd data={jsonLd} />
       <PageIntro eyebrow="FAQ" title="Questions, answered plainly." intro={<>Anything we missed? Call <a href={brand.phoneHref} className="link">{brand.phone}</a> or <Link href="/contact" className="link">send a message</Link>.</>} />
       <section className="container-site max-w-3xl pb-20">
-        <Accordion items={faq.map((f) => ({ id: f.id, title: f.q, content: <p>{f.a}</p> }))} defaultOpen={[faq[0].id]} headingLevel={2} />
+        <Accordion items={faq.map((f) => ({ id: f.id, title: f.q, content: <FaqAnswer item={f} /> }))} defaultOpen={[faq[0].id]} headingLevel={2} />
         <div className="mt-10 flex flex-wrap gap-3">
           <a href={buyLinks.board} className="btn-primary">
             Get the Vary Board ({formatPrice(products.board.price)})
