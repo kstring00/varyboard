@@ -10,7 +10,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contact" },
 };
 
-export default function ContactPage() {
+/** /contact?topic=story preselects "Share my story" (the testimonials band links here). */
+const TOPICS: Record<string, string> = { story: "story", discount: "discount", order: "order" };
+
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ topic?: string }> }) {
+  const { topic } = await searchParams;
   return (
     <>
       <PageIntro eyebrow="Contact" title="Talk to a person." intro="Questions before you order, help with an order, or the veteran and first responder discount. We are happy to help." />
@@ -36,7 +40,7 @@ export default function ContactPage() {
           </div>
         </div>
         <div className="rounded-3xl border border-line bg-white p-6 shadow-soft md:p-6">
-          <InquiryForm kind="contact" page="/contact" />
+          <InquiryForm kind="contact" page="/contact" defaultInterest={topic ? TOPICS[topic] : undefined} />
         </div>
       </section>
     </>

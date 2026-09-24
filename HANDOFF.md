@@ -32,16 +32,19 @@ Weight, depth, what "100 lb max capacity" means, colors, warranty terms and retu
 
 ## Add a review
 
-Open `content/reviews.ts` and add one entry to the `reviews` array, copied word for word from the review export:
+Open `content/reviews.ts` and add one entry to the `reviews` array, copied word for word:
 
 ```ts
-{ id: "r-001", author: "Jane D.", rating: 5, date: "2026-03-14", body: "…exact text…", context: "Physical therapy clinic", verified: true, featured: true },
+{ id: "jane-d", author: "Jane D.", body: "…exact text…", excerpt: "A short part of the exact text.", lane: "Home", label: "Home user", initials: "JD", featured: true },
 ```
 
-The home page "What people say" section appears as soon as the array has one entry. Stars and the average show only for reviews that carry a `rating` (the testimonials copied from the old homepage have none). Reviews whose `context` mentions a clinic or the military are shown first. Never edit a review's wording.
-
-- `listOnly: true` keeps a review out of every card, the hero, the audience cards, plan pages and CTA areas; it appears only in the plain list under the review cards. J. White's review is list-only because of its fall-risk wording.
-- `ericQuestion` puts a question about a review on Eric's list (`audit:content`, `review:export`). In the CSV, Y means keep. Reviews cannot be edited through the CSV; to remove one, delete its entry.
+- **`excerpt`** is the short quote in the homepage band. It must appear exactly inside `body`; it may start or end with "…". The build fails if it does not. Never edit a review's wording to make it pass.
+- **`lane`** is `"Military"`, `"Clinic"` or `"Home"`; plan pages pick a review from the matching lane. **`label`** is one short line from the reviewer's own words. `focal: true` makes one featured review the deep-teal hexagon.
+- **`featured: true`** puts the review in the homepage band ("In their words", `#reviews`, above pricing), in file order.
+- `listOnly: true` keeps a review out of every featured placement. J. White's review is list-only and not featured until Eric answers "keep or remove? (fall-risk wording)" on his review list (`ericQuestion`; in the CSV, Y means keep; removing means deleting the entry).
+- Stars per review appear only when a review has a `rating`, which the Shopify review sync will supply. The store-wide "47 ★★★★★ reviews on the Vary Board store" comes from `content/facts.ts` (`storeReviews`). **[VERIFY]** confirm 47 and 5.0 against the Shopify reviews app before launch.
+- "Read all 47 reviews" goes to the Shopify product page (`reviewsUrl` in `content/config.ts`) until the review sync adds `/reviews`.
+- The band's last cell links to `/contact?topic=story`, which preselects "Share my story" in the contact form.
 
 ## Add the founder portraits
 

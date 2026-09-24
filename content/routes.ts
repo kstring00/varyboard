@@ -50,3 +50,6 @@ export const footerNav = [
 
 /** Bottom legal row. */
 export const legalNav = [link("/privacy"), link("/terms"), link("/accessibility")] as const;
+
+/** The testimonials band's invitation cell: the contact form with "Share my story" preselected. */
+export const shareStoryLink = link("/contact", { query: "topic=story", label: "Own a Vary Board? Share how you use it." });

@@ -5,22 +5,15 @@ import { canFeature, reviews as allReviews, type Review } from "@/content/review
 const reviews = allReviews.filter(canFeature);
 
 /**
- * One real review matched to the lane by the reviewer's own stated context.
+ * One real review matched to the plan lane by the review's lane (Military, Clinic, Home).
  * Reviews are pasted verbatim into content/reviews.ts by Eric; nothing here is written by us.
  * Renders nothing while no matching review exists (never an invented person).
  */
-const MATCH: Record<Lane, RegExp | null> = {
-  mil: /veteran|military|active duty|army|navy|marine|air force|coast guard|service/i,
-  clinic: /clinic|therap|\bPT\b|\bOT\b|rehab/i,
-  athlete: /athlete|coach|train|team|player/i,
-  me: null,
-  loved: /parent|mother|father|mom|dad|husband|wife|spouse|gift/i,
-};
+const LANE: Record<Lane, Review["lane"] | null> = { mil: "Military", clinic: "Clinic", me: "Home", loved: "Home", athlete: null };
 
 export function laneReview(lane: Lane): Review | undefined {
-  const re = MATCH[lane];
-  const pool = re ? reviews.filter((r) => r.context && re.test(r.context)) : [];
-  return pool[0] ?? reviews.find((r) => r.featured) ?? reviews[0];
+  const want = LANE[lane];
+  return (want ? reviews.find((r) => r.lane === want) : undefined) ?? reviews.find((r) => r.featured) ?? reviews[0];
 }
 
 export function LaneTestimonial({ lane }: { lane: Lane }) {

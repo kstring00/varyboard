@@ -24,7 +24,7 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
 
 const input = "block w-full min-h-12 rounded-xl border border-line bg-white px-4 py-3 text-lg text-ink placeholder:text-muted focus:border-teal-deep";
 
-export function InquiryForm({ kind, page }: { kind: FormKind; page: string }) {
+export function InquiryForm({ kind, page, defaultInterest }: { kind: FormKind; page: string; defaultInterest?: string }) {
   const [state, action, pending] = useActionState(submitInquiry, initial);
   const uid = useId();
   const id = (n: string) => `${uid}-${n}`;
@@ -74,10 +74,11 @@ export function InquiryForm({ kind, page }: { kind: FormKind; page: string }) {
           </Field>
         ) : (
           <Field id={id("interest")} label="What can we help with?">
-            <select id={id("interest")} name="interest" className={input} defaultValue="question">
+            <select id={id("interest")} name="interest" className={input} defaultValue={state.values?.interest ?? defaultInterest ?? "question"}>
               <option value="question">A question before I order</option>
               <option value="order">An existing order</option>
               <option value="discount">Veteran, active duty or first responder discount</option>
+              <option value="story">Share my story</option>
               <option value="other">Something else</option>
             </select>
           </Field>

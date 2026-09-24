@@ -5,6 +5,7 @@
  * which builds Shopify cart permalinks from the variant ids in ./facts and the host in
  * NEXT_PUBLIC_SHOP_DOMAIN. Nothing here invents a number.
  */
+import { resolveShopDomain } from "@/lib/env";
 
 /**
  * Military discount. CONFIRM_WITH_ERIC: we know it is 10% for veterans, active duty and
@@ -48,3 +49,9 @@ export const fitPlanner: { mountMethod: "studs" | "any"; studSpacingIn: number; 
   mountBottomIn: 2,
   personHeightIn: 68,
 };
+
+/**
+ * "Read all N reviews" in the homepage testimonials band. For now the Shopify product page, where
+ * the reviews app lists them; the review-sync work will switch this to the site's own /reviews.
+ */
+export const reviewsUrl = `https://${resolveShopDomain()}/products/vb`;

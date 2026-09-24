@@ -17,7 +17,7 @@ export interface FormState {
   message?: string;
   errors?: Partial<Record<"name" | "email" | "phone" | "message" | "org" | "consent", string>>;
   /** What the visitor typed, echoed back on a validation error so the form does not clear. */
-  values?: Partial<Record<"name" | "email" | "phone" | "message" | "org" | "role" | "consent", string>>;
+  values?: Partial<Record<"name" | "email" | "phone" | "message" | "org" | "role" | "consent" | "interest", string>>;
 }
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -55,7 +55,7 @@ export async function submitInquiry(_prev: FormState, formData: FormData): Promi
   if ((kind === "clinic" || kind === "team") && data.org.length < 2) errors.org = kind === "team" ? "Please enter your team or organization." : "Please enter your clinic or organization.";
   if (kind === "plan" && !consent) errors.consent = "Please tick the box so we can email you.";
   if (data.message.length < 5) errors.message = kind === "clinic" ? "Tell us a little about your clinic and what you need." : "Please enter a message.";
-  if (Object.keys(errors).length) return { status: "error", errors, message: "Please check the highlighted fields.", values: { name: data.name, email: data.email, phone: data.phone, message: data.message, org: data.org, role: data.role, consent: consent ? "yes" : "" } };
+  if (Object.keys(errors).length) return { status: "error", errors, message: "Please check the highlighted fields.", values: { name: data.name, email: data.email, phone: data.phone, message: data.message, org: data.org, role: data.role, interest: data.interest, consent: consent ? "yes" : "" } };
 
   const fallback = `We could not send your message just now. Please call ${brand.phone} or email ${brand.email}.`;
   const subject =

@@ -213,6 +213,17 @@ export const shipping = {
   flatRateLine: "Flat-rate shipping $9.99",
 } as const;
 
+/**
+ * Store-wide review stats shown in the homepage testimonials band ("47 ★★★★★ reviews on the
+ * Vary Board store"). The Shopify review sync will update these two numbers automatically.
+ * [VERIFY] Typed from the preview on 2026-09-24; confirm against the Shopify reviews app
+ * before launch (47 is also the anchor points per section, so check it is not a placeholder).
+ */
+export const storeReviews = {
+  storeReviewCount: 47,
+  storeReviewAverage: 5,
+} as const;
+
 export const discounts = {
   heroesPercent: 10,
   heroesLine: "10% off for veterans, active duty and first responders.",
