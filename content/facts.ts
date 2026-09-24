@@ -21,6 +21,13 @@ export const brand = {
   phoneHref: "tel:+18885977591",
   email: "info@varysystems.com",
   accent: "#85b5b2",
+  /** Where the board was designed (Eric's clinic). Footer copy. */
+  designedIn: "Webster, Texas",
+  /** The accounts linked from the live thevaryboard.com footer. Facebook and Instagram only. */
+  social: {
+    instagram: "https://www.instagram.com/thevaryboard/",
+    facebook: "https://www.facebook.com/profile.php?id=61552116026974",
+  },
 } as const;
 
 export const founders = {

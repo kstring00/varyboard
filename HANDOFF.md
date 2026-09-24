@@ -75,6 +75,13 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 - three.js never ships with the page. The section shows a real still of the bedroom scene (`public/images/fit/poster-bedroom.jpg`) until the visitor taps; the chunk is prefetched when the section is within 400px. Browsers without WebGL get the still plus a written room-by-room summary.
 - To refresh the still after changing the bedroom or the board: run the site, then `node scripts/fit-poster.mjs` (Chromium with software GL; the script header says how).
 
+## Footer
+
+Brand + utility: honeycomb top edge, closing band with the hexagon "VARY" (decorative, `aria-hidden`), utility columns, legal row. Every footer link comes from `content/routes.ts` (`footerNav`, `legalNav`); the phone, email, city and social accounts come from `content/facts.ts` (`brand`). `/accessibility` is a short statement page linked from the legal row.
+
+- **Confirm the social URLs** in `content/facts.ts` (`brand.social`): they were taken from the footer mockup, not re-checked against the live site.
+- "Military & VA" opens the intake's military lane (`/plan?for=mil`); "Team pricing" opens the clinic request form (`/professionals#request`). Repoint them in `content/routes.ts` if dedicated pages ship.
+
 ## Forms (contact and clinic requests)
 
 Both forms post to a small server function (`app/actions/forms.ts`) with spam protection. Set ONE of these in Vercel > Project > Settings > Environment Variables so messages reach you:
