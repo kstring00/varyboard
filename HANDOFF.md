@@ -77,7 +77,7 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 
 ## Footer
 
-Brand + utility: honeycomb top edge, closing band with the hexagon "VARY" (decorative, `aria-hidden`), utility columns, legal row. Every footer link comes from `content/routes.ts` (`footerNav`, `legalNav`); the phone, email, city and social accounts come from `content/facts.ts` (`brand`). `/accessibility` is a short statement page linked from the legal row.
+Brand + utility: honeycomb top edge, "VARY BOARD" built from hexagons (decorative, `aria-hidden`; one line on wide screens, VARY over BOARD under 760px), utility columns, legal row. Every footer link comes from `content/routes.ts` (`footerNav`, `legalNav`); the phone, email, city and social accounts come from `content/facts.ts` (`brand`). `/accessibility` is a short statement page linked from the legal row.
 
 - **Confirm the social URLs** in `content/facts.ts` (`brand.social`): they were taken from the footer mockup, not re-checked against the live site.
 - "Military & VA" opens the intake's military lane (`/plan?for=mil`); "Team pricing" opens the clinic request form (`/professionals#request`). Repoint them in `content/routes.ts` if dedicated pages ship.
