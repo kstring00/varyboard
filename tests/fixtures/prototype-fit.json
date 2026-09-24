@@ -1,0 +1,2818 @@
+{
+ "bedroom": {
+  "std": {
+   "goodSpots": 3,
+   "walls": {
+    "left": [
+     {
+      "u": -50,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "a plant",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -34,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the nightstand",
+      "top": 77
+     },
+     {
+      "u": -18,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -2,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 14,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 30,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 46,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 62,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the corner",
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "back": [
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 77
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 77
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 77
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 77
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 77
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 77
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "right": [
+     {
+      "u": -50,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -34,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the nightstand",
+      "top": 77
+     },
+     {
+      "u": -18,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -2,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the dresser",
+      "top": 77
+     },
+     {
+      "u": 14,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the dresser",
+      "zoneBy": "the dresser",
+      "top": 77
+     },
+     {
+      "u": 30,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the dresser",
+      "zoneBy": "the dresser",
+      "top": 77
+     },
+     {
+      "u": 46,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the dresser",
+      "zoneBy": "the dresser",
+      "top": 77
+     },
+     {
+      "u": 62,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the corner",
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ]
+   }
+  },
+  "xt": {
+   "goodSpots": 0,
+   "walls": {
+    "left": [
+     {
+      "u": -50,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "a plant",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -34,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the nightstand",
+      "top": 102
+     },
+     {
+      "u": -18,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -2,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 14,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 30,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": "the door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 46,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": "the door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 62,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the corner",
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "back": [
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 102
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 102
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 102
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 102
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 102
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "the bed",
+      "top": 102
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the bed and nightstands",
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "right": [
+     {
+      "u": -50,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -34,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the nightstand",
+      "top": 102
+     },
+     {
+      "u": -18,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -2,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the dresser",
+      "top": 102
+     },
+     {
+      "u": 14,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the dresser",
+      "zoneBy": "the dresser",
+      "top": 102
+     },
+     {
+      "u": 30,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the dresser",
+      "zoneBy": "the dresser",
+      "top": 102
+     },
+     {
+      "u": 46,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the dresser",
+      "zoneBy": "the dresser",
+      "top": 102
+     },
+     {
+      "u": 62,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the corner",
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ]
+   }
+  }
+ },
+ "garage": {
+  "std": {
+   "goodSpots": 8,
+   "walls": {
+    "left": [
+     {
+      "u": -104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "the water heater",
+      "top": 77
+     },
+     {
+      "u": -72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the door to the house",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the door to the house",
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the door to the house",
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 72,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 88,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 77
+     },
+     {
+      "u": 104,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "back": [
+     {
+      "u": -104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "the water heater",
+      "top": 77
+     },
+     {
+      "u": -72,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -56,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -40,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -24,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -8,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": 72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": 88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": 104,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "right": [
+     {
+      "u": -104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the workbench",
+      "top": 77
+     },
+     {
+      "u": -72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 77
+     },
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 77
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 77
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 77
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the shelves",
+      "top": 77
+     },
+     {
+      "u": 8,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 24,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 40,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the trash bins",
+      "top": 77
+     },
+     {
+      "u": 72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the trash bins",
+      "zoneBy": "the trash bins",
+      "top": 77
+     },
+     {
+      "u": 88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the trash bins",
+      "zoneBy": "the trash bins",
+      "top": 77
+     },
+     {
+      "u": 104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the trash bins",
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ]
+   }
+  },
+  "xt": {
+   "goodSpots": 8,
+   "walls": {
+    "left": [
+     {
+      "u": -104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "the water heater",
+      "top": 102
+     },
+     {
+      "u": -72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the door to the house",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the door to the house",
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the door to the house",
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 72,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 88,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the car",
+      "top": 102
+     },
+     {
+      "u": 104,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "back": [
+     {
+      "u": -104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the water heater",
+      "zoneBy": "the water heater",
+      "top": 102
+     },
+     {
+      "u": -72,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -56,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -40,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -24,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -8,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": 72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": 88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the workbench",
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": 104,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "right": [
+     {
+      "u": -104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the workbench",
+      "top": 102
+     },
+     {
+      "u": -72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 102
+     },
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 102
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 102
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the shelves",
+      "zoneBy": "the shelves",
+      "top": 102
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the shelves",
+      "top": 102
+     },
+     {
+      "u": 8,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 24,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 40,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the trash bins",
+      "top": 102
+     },
+     {
+      "u": 72,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the trash bins",
+      "zoneBy": "the trash bins",
+      "top": 102
+     },
+     {
+      "u": 88,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the trash bins",
+      "zoneBy": "the trash bins",
+      "top": 102
+     },
+     {
+      "u": 104,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the trash bins",
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ]
+   }
+  }
+ },
+ "patio": {
+  "std": {
+   "goodSpots": 4,
+   "walls": {
+    "left": [
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -40,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the grill",
+      "top": 77
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the grill",
+      "zoneBy": "the grill",
+      "top": 77
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the grill",
+      "zoneBy": "the grill",
+      "top": 77
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the grill",
+      "top": 77
+     },
+     {
+      "u": 40,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "back": [
+     {
+      "u": -80,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -64,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -48,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -32,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -16,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 0,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 16,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 32,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 48,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 64,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the planter",
+      "zoneBy": "the planter",
+      "top": 77
+     },
+     {
+      "u": 80,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the planter",
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "right": [
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the planter",
+      "top": 77
+     },
+     {
+      "u": -24,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 77
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 77
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 77
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 77
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ]
+   }
+  },
+  "xt": {
+   "goodSpots": 1,
+   "walls": {
+    "left": [
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the grill",
+      "top": 102
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the grill",
+      "zoneBy": "the grill",
+      "top": 102
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": "the grill",
+      "zoneBy": "the grill",
+      "top": 102
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the grill",
+      "top": 102
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "back": [
+     {
+      "u": -80,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -64,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -48,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -32,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -16,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 0,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 16,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 32,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 48,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the sliding door",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 64,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the planter",
+      "zoneBy": "the planter",
+      "top": 102
+     },
+     {
+      "u": 80,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the planter",
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "right": [
+     {
+      "u": -56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the planter",
+      "top": 102
+     },
+     {
+      "u": -24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 102
+     },
+     {
+      "u": 8,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 102
+     },
+     {
+      "u": 24,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 102
+     },
+     {
+      "u": 40,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "a lounge chair",
+      "top": 102
+     },
+     {
+      "u": 56,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": false,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ]
+   }
+  }
+ },
+ "clinic": {
+  "std": {
+   "goodSpots": 10,
+   "walls": {
+    "left": [
+     {
+      "u": -92,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -76,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the mirror",
+      "zoneBy": "the bike",
+      "top": 77
+     },
+     {
+      "u": -60,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the mirror",
+      "zoneBy": "the bike",
+      "top": 77
+     },
+     {
+      "u": -44,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -28,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -12,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 4,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 20,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 36,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 77
+     },
+     {
+      "u": 52,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 77
+     },
+     {
+      "u": 68,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 77
+     },
+     {
+      "u": 84,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 77
+     },
+     {
+      "u": 100,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "back": [
+     {
+      "u": -128,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bike",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -112,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bike",
+      "zoneBy": "the bike",
+      "top": 77
+     },
+     {
+      "u": -96,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the bike",
+      "top": 77
+     },
+     {
+      "u": -80,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -64,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -48,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -32,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": -16,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 0,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 16,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 32,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the cabinets",
+      "top": 77
+     },
+     {
+      "u": 48,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the cabinets",
+      "top": 77
+     },
+     {
+      "u": 64,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the cabinets",
+      "top": 77
+     },
+     {
+      "u": 80,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the cabinets",
+      "top": 77
+     },
+     {
+      "u": 96,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the stair unit",
+      "top": 77
+     },
+     {
+      "u": 112,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the stair unit",
+      "top": 77
+     },
+     {
+      "u": 128,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ],
+    "right": [
+     {
+      "u": -92,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "corner",
+      "top": 77
+     },
+     {
+      "u": -76,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "the stair unit",
+      "top": 77
+     },
+     {
+      "u": -60,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "the stair unit",
+      "top": 77
+     },
+     {
+      "u": -44,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "the stair unit",
+      "top": 77
+     },
+     {
+      "u": -28,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the stair unit",
+      "top": 77
+     },
+     {
+      "u": -12,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 4,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 20,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the parallel bars",
+      "top": 77
+     },
+     {
+      "u": 36,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the parallel bars",
+      "top": 77
+     },
+     {
+      "u": 52,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the parallel bars",
+      "top": 77
+     },
+     {
+      "u": 68,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the parallel bars",
+      "top": 77
+     },
+     {
+      "u": 84,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 77
+     },
+     {
+      "u": 100,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 77
+     }
+    ]
+   }
+  },
+  "xt": {
+   "goodSpots": 10,
+   "walls": {
+    "left": [
+     {
+      "u": -92,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -76,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the mirror",
+      "zoneBy": "the bike",
+      "top": 102
+     },
+     {
+      "u": -60,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the mirror",
+      "zoneBy": "the bike",
+      "top": 102
+     },
+     {
+      "u": -44,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -28,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -12,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 4,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the mirror",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 20,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 36,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 102
+     },
+     {
+      "u": 52,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 102
+     },
+     {
+      "u": 68,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 102
+     },
+     {
+      "u": 84,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the exercise ball",
+      "top": 102
+     },
+     {
+      "u": 100,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "back": [
+     {
+      "u": -128,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bike",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -112,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the bike",
+      "zoneBy": "the bike",
+      "top": 102
+     },
+     {
+      "u": -96,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the bike",
+      "top": 102
+     },
+     {
+      "u": -80,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -64,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -48,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -32,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": -16,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 0,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 16,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 32,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the cabinets",
+      "top": 102
+     },
+     {
+      "u": 48,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the cabinets",
+      "top": 102
+     },
+     {
+      "u": 64,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the cabinets",
+      "top": 102
+     },
+     {
+      "u": 80,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the cabinets",
+      "top": 102
+     },
+     {
+      "u": 96,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the cabinets",
+      "zoneBy": "the stair unit",
+      "top": 102
+     },
+     {
+      "u": 112,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the stair unit",
+      "top": 102
+     },
+     {
+      "u": 128,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ],
+    "right": [
+     {
+      "u": -92,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "corner",
+      "top": 102
+     },
+     {
+      "u": -76,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "the stair unit",
+      "top": 102
+     },
+     {
+      "u": -60,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "the stair unit",
+      "top": 102
+     },
+     {
+      "u": -44,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the stair unit",
+      "zoneBy": "the stair unit",
+      "top": 102
+     },
+     {
+      "u": -28,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the stair unit",
+      "top": 102
+     },
+     {
+      "u": -12,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 4,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": "the window",
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 20,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the parallel bars",
+      "top": 102
+     },
+     {
+      "u": 36,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the parallel bars",
+      "top": 102
+     },
+     {
+      "u": 52,
+      "ok": false,
+      "wallOK": false,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": "the window",
+      "zoneBy": "the parallel bars",
+      "top": 102
+     },
+     {
+      "u": 68,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "the parallel bars",
+      "top": 102
+     },
+     {
+      "u": 84,
+      "ok": true,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": true,
+      "wallBy": null,
+      "zoneBy": null,
+      "top": 102
+     },
+     {
+      "u": 100,
+      "ok": false,
+      "wallOK": true,
+      "heightOK": true,
+      "zoneOK": false,
+      "wallBy": null,
+      "zoneBy": "corner",
+      "top": 102
+     }
+    ]
+   }
+  }
+ }
+}

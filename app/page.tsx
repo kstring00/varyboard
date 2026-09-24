@@ -3,6 +3,7 @@ import { Hero } from "@/components/home/Hero";
 import { FindYourPlan } from "@/components/home/FindYourPlan";
 import { WhoItsFor } from "@/components/home/WhoItsFor";
 import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
+import { FitSection } from "@/components/fit/FitSection";
 import { People } from "@/components/home/People";
 import { Proof } from "@/components/home/Proof";
 import { FitsYourSpace } from "@/components/home/FitsYourSpace";
@@ -23,6 +24,7 @@ export default function HomePage() {
       <FindYourPlan />
       <WhoItsFor />
       <WhatYouCanDo />
+      <FitSection />
       <People />
       <Proof />
       <FitsYourSpace />

@@ -7,6 +7,8 @@ export interface FaqItem {
   a: string;
   /** Shown in the short accordion on the home page. */
   home?: boolean;
+  /** A follow-on link rendered after the answer. */
+  link?: { href: string; label: string };
 }
 
 export const faq: FaqItem[] = [
@@ -58,6 +60,7 @@ export const faq: FaqItem[] = [
     id: "install",
     q: "How is it installed?",
     a: `The three sections stack to a ${products.board.specs[1].value} board and mount to the wall. Watch the installation video on our install page before you start.`,
+    link: { href: "/fit", label: "See if it fits your room" },
   },
   {
     id: "clinics",

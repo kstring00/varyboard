@@ -66,6 +66,15 @@ Three one-tap questions (`for`, `c`, `s` or `area` in the URL) lead to `/plan/re
 - **Eric's review round trip.** `npm run review:export` writes every unreviewed line to `content/review.csv` (columns: id, lane, type, current text, approve (Y/N), Eric's edit). Eric puts Y in the approve column and any rewording in the last column, keeping the `{you}` `{your}` `{my}` `{I}` tokens. `npm run review:import` writes it back: approved rows get `reviewedByEric: true` (exercises get `approved: true`) and edits replace the text in place. "try today" rows share one flag per movement, so all of that movement's rows need Y. Exercise rows carry the name only; other exercise fields are edited in `content/exercises.ts`. After importing run `npm run check:intake && npm run audit:safety && npm run audit:content`, then commit both the content files and the regenerated CSV.
 - Blake Cook's testimonial: paste it into `content/reviews.ts` with `context: "Veteran"` (or similar) and the mil lane's plan page shows it automatically.
 
+## Will it fit? (the room planner at /fit and on the homepage)
+
+A three.js room planner ported from the client's prototype (kept at `reference/room-planner.html`, which the tests compare against). Drag the board to any wall of four rooms drawn to scale; the panel says whether it fits and why.
+
+- **Two settings to confirm with Eric** in `content/config.ts` (`fitPlanner`): `mountMethod` ("studs" = snaps to studs 16 in apart, copy and stud lines say so; "any" = a 4 in grid and the stud copy disappears) and `mountBottomIn` (2 in above the floor today). Board sizes come from `content/facts.ts` (`sections`, `heightIn`, `board.section`).
+- Rules are pure functions in `lib/fit.ts`; rooms and furniture are data in `content/rooms.ts`; the 3D scene is `components/fit/scene.ts`. `npm test` checks every room x board x wall x stud against the prototype (fixture from `npm run fit:fixture`).
+- three.js never ships with the page. The section shows a real still of the bedroom scene (`public/images/fit/poster-bedroom.jpg`) until the visitor taps; the chunk is prefetched when the section is within 400px. Browsers without WebGL get the still plus a written room-by-room summary.
+- To refresh the still after changing the bedroom or the board: run the site, then `node scripts/fit-poster.mjs` (Chromium with software GL; the script header says how).
+
 ## Forms (contact and clinic requests)
 
 Both forms post to a small server function (`app/actions/forms.ts`) with spam protection. Set ONE of these in Vercel > Project > Settings > Environment Variables so messages reach you:

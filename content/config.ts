@@ -32,3 +32,19 @@ export const vaPacket = { pdfPath: "/docs/va-provider-packet.pdf" } as const;
 
 /** Sections of the plan result page, in order. Used by the completeness check. */
 export const RESULT_SECTIONS = ["reflect", "hexagon", "try", "weeks", "questions", "cta", "related"] as const;
+
+/**
+ * Room planner ("Will it fit?") assumptions.
+ *   mountMethod CONFIRM_WITH_ERIC: "studs" means the board snaps to studs 16 in apart, the copy
+ *     says so, and stud lines show while dragging. Set "any" if it does not need studs: positions
+ *     become a 4 in grid, the stud copy and lines turn off.
+ *   mountBottomIn CONFIRM_WITH_ERIC: how far above the floor the bottom of the board is mounted.
+ *   personHeightIn: the scale figure, 5 ft 8 in as in the prototype.
+ */
+export const fitPlanner: { mountMethod: "studs" | "any"; studSpacingIn: number; gridStepIn: number; mountBottomIn: number; personHeightIn: number } = {
+  mountMethod: "studs",
+  studSpacingIn: 16,
+  gridStepIn: 4,
+  mountBottomIn: 2,
+  personHeightIn: 68,
+};

@@ -4,6 +4,7 @@
 export const routes: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
   { path: "/plan", priority: 0.9 },
+  { path: "/fit", priority: 0.8 },
   { path: "/vary-board", priority: 0.9 },
   { path: "/vary-board-xt", priority: 0.9 },
   { path: "/resistance-bands", priority: 0.8 },

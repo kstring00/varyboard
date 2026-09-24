@@ -207,6 +207,11 @@ export function PlanResult({ plan, path }: { plan: PlanContent; path: string }) 
           </Link>
         </p>
         <p>
+          <Link href="/fit" className="link" data-fit-link>
+            See if it fits your room
+          </Link>
+        </p>
+        <p>
           <Link href={intakeHref.step1()} className="link" data-startover>
             Start over
           </Link>

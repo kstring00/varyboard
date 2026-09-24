@@ -79,6 +79,9 @@ export interface Product {
   summary: string;
   /** Spec lines that are confirmed and safe to render. */
   specs: { label: string; value: string }[];
+  /** Numeric geometry for boards (the room planner reads these; undefined for accessories). */
+  sections?: number;
+  heightIn?: number;
 }
 
 /**
@@ -101,6 +104,8 @@ export const products: Record<ProductId, Product> = {
     price: 199,
     sku: "VB75001",
     variantId: "45481137439023",
+    sections: 3,
+    heightIn: 75,
     path: "/vary-board",
     summary: "Three modular sections. Installed height 75 inches. Fits most adults.",
     specs: [
@@ -120,6 +125,8 @@ export const products: Record<ProductId, Product> = {
     price: 399,
     sku: "VBXT100",
     variantId: "45480889581871",
+    sections: 4,
+    heightIn: 100,
     path: "/vary-board-xt",
     summary: "Four modular sections. Installed height 100 inches. For users 6'3\" and taller.",
     specs: [
@@ -167,6 +174,8 @@ export const board = {
   trustLine: "Designed by a physical therapist. Patented.",
   sectionAnatomy: "Each section is a backer plus a convex platform.",
   anchorPointsPerSection: 47,
+  /** One section, in inches: 25 tall, 8 wide, stands 3 off the wall. */
+  section: { heightIn: 25, widthIn: 8, depthIn: 3 },
   anchorShape: "hexagonal",
   positioningAccuracy: '1/2"',
   material: "HDPE",
