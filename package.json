@@ -21,7 +21,8 @@
     "fit:fixture": "node scripts/prototype-fit-fixture.mjs",
     "prebuild": "npm run check:placeholders && npm run audit:safety && npm run check:intake && npm run audit:content",
     "vercel-build": "next build",
-    "assets:og": "node scripts/make-og.mjs"
+    "assets:og": "node scripts/make-og.mjs",
+    "assets:hero": "node scripts/hero-photo.mjs"
   },
   "dependencies": {
     "gsap": "^3.15.0",

@@ -20,7 +20,7 @@ export const brand = {
   phone: "888-597-7591",
   phoneHref: "tel:+18885977591",
   email: "info@varysystems.com",
-  accent: "#85b5b2",
+  accent: "#8cbfd2",
   /** Where the board was designed (Eric's clinic). Footer copy. */
   designedIn: "Webster, Texas",
   /** The accounts linked from the live thevaryboard.com footer. Facebook and Instagram only. */

@@ -57,13 +57,13 @@ To pull the remaining photos from the old Shopify store, run `npm run assets:fet
 
 ## Change the hero image
 
-The home hero shows the real board in a layered parallax on the right. Three asset slots, all real photos, never illustrations or generated images:
+The home hero is copy on the left and a real photo on the right (a man pulling a red band anchored high on the Vary Board), over the existing honeycomb shader. The photo is graded at build time, never with CSS filters:
 
-- `public/images/hero/board-cutout.png`: the board with its background removed (transparent PNG). Until it exists the hero falls back to the real close-up `public/images/originals/board-closeup.webp`.
-- `public/images/hero/hand-band.png`: the hand and band from the same photo, if they can be separated. Optional; renders nothing when missing.
-- `public/images/hero/leaf.png`: a real foreground leaf, blurred in CSS. Optional; renders nothing when missing.
+1. Put the full-resolution original at `public/images/hero/hero-strength-original.jpg`. **Not added yet:** until it is, the 600 px copy already on the site (`public/images/originals/mantoleft.webp`) is used, and the hero looks soft on large screens.
+2. Run `npm run assets:hero`. It applies the grade (gamma 0.78, R ×1.0, G ×0.99, B ×0.965, so the gray studio wall reads as plaster), writes AVIF and WebP at 1x and 2x for a desktop and a mobile crop, and records them in `content/hero-photo.generated.json`.
+3. Commit the new files in `public/images/hero/` and the JSON.
 
-Drop the files in and redeploy; `components/home/Hero.tsx` checks which exist at build time. The alt text for the cutout lives in that file. The one short review under the buttons comes from `content/reviews.ts` (a featured review's title, or a body under 160 characters) and renders nothing while that file is empty.
+`components/home/Hero.tsx` holds the alt text and preloads the photo (it is the page's LCP). The photo's left edge fade and the crop are in `app/globals.css` (`.hero__photo`).
 
 ## Add the install steps and the spec sheet
 

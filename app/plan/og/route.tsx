@@ -39,16 +39,16 @@ export async function GET(req: Request) {
             return <line key={g} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={lit ? "#4a8f8a" : "#cfd6d4"} strokeWidth={lit ? 14 : 8} strokeLinecap="round" />;
           })}
           {GENRE_ORDER.map((_, i) => (
-            <circle key={i} cx={corner(i).x} cy={corner(i).y} r="9" fill="#24433f" />
+            <circle key={i} cx={corner(i).x} cy={corner(i).y} r="9" fill="#1f3d48" />
           ))}
         </svg>
         <div style={{ display: "flex", flexDirection: "column", marginLeft: 56, flex: 1 }}>
-          <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#24433f", fontFamily: "Arial, sans-serif" }}>{`${brand.name} · Find your plan`}</div>
+          <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#1f3d48", fontFamily: "Arial, sans-serif" }}>{`${brand.name} · Find your plan`}</div>
           <div style={{ fontSize: headline.length > 60 ? 44 : 54, lineHeight: 1.1, marginTop: 20, fontWeight: 500 }}>{headline}</div>
           <div style={{ fontSize: 26, marginTop: 24, color: "#3b4745", fontFamily: "Arial, sans-serif" }}>{sub}</div>
           <div style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap" }}>
             {GENRE_ORDER.map((g) => (
-              <div key={g} style={{ padding: "8px 16px", borderRadius: 999, fontSize: 20, fontFamily: "Arial, sans-serif", background: used.has(g) ? "#24433f" : "transparent", color: used.has(g) ? "#f2f0eb" : "#55615e", border: "2px solid " + (used.has(g) ? "#24433f" : "#cfd6d4") }}>
+              <div key={g} style={{ padding: "8px 16px", borderRadius: 999, fontSize: 20, fontFamily: "Arial, sans-serif", background: used.has(g) ? "#1f3d48" : "transparent", color: used.has(g) ? "#f2f0eb" : "#55615e", border: "2px solid " + (used.has(g) ? "#1f3d48" : "#cfd6d4") }}>
                 {GENRES[g].label}
               </div>
             ))}

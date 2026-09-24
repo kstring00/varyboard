@@ -40,6 +40,8 @@ export interface HexEdgeProps {
   seed?: number;
   /** false = the front never moves: the at-rest dissolve is drawn once and only redrawn on resize. */
   scrollLinked?: boolean;
+  /** Extra class on the canvas (e.g. to change its height per breakpoint from CSS). */
+  className?: string;
 }
 
 /** Small, fast, deterministic hash -> [0, 1). Same (col,row,seed) always gives the same value. */
@@ -61,6 +63,7 @@ export function HexEdge({
   heightPct = 85,
   seed = 7,
   scrollLinked = true,
+  className,
 }: HexEdgeProps) {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -240,6 +243,7 @@ export function HexEdge({
     <canvas
       ref={ref}
       aria-hidden="true"
+      className={className}
       style={{ position: "absolute", left: 0, right: 0, bottom: 0, width: "100%", height: `${heightPct}%`, pointerEvents: "none", zIndex: 4, display: "block" }}
     />
   );
