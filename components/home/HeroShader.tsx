@@ -4,29 +4,27 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { HexShaderBackground } from "@/components/ui/hex-shader";
 import { HexEdge } from "@/components/HexEdge";
-import { Stars } from "@/components/ui/Stars";
-import { GENRES, GENRE_ORDER } from "@/content/intake";
 import { AudienceTicker } from "./AudienceTicker";
-import { HeroVisual } from "./HeroVisual";
+import { DESKTOP_MEDIA } from "./heroMedia";
 
 /**
- * Hero: plaster ground, honeycomb shader, copy on the left, the real board in a layered
- * parallax on the right, the static honeycomb dissolve at the bottom, the audience ticker
- * as the closing element. One H1 on the page: "One wall. Six ways to move better."
+ * Hero: plaster ground with the existing honeycomb shader, copy on the left, the real photo on
+ * the right (desktop) or below the copy (phones and tablets), the static honeycomb dissolve drawn
+ * over the photo's bottom edge, and the audience ticker as the closing element.
+ * One H1 on the page: "One wall. Six ways to move better."
  *
- * Load order: the board image is the LCP element and is preloaded. The WebGL shader mounts
- * only after the board has loaded (or after a short fallback), so it never competes for LCP.
- * Live text always sits above the canvases (.hero__inner z 5 > HexEdge 4 > wash 1).
+ * Load order: the photo is the LCP element and is preloaded (Hero.tsx). The WebGL shader mounts
+ * only after the photo has loaded (or after a short fallback), so it never competes for LCP.
+ * The photo never animates. Live text sits above everything (.hero__inner z 5 > edge 4 > photo 2).
  */
-export interface HeroAssets {
-  board: { src: string; alt: string; cutout: true } | { src: string; alt: string; cutout: false; width: number; height: number; blurDataURL: string };
-  hand: string | null;
-  leaf: string | null;
-}
-export interface HeroReview {
-  text: string;
-  author: string;
-  rating: number;
+export interface HeroPhoto {
+  alt: string;
+  width: number;
+  height: number;
+  desktop: { avif: string; webp: string; sizes: string; fallback: string };
+  mobile: { avif: string; webp: string; sizes: string };
+  /** Width of the photo's left-edge fade. */
+  fade: string;
 }
 
 /** Shader density: 12 on desktop, 9 under 768px. Read in the initializer so the canvas never remounts. */
@@ -41,7 +39,7 @@ function useShaderDensity() {
   return density;
 }
 
-export function HeroShader({ assets, review }: { assets: HeroAssets; review: HeroReview | null }) {
+export function HeroShader({ photo }: { photo: HeroPhoto }) {
   const density = useShaderDensity();
   const [shaderReady, setShaderReady] = useState(false);
   const ready = useCallback(() => setShaderReady(true), []);
@@ -65,28 +63,39 @@ export function HeroShader({ assets, review }: { assets: HeroAssets; review: Her
               <br />
               Six ways to move better.
             </h1>
-            <p className="hero__genres">{GENRE_ORDER.map((g) => GENRES[g].label).join(" · ")}</p>
-            <p className="hero__sub">A wall-mounted training board that brings the physical therapy gym home, in just 3 × 3 feet.</p>
+            <p className="hero__sub">A physical therapist&apos;s gym on one wall, for the strength, balance and mobility you need for the things you love.</p>
             <div className="hero__ctas">
               <Link href="#find-your-plan" className="hero__btn hero__btn--primary">
                 Find your plan
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
               </Link>
               <Link href="#how-it-works" className="hero__btn hero__btn--secondary">
                 See how it works
               </Link>
             </div>
-            {review && (
-              <figure className="hero__review">
-                <Stars value={review.rating} size={14} />
-                <blockquote className="hero__review-text">&ldquo;{review.text}&rdquo;</blockquote>
-                <figcaption className="hero__review-by">{review.author}</figcaption>
-              </figure>
-            )}
           </div>
-          <HeroVisual assets={assets} onBoardLoad={ready} />
         </div>
 
-        <HexEdge heightPct={42} scrollLinked={false} />
+        <picture className="hero__photo" style={{ "--photo-ratio": `${photo.width} / ${photo.height}`, "--photo-fade": photo.fade } as React.CSSProperties}>
+          <source media={DESKTOP_MEDIA} type="image/avif" srcSet={photo.desktop.avif} sizes={photo.desktop.sizes} />
+          <source media={DESKTOP_MEDIA} type="image/webp" srcSet={photo.desktop.webp} sizes={photo.desktop.sizes} />
+          <source type="image/avif" srcSet={photo.mobile.avif} sizes={photo.mobile.sizes} />
+          <source type="image/webp" srcSet={photo.mobile.webp} sizes={photo.mobile.sizes} />
+          <img
+            src={photo.desktop.fallback}
+            alt={photo.alt}
+            width={photo.width}
+            height={photo.height}
+            fetchPriority="high"
+            decoding="async"
+            onLoad={ready}
+            className="hero__photo-img"
+          />
+        </picture>
+
+        <HexEdge heightPct={42} scrollLinked={false} className="hero__edge" />
       </div>
       <AudienceTicker />
       <div id="hero-end" aria-hidden="true" className="absolute bottom-0 left-0 h-px w-px" />

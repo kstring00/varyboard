@@ -5,7 +5,7 @@ import { WhoItsFor } from "@/components/home/WhoItsFor";
 import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
 import { FitSection } from "@/components/fit/FitSection";
 import { People } from "@/components/home/People";
-import { Proof } from "@/components/home/Proof";
+import { Testimonials } from "@/components/home/Testimonials";
 import { FitsYourSpace } from "@/components/home/FitsYourSpace";
 import { PriceCta } from "@/components/home/PriceCta";
 import { brand, formatPrice, products } from "@/content/facts";
@@ -21,13 +21,13 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <FindYourPlan />
-      <WhoItsFor />
       <WhatYouCanDo />
+      <WhoItsFor />
+      <FindYourPlan />
       <FitSection />
       <People />
-      <Proof />
       <FitsYourSpace />
+      <Testimonials />
       <PriceCta />
     </>
   );

@@ -45,8 +45,11 @@ export const link = (path: string, opts: { hash?: string; query?: string; label?
 export const footerNav = [
   { title: "Shop", links: [link("/vary-board"), link("/vary-board-xt"), link("/resistance-bands")] },
   { title: "Learn", links: [link("/", { hash: "how-it-works", label: "How it works" }), link("/plan"), link("/fit"), link("/faq")] },
-  { title: "Professionals", links: [link("/professionals"), link("/plan", { query: "for=mil", label: "Military & VA" }), link("/professionals", { hash: "request", label: "Team pricing" })] },
+  { title: "Professionals", links: [link("/professionals"), link("/plan", { query: "for=mil", label: "Military & VA" }), link("/", { hash: "team-pricing", label: "Team pricing" })] },
 ] as const;
 
 /** Bottom legal row. */
 export const legalNav = [link("/privacy"), link("/terms"), link("/accessibility")] as const;
+
+/** The testimonials band's invitation cell: the contact form with "Share my story" preselected. */
+export const shareStoryLink = link("/contact", { query: "topic=story", label: "Own a Vary Board? Share how you use it." });

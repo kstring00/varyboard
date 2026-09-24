@@ -20,7 +20,7 @@ export const brand = {
   phone: "888-597-7591",
   phoneHref: "tel:+18885977591",
   email: "info@varysystems.com",
-  accent: "#85b5b2",
+  accent: "#8cbfd2",
   /** Where the board was designed (Eric's clinic). Footer copy. */
   designedIn: "Webster, Texas",
   /** The accounts linked from the live thevaryboard.com footer. Facebook and Instagram only. */
@@ -211,6 +211,17 @@ export const board = {
 export const shipping = {
   flatRate: 9.99,
   flatRateLine: "Flat-rate shipping $9.99",
+} as const;
+
+/**
+ * Store-wide review stats shown in the homepage testimonials band ("47 ★★★★★ reviews on the
+ * Vary Board store"). The Shopify review sync will update these two numbers automatically.
+ * [VERIFY] Typed from the preview on 2026-09-24; confirm against the Shopify reviews app
+ * before launch (47 is also the anchor points per section, so check it is not a placeholder).
+ */
+export const storeReviews = {
+  storeReviewCount: 47,
+  storeReviewAverage: 5,
 } as const;
 
 export const discounts = {

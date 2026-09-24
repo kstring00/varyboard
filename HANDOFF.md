@@ -2,6 +2,20 @@
 
 Plain-English guide to running thevaryboard.com. The site is a Next.js app on Vercel. Shopify is used only for checkout.
 
+## Launch blockers (do these in order, before thevaryboard.com moves to Vercel)
+
+Status on 2026-09-24: thevaryboard.com and www.thevaryboard.com still point at Shopify (`23.227.38.32` and `shops.myshopify.com`). The Vercel project serves only its own `*.vercel.app` URLs.
+
+1. **`vercel-build` must run the content gate before the domain moves to Vercel.** Today it is plain `next build`, which skips every check in `prebuild` (placeholders, safety, intake, content review). Change it to `"vercel-build": "npm run build"` (or set Vercel's Build Command to `npm run build`). Not enabled yet on purpose: with Eric's review list open, every production deploy would fail.
+2. Eric works through `content/review.csv` until `npm run audit:content` prints "every content item is reviewed", including the open review question (J. White, fall-risk wording).
+3. `NEXT_PUBLIC_SHOP_DOMAIN` set to the Shopify checkout host (see "Domains and the Shopify cutover").
+4. Move the domain (same section), then set `SITE_LAUNCHED=true` for Production and redeploy. That lifts the noindex on production only; previews stay noindex.
+5. Submit the sitemap (see "After launch").
+
+## Pre-launch noindex
+
+The site is open to anyone with a link, but nothing is indexed until launch. Until `SITE_LAUNCHED=true` on production: `robots.txt` disallows everything, every page carries `<meta name="robots" content="noindex, nofollow">`, and every response carries `X-Robots-Tag: noindex, nofollow, noarchive` (`proxy.ts`). Previews never index, launched or not.
+
 ## Change a price, spec or contact detail
 
 Everything lives in one file: `content/facts.ts`.
@@ -18,13 +32,19 @@ Weight, depth, what "100 lb max capacity" means, colors, warranty terms and retu
 
 ## Add a review
 
-Open `content/reviews.ts` and add one entry to the `reviews` array, copied word for word from the review export:
+Open `content/reviews.ts` and add one entry to the `reviews` array, copied word for word:
 
 ```ts
-{ id: "r-001", author: "Jane D.", rating: 5, date: "2026-03-14", body: "…exact text…", context: "Physical therapy clinic", verified: true, featured: true },
+{ id: "jane-d", author: "Jane D.", body: "…exact text…", excerpt: "A short part of the exact text.", lane: "Home", label: "Home user", initials: "JD", featured: true },
 ```
 
-The home page "What people say" section appears as soon as the array has one entry. The star average is calculated from the array. Reviews whose `context` mentions a clinic or the military are shown first. Never edit a review's wording.
+- **`excerpt`** is the short quote in the homepage band. It must appear exactly inside `body`; it may start or end with "…". The build fails if it does not. Never edit a review's wording to make it pass.
+- **`lane`** is `"Military"`, `"Clinic"` or `"Home"`; plan pages pick a review from the matching lane. **`label`** is one short line from the reviewer's own words. `focal: true` makes one featured review the deep-teal hexagon.
+- **`featured: true`** puts the review in the homepage band ("In their words", `#reviews`, above pricing), in file order.
+- `listOnly: true` keeps a review out of every featured placement. J. White's review is list-only and not featured until Eric answers "keep or remove? (fall-risk wording)" on his review list (`ericQuestion`; in the CSV, Y means keep; removing means deleting the entry).
+- Stars per review appear only when a review has a `rating`, which the Shopify review sync will supply. The store-wide "47 ★★★★★ reviews on the Vary Board store" comes from `content/facts.ts` (`storeReviews`). **[VERIFY]** confirm 47 and 5.0 against the Shopify reviews app before launch.
+- "Read all 47 reviews" goes to the Shopify product page (`reviewsUrl` in `content/config.ts`) until the review sync adds `/reviews`.
+- The band's last cell links to `/contact?topic=story`, which preselects "Share my story" in the contact form.
 
 ## Add the founder portraits
 
@@ -40,13 +60,13 @@ To pull the remaining photos from the old Shopify store, run `npm run assets:fet
 
 ## Change the hero image
 
-The home hero shows the real board in a layered parallax on the right. Three asset slots, all real photos, never illustrations or generated images:
+The home hero is copy on the left and a real photo on the right (a man pulling a red band anchored high on the Vary Board), over the existing honeycomb shader. The photo is graded at build time, never with CSS filters:
 
-- `public/images/hero/board-cutout.png`: the board with its background removed (transparent PNG). Until it exists the hero falls back to the real close-up `public/images/originals/board-closeup.webp`.
-- `public/images/hero/hand-band.png`: the hand and band from the same photo, if they can be separated. Optional; renders nothing when missing.
-- `public/images/hero/leaf.png`: a real foreground leaf, blurred in CSS. Optional; renders nothing when missing.
+1. Put the full-resolution original at `public/images/hero/hero-strength-original.jpg`. **Not added yet:** until it is, the 600 px copy already on the site (`public/images/originals/mantoleft.webp`) is used, and the hero looks soft on large screens.
+2. Run `npm run assets:hero`. It applies the grade (gamma 0.78, R ×1.0, G ×0.99, B ×0.965, so the gray studio wall reads as plaster), writes AVIF and WebP at 1x and 2x for a desktop and a mobile crop, and records them in `content/hero-photo.generated.json`.
+3. Commit the new files in `public/images/hero/` and the JSON.
 
-Drop the files in and redeploy; `components/home/Hero.tsx` checks which exist at build time. The alt text for the cutout lives in that file. The one short review under the buttons comes from `content/reviews.ts` (a featured review's title, or a body under 160 characters) and renders nothing while that file is empty.
+`components/home/Hero.tsx` holds the alt text and preloads the photo (it is the page's LCP). The photo's left edge fade and the crop are in `app/globals.css` (`.hero__photo`).
 
 ## Add the install steps and the spec sheet
 
@@ -75,6 +95,18 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 - three.js never ships with the page. The section shows a real still of the bedroom scene (`public/images/fit/poster-bedroom.jpg`) until the visitor taps; the chunk is prefetched when the section is within 400px. Browsers without WebGL get the still plus a written room-by-room summary.
 - To refresh the still after changing the bedroom or the board: run the site, then `node scripts/fit-poster.mjs` (Chromium with software GL; the script header says how).
 
+## Homepage: "What you can do" and "Who it's for"
+
+- **Genres** live in `content/genres.ts` (single source; the intake, hero and plan hexagon read from it). Clinical names are Eric's wording. Every health line is `rv("…")` and unreviewed until Eric signs it off. Anchor counts come from `content/facts.ts` through `{anchors}`-style tokens. Loosen (Joint Mobilizations) has no movements yet: its card shows "Coming soon from Dr. Eric" until the four fields are filled.
+- **Audiences** live in `content/audiences.ts`, military first. `proofReviewId` must match an id in `content/reviews.ts` or be null; the build fails on a missing id. The military CTA opens `public/docs/va-provider-packet.pdf` once it exists, and the military intake lane until then. "Team pricing" opens the team inquiry form in the athletes card (`/#team-pricing` from anywhere).
+- The hero ticker scrolls to the audience cards (`content/audience.ts`). Caregivers, aging well and post-surgery recovery go to patients & families.
+- `npm run audit:content`, the Draft banner and `npm run review:export` / `review:import` all cover both files.
+- **Reviews** (`content/reviews.ts`): five testimonials copied word for word from the old homepage. They carry no star rating or date because the source shows none, so no stars render. D. Muhammad's is still to paste.
+
+## Content gate on Vercel
+
+`npm run build` runs the gates (placeholders, safety, intake, content). Vercel runs `vercel-build`, which is plain `next build`, so none of them run on Vercel today. Turning them on is launch blocker 1 above.
+
 ## Footer
 
 Brand + utility: honeycomb top edge, "VARY BOARD" built from hexagons (decorative, `aria-hidden`; one line on wide screens, VARY over BOARD under 760px), utility columns, legal row. Every footer link comes from `content/routes.ts` (`footerNav`, `legalNav`); the phone, email, city and social accounts come from `content/facts.ts` (`brand`). `/accessibility` is a short statement page linked from the legal row.
@@ -98,7 +130,8 @@ Until one is set, the form tells the visitor it could not send and shows the pho
    - `NEXT_PUBLIC_SHOP_DOMAIN`: the Shopify hostname that serves checkout. See the cutover note below. Can stay unset while thevaryboard.com still points at Shopify; required once the domain moves. The build fails on purpose if the checkout host would be the site itself.
    - `NEXT_PUBLIC_SITE_URL`: `https://thevaryboard.com` (optional, defaults to the Vercel production URL).
    - One of the form variables above.
-3. Every push to `main` goes live; every pull request gets a preview URL. Previews send `noindex`.
+   - `SITE_LAUNCHED`: leave unset until launch day, then `true` for Production only.
+3. Every push to `main` goes live on the production URL; every pull request gets a preview URL. Nothing is indexed until launch.
 
 ### Domains and the Shopify cutover
 

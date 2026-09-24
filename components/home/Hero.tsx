@@ -1,39 +1,36 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
-import { images } from "@/content/images";
-import { reviews } from "@/content/reviews";
-import { HeroShader, type HeroAssets } from "./HeroShader";
+import { preload } from "react-dom";
+import photo from "@/content/hero-photo.generated.json";
+import { HeroShader, type HeroPhoto } from "./HeroShader";
+import { DESKTOP_MEDIA, MOBILE_MEDIA } from "./heroMedia";
 
 /**
- * HERO: plaster wall, honeycomb shader, real board photo in a layered parallax, honeycomb
- * bottom edge, audience ticker. Server side we only check which real assets exist:
+ * HERO: the existing honeycomb shader on plaster, copy on the left, a real photo on the right
+ * (a man pulling a red band anchored high on the Vary Board), the honeycomb bottom edge drawn
+ * over the photo, and the audience ticker underneath.
  *
- *   public/images/hero/board-cutout.png   the board, background removed (Eric supplies)
- *   public/images/hero/hand-band.png      hand + band from the same photo, if separable
- *   public/images/hero/leaf.png           a real foreground leaf, blurred in CSS
- *
- * Until the cutout exists the current real board photo (board-closeup) is used. Never an
- * illustration or a generated image. Missing optional layers render nothing.
+ * The photo is graded and exported at build time by scripts/hero-photo.mjs (npm run assets:hero):
+ * AVIF + WebP, a desktop and a mobile crop, 1x and 2x (never upscaled past the source). It is
+ * the LCP element: both crops are preloaded for their own breakpoint, with explicit sizes.
  */
-const HERO_DIR = path.join(process.cwd(), "public", "images", "hero");
-const slot = (file: string) => (existsSync(path.join(HERO_DIR, file)) ? `/images/hero/${file}` : null);
+export const HERO_ALT = "A man doing a resistance band exercise anchored to the Vary Board on his wall.";
+const DESKTOP_SIZES = "(min-width: 1024px) 68vw, 100vw";
+const MOBILE_SIZES = "100vw";
 
-/** One short real review line. Never edited: the title if there is one, else a body under 160 chars. */
-function heroReview() {
-  const r = reviews.find((x) => x.featured) ?? reviews[0];
-  if (!r) return null;
-  const text = r.title?.trim() || (r.body.length <= 160 ? r.body.trim() : "");
-  return text ? { text, author: r.author, rating: r.rating } : null;
-}
+const srcset = (files: { w: number; avif: string; webp: string }[], kind: "avif" | "webp") => files.map((f) => `${f[kind]} ${f.w}w`).join(", ");
 
 export function Hero() {
-  const cutout = slot("board-cutout.png");
-  const assets: HeroAssets = {
-    board: cutout
-      ? { src: cutout, alt: "The Vary Board: a wall-mounted training board with honeycomb anchor points and side rails, photographed and cut out from its background", cutout: true }
-      : { src: images.boardCloseup.src, alt: images.boardCloseup.alt, width: images.boardCloseup.width, height: images.boardCloseup.height, blurDataURL: images.boardCloseup.blurDataURL, cutout: false },
-    hand: slot("hand-band.png"),
-    leaf: slot("leaf.png"),
+  const d = photo.layouts.desktop;
+  const m = photo.layouts.mobile;
+  const data: HeroPhoto = {
+    alt: HERO_ALT,
+    width: photo.width,
+    height: photo.height,
+    desktop: { avif: srcset(d, "avif"), webp: srcset(d, "webp"), sizes: DESKTOP_SIZES, fallback: d[d.length - 1].webp },
+    mobile: { avif: srcset(m, "avif"), webp: srcset(m, "webp"), sizes: MOBILE_SIZES },
+    // A portrait stand-in has the man near its left edge, so its fade is narrower.
+    fade: photo.width / photo.height < 1.1 ? "26%" : "32%",
   };
-  return <HeroShader assets={assets} review={heroReview()} />;
+  preload(d[0].avif, { as: "image", type: "image/avif", imageSrcSet: data.desktop.avif, imageSizes: DESKTOP_SIZES, media: DESKTOP_MEDIA, fetchPriority: "high" });
+  preload(m[0].avif, { as: "image", type: "image/avif", imageSrcSet: data.mobile.avif, imageSizes: MOBILE_SIZES, media: MOBILE_MEDIA, fetchPriority: "high" });
+  return <HeroShader photo={data} />;
 }

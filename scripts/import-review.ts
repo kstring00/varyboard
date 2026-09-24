@@ -1,5 +1,5 @@
 /**
- * Reads the CSV Eric edited and writes it back into content/intake.ts and content/exercises.ts:
+ * Reads the CSV Eric edited and writes it back into content/intake.ts, exercises.ts, genres.ts and audiences.ts:
  *   - "approve (Y/N)" = Y  -> reviewedByEric: true (or approved: true for exercises)
  *   - "Eric's edit" filled -> replaces the current text (approved or not)
  *   npm run review:import              (reads content/review.csv)
@@ -11,7 +11,7 @@
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { CSV_HEADER, FILES, collectItems, parseCsv, type ReviewItem } from "./review-items";
+import { CSV_HEADER, absFile, collectItems, parseCsv, type ReviewItem } from "./review-items";
 
 const csvPath = path.resolve(process.argv[2] ?? path.join("content", "review.csv"));
 const rows = parseCsv(readFileSync(csvPath, "utf8"));
@@ -36,6 +36,7 @@ for (const i of items.values()) {
 }
 
 let textEdits = 0;
+const reviewEdits: string[] = [];
 const unknown: string[] = [];
 const unchanged: string[] = [];
 for (const r of rows) {
@@ -48,7 +49,9 @@ for (const r of rows) {
   }
   const approve = (r[iApprove] ?? "").trim().toUpperCase() === "Y";
   const edit = (r[iEdit] ?? "").trim();
-  if (edit && edit !== item.text) {
+  if (item.type === "review" && edit) {
+    reviewEdits.push(id);
+  } else if (edit && edit !== item.text) {
     edits.push({ file: item.file, start: item.textSpan.start, end: item.textSpan.end, text: JSON.stringify(edit) });
     textEdits++;
   }
@@ -80,7 +83,7 @@ for (const [group, ids] of approvedRows) {
 const byFile = new Map<string, Edit[]>();
 for (const e of edits) (byFile.get(e.file) ?? byFile.set(e.file, []).get(e.file)!).push(e);
 for (const [rel, list] of byFile) {
-  const abs = rel === "content/intake.ts" ? FILES.intake : FILES.exercises;
+  const abs = absFile(rel);
   let text = readFileSync(abs, "utf8");
   list.sort((a, b) => b.start - a.start);
   for (const e of list) text = text.slice(0, e.start) + e.text + text.slice(e.end);
@@ -90,5 +93,6 @@ for (const [rel, list] of byFile) {
 console.log(`✓ ${textEdits} text edit(s) applied, ${flipped.length} item(s) marked reviewed`);
 if (partial.length) console.log(`  not flipped, only partly approved: ${partial.join("; ")}`);
 if (unknown.length) console.log(`  skipped, unknown id: ${unknown.join(", ")}`);
+if (reviewEdits.length) console.log(`  not applied, reviews are never edited: ${reviewEdits.join(", ")}. Y keeps a review; to remove one, delete it from content/reviews.ts.`);
 console.log(`  ${unchanged.length} row(s) left as they were`);
 console.log("Next: npm run check:intake && npm run audit:safety && npm run audit:content");

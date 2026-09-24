@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "react";
 import { audience } from "@/content/audience";
 import { HexIcon, VertexMark } from "@/components/plan/HexIcon";
-import { INLINE_ANCHOR } from "@/components/plan/InlineIntake";
+import { audienceAnchor } from "@/content/audiences";
 
 /**
  * Audience ticker: the hero's closing element, floating on the plaster ground under the
  * honeycomb dissolve. A nav landmark ("Who the Vary Board serves") with one visible list and
  * two aria-hidden, inert copies for the seamless loop. Each item deep-links into the inline
- * intake on this page (#find-your-plan?for=lane).
+ * card in "Who it's for" on this page (#for-military, #for-patients ...).
  *
  * Motion (site rules: calm, slow ease-outs, no bounce):
  *   - drifts slowly at rest; scroll velocity adds speed, scrolling up reverses it; capped
@@ -26,7 +26,7 @@ function List({ hidden = false, onLinkClick }: { hidden?: boolean; onLinkClick: 
     <ul className="ticker__list" aria-hidden={hidden || undefined} {...(hidden ? { inert: true } : {})}>
       {audience.map((a) => (
         <li key={a.label} className="ticker__item">
-          <a href={`#${INLINE_ANCHOR}?for=${a.lane}`} className="ticker__link" tabIndex={hidden ? -1 : undefined} onClick={onLinkClick} data-ticker-link={hidden ? undefined : a.lane}>
+          <a href={`#${audienceAnchor(a.audience)}`} className="ticker__link" tabIndex={hidden ? -1 : undefined} onClick={onLinkClick} data-ticker-link={hidden ? undefined : a.audience}>
             <HexIcon icon={a.icon} />
             <span className="ticker__label">{a.label}</span>
           </a>
@@ -221,7 +221,7 @@ export function AudienceTicker() {
   }, [reduced]);
 
   // A drag that moved more than a few pixels is a scrub, not a click. A repeat click on a hash
-  // the page already has would be silent, so re-fire hashchange for the inline intake.
+  // the page already has would be silent, so re-fire hashchange so the card highlights again.
   const onLinkClick = (e: React.MouseEvent) => {
     if (state.current.moved > 6) {
       e.preventDefault();

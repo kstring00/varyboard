@@ -1,0 +1,30 @@
+{
+  "source": "public/images/originals/mantoleft.webp",
+  "fallback": true,
+  "width": 600,
+  "height": 656,
+  "layouts": {
+    "desktop": [
+      {
+        "w": 600,
+        "h": 656,
+        "avif": "/images/hero/hero-strength-desktop-600.avif",
+        "webp": "/images/hero/hero-strength-desktop-600.webp"
+      }
+    ],
+    "mobile": [
+      {
+        "w": 430,
+        "h": 470,
+        "avif": "/images/hero/hero-strength-mobile-430.avif",
+        "webp": "/images/hero/hero-strength-mobile-430.webp"
+      },
+      {
+        "w": 600,
+        "h": 656,
+        "avif": "/images/hero/hero-strength-mobile-600.avif",
+        "webp": "/images/hero/hero-strength-mobile-600.webp"
+      }
+    ]
+  }
+}

@@ -36,7 +36,7 @@ export interface ReviewItem {
   /** Group id: rows that share one reviewed flag (try-today fields). Equals id for single-field items. */
   group: string;
   lane: string;
-  type: "truth" | "try today" | "week note" | "question" | "exercise";
+  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience" | "review";
   text: string;
   reviewed: boolean;
   file: string;
@@ -47,7 +47,17 @@ export interface ReviewItem {
 export const FILES = {
   intake: path.join(process.cwd(), "content", "intake.ts"),
   exercises: path.join(process.cwd(), "content", "exercises.ts"),
+  genres: path.join(process.cwd(), "content", "genres.ts"),
+  audiences: path.join(process.cwd(), "content", "audiences.ts"),
+  reviews: path.join(process.cwd(), "content", "reviews.ts"),
 };
+
+/** Absolute path for a repo-relative content file an item came from. */
+export function absFile(rel: string): string {
+  const hit = Object.values(FILES).find((f) => f.replace(/\\/g, "/").endsWith(rel));
+  if (!hit) throw new Error(`[review] unknown file ${rel}`);
+  return hit;
+}
 
 function parse(file: string) {
   const text = readFileSync(file, "utf8");
@@ -82,9 +92,9 @@ function strSpan(node: ts.Node): Span {
   return { start: node.getStart(), end: node.getEnd() };
 }
 
-/** A truth("…") or truth("…", true) call. */
-function truthCall(node: ts.Expression): { text: string; textSpan: Span; reviewed: boolean; flag: Flag } {
-  if (!ts.isCallExpression(node) || node.expression.getText() !== "truth") throw new Error(`[review] expected truth(...) at ${node.getStart()}`);
+/** A truth("…") / rv("…") call, optionally with a second `true` argument. */
+function truthCall(node: ts.Expression, fn = "truth"): { text: string; textSpan: Span; reviewed: boolean; flag: Flag } {
+  if (!ts.isCallExpression(node) || node.expression.getText() !== fn) throw new Error(`[review] expected ${fn}(...) at ${node.getStart()}`);
   const [arg0, arg1] = node.arguments;
   const textSpan = strSpan(arg0);
   const reviewed = Boolean(arg1 && arg1.kind === ts.SyntaxKind.TrueKeyword);
@@ -168,6 +178,38 @@ export function collectItems(): ReviewItem[] {
     const { reviewed, flag } = boolProp(el, "approved");
     const id = `exercise:${idNode.text}`;
     items.push({ id, group: id, lane: "all", type: "exercise", text: (nameNode as ts.StringLiteral).text, reviewed, file: "content/exercises.ts", textSpan: strSpan(nameNode), flag });
+  }
+  // genres.ts GENRE_LIST[].<field> and audiences.ts AUDIENCES[].<field>: rv("…") calls
+  const keyed = (rel: string, abs: string, list: string, type: "genre" | "audience") => {
+    const { sf: s2 } = parse(abs);
+    const arr = topLevel(s2, list) as ts.ArrayLiteralExpression;
+    for (const el of arr.elements) {
+      if (!ts.isObjectLiteralExpression(el)) continue;
+      const key = (prop(el, "key") as ts.StringLiteral).text;
+      for (const p of el.properties) {
+        if (!ts.isPropertyAssignment(p) || !ts.isCallExpression(p.initializer) || p.initializer.expression.getText() !== "rv") continue;
+        const id = `${type}:${key}:${keyOf(p)}`;
+        items.push({ id, group: id, lane: type === "audience" ? key : "all", type, file: rel, ...truthCall(p.initializer, "rv") });
+      }
+    }
+  };
+  keyed("content/genres.ts", FILES.genres, "GENRE_LIST", "genre");
+  keyed("content/audiences.ts", FILES.audiences, "AUDIENCES", "audience");
+
+  // reviews.ts: an open ericQuestion on a review. Y = keep (question closed). Reviews are never
+  // edited: the importer refuses text in "Eric's edit" for these rows; to remove, delete the entry.
+  const rv = parse(FILES.reviews);
+  const rlist = topLevel(rv.sf, "reviews") as ts.ArrayLiteralExpression;
+  for (const el of rlist.elements) {
+    if (!ts.isObjectLiteralExpression(el)) continue;
+    const q = prop(el, "ericQuestion");
+    if (!q || !ts.isObjectLiteralExpression(q)) continue;
+    const rid = (prop(el, "id") as ts.StringLiteral).text;
+    const body = prop(el, "body")!;
+    const question = (prop(q, "question") as ts.StringLiteral).text;
+    const { reviewed, flag } = boolProp(q, "reviewedByEric");
+    const id = `review:${rid}`;
+    items.push({ id, group: id, lane: "all", type: "review", text: `${question}: "${(body as ts.StringLiteral).text}"`, reviewed, file: "content/reviews.ts", textSpan: strSpan(body), flag });
   }
   return items;
 }

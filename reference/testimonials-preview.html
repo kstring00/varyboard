@@ -1,0 +1,243 @@
+<title>Vary Board Testimonials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Figtree:wght@400;500;600&display=swap">
+<style>
+  :root{
+    color-scheme: light;
+    --plaster:#F1EFEA; --paper:#FBFAF7; --ink:#16302B; --ink-2:#4F605B; --ink-3:#7A8883;
+    --line:#DAD9D1; --ghost:#D3D5CC; --mint:#62BBA6; --mint-edge:#86B8AC; --mint-wash:#E3EFEA;
+    --teal:#1E4D46; --teal-2:#2D6A60;
+    --display:'Newsreader','Iowan Old Style',Georgia,serif;
+    --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  html,body{background:var(--plaster);color:var(--ink);}
+  body{font-family:var(--body);font-size:16px;line-height:1.55;}
+  .preview-bar{max-width:1240px;margin:0 auto;padding:20px 16px 0;font-size:13px;color:var(--ink-3);}
+  .preview-bar strong{font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:11px;color:var(--ink-2);}
+
+  section{overflow-x:clip;padding-block:48px 72px;}
+  .inner{max-width:1240px;margin:0 auto;padding-inline:clamp(16px,4vw,48px);}
+  .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:36px;}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--teal-2);margin:0 0 12px;}
+  h2{font-family:var(--display);font-weight:400;font-size:clamp(2.2rem,4.4vw,3.4rem);line-height:1.02;letter-spacing:-.015em;margin:0;text-wrap:balance;}
+  .lede{color:var(--ink-2);margin:14px 0 0;max-width:52ch;}
+  .stat{display:flex;align-items:center;gap:12px;margin:0;}
+  .stat .stars{color:var(--teal-2);letter-spacing:2px;font-size:18px;}
+  .stat .big{font-family:var(--display);font-size:34px;line-height:1;}
+  .stat .sm{font-size:14px;color:var(--ink-3);line-height:1.3;}
+
+  /* ---------- drifting honeycomb band ---------- */
+  .band{--W:262px; --dx:calc(var(--W) * .78); --dy:calc(var(--W) * .9); --shift-y:calc(var(--dy) / 2);
+    position:relative;height:calc(var(--dy) + var(--W) * .866 + var(--shift-y));
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);}
+  @media (max-width:640px){.band{--W:168px;}}
+  .track{position:absolute;inset:0 auto 0 0;width:calc(var(--cols) * 2 * var(--dx) + var(--W));
+    animation:drift calc(var(--cols) * 9s) linear infinite;}
+  .band.paused .track,.band:hover .track,.band:focus-within .track{animation-play-state:paused;}
+  @keyframes drift{from{transform:translateX(0);}to{transform:translateX(calc(var(--cols) * var(--dx) * -1));}}
+
+  .hex{position:absolute;left:calc(var(--col) * var(--dx));top:calc(var(--row) * var(--dy) + var(--odd) * var(--shift-y));
+    width:var(--W);aspect-ratio:1 / .866;padding:0;border:0;background:none;cursor:pointer;font:inherit;color:inherit;text-align:center;
+    filter:drop-shadow(0 4px 10px rgba(22,48,43,.05));transition:transform .5s var(--ease),filter .4s ease;}
+  .hex .shape,.hex .fill{position:absolute;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);transition:background .4s ease;}
+  .hex .shape{inset:0;background:var(--mint-edge);}
+  .hex .fill{inset:1.5px;background:var(--paper);}
+  .hex .body{position:absolute;inset:13% 17%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--W) * .03);}
+  .hex .q{font-family:var(--display);font-size:calc(var(--W) * .057);line-height:1.28;color:var(--ink);}
+  .hex .n{font-weight:600;font-size:calc(var(--W) * .045);}
+  .hex .l{font-size:calc(var(--W) * .038);color:var(--ink-3);letter-spacing:.02em;}
+  .hex .i{display:none;}
+  .hex.focal .fill{background:var(--teal);}
+  .hex.focal .q,.hex.focal .n{color:#fff;}
+  .hex.focal .l{color:#B9D6CE;}
+  .hex:hover,.hex[aria-pressed="true"]{transform:translateY(-5px);filter:drop-shadow(0 12px 22px rgba(22,48,43,.12));}
+  .hex[aria-pressed="true"] .shape{background:var(--mint);}
+  .hex[aria-pressed="true"]:not(.focal) .fill{background:var(--mint-wash);}
+  .hex:focus-visible{outline:none;}
+  .hex:focus-visible .shape{background:var(--teal-2);}
+  .hex.invite .shape{background:var(--ghost);}
+  .hex.invite .fill{background:var(--plaster);}
+  .hex.invite .q{font-style:italic;color:var(--ink-2);}
+  @media (max-width:640px){
+    .hex .q{display:none;}
+    .hex .i{display:block;font-family:var(--display);font-size:calc(var(--W) * .2);line-height:1;color:var(--teal);}
+    .hex.focal .i{color:#fff;}
+    .hex .n{font-size:calc(var(--W) * .075);}
+    .hex .l{font-size:calc(var(--W) * .065);}
+    .hex.invite .i{color:var(--ink-3);}
+  }
+
+  /* reduced motion: a still strip you scroll yourself */
+  @media (prefers-reduced-motion:reduce){
+    .band{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;}
+    .track{animation:none;}
+    .hex{scroll-snap-align:start;transition:none;}
+    .hex:hover,.hex[aria-pressed="true"]{transform:none;}
+    .panel blockquote,.panel .who{transition:none;}
+  }
+
+  /* ---------- reading panel ---------- */
+  .below{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;margin-top:28px;}
+  .below .note{margin:0;max-width:none;}
+  .below-actions{display:flex;align-items:center;gap:16px;}
+  .all{font-weight:600;color:var(--teal);text-underline-offset:5px;padding-block:10px;}
+  .pause-btn,.reader .close{font:inherit;font-size:14px;font-weight:500;background:var(--paper);border:1px solid var(--line);border-radius:999px;min-height:44px;padding:0 16px;cursor:pointer;color:var(--ink);}
+  .pause-btn:hover,.reader .close:hover{border-color:var(--teal-2);}
+  .pause-btn:focus-visible,.reader .close:focus-visible,.all:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px;}
+  .reader{width:min(640px, calc(100vw - 32px));max-height:calc(100dvh - 48px);background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:clamp(22px,3vw,34px);box-shadow:0 24px 60px rgba(22,48,43,.18);}
+  .reader[open]{display:grid;gap:18px;}
+  .reader::backdrop{background:rgba(22,48,43,.35);}
+  .reader .close{justify-self:end;}
+  .reader .tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--teal-2);margin:0;}
+  .reader blockquote{margin:0;font-family:var(--display);font-size:clamp(1.12rem,1.6vw,1.3rem);line-height:1.55;color:var(--ink);}
+  .reader blockquote::before{content:"\201C";display:block;font-size:3.2rem;line-height:.6;color:var(--mint);margin-bottom:8px;}
+  .who{display:flex;align-items:center;gap:12px;}
+  .who .mono{width:46px;aspect-ratio:1 / .866;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);background:var(--mint-wash);display:grid;place-items:center;font-family:var(--display);font-size:18px;color:var(--teal);flex:none;}
+  .who p{margin:0;}
+  .who .nm{font-weight:600;}
+  .who .lb{font-size:14px;color:var(--ink-3);}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--line);}
+  .controls button{font:inherit;font-size:14px;font-weight:500;background:var(--plaster);border:1px solid var(--line);border-radius:999px;min-height:44px;min-width:44px;padding:0 14px;cursor:pointer;color:var(--ink);}
+  .controls button:hover{border-color:var(--teal-2);}
+  .controls button:focus-visible{outline:2px solid var(--teal-2);outline-offset:2px;}
+  .count{margin-left:auto;font-size:14px;color:var(--ink-3);font-variant-numeric:tabular-nums;}
+  .panel blockquote,.panel .who{transition:opacity .35s ease,transform .35s var(--ease);}
+  .panel.swap blockquote,.panel.swap .who{opacity:0;transform:translateY(6px);}
+  .note{font-size:13px;color:var(--ink-3);margin:24px auto 0;max-width:780px;}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+</style>
+
+<p class="preview-bar"><strong>Section preview</strong> · Testimonials · The Vary Board</p>
+
+<section aria-labelledby="t-title">
+  <div class="inner head">
+    <div>
+      <p class="eyebrow">In their words</p>
+      <h2 id="t-title">Real people. Real walls.</h2>
+      <p class="lede">Clinics, service members and families, quoted word for word from their reviews.</p>
+    </div>
+    <p class="stat"><span class="big">47</span><span><span class="stars" aria-hidden="true">★★★★★</span><br><span class="sm">reviews on the Vary Board store</span></span></p>
+  </div>
+
+  <div class="band" id="band" role="group" aria-roledescription="carousel" aria-label="Customer reviews, moving slowly. Choose one to read it in full.">
+    <div class="track" id="track"></div>
+  </div>
+
+  <div class="inner below">
+    <p class="note">Every review is word for word. Tap a review to read it in full.</p>
+    <div class="below-actions">
+      <a class="all" href="#t-title">Read all 47 reviews</a>
+      <button type="button" class="pause-btn" id="pause" aria-pressed="false">Pause</button>
+    </div>
+  </div>
+
+  <dialog class="reader" id="reader" aria-labelledby="rName">
+    <p class="tag" id="rTag"></p>
+    <blockquote id="rQuote"></blockquote>
+    <div class="who">
+      <div class="mono" id="rMono" aria-hidden="true"></div>
+      <div><p class="nm" id="rName"></p><p class="lb" id="rLabel"></p></div>
+    </div>
+    <button type="button" class="close" id="rClose">Close</button>
+  </dialog>
+</section>
+
+<script>
+(function(){
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hexIcon = '<svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5 17.4 5.75v8.5L10 18.5 2.6 14.25v-8.5Z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
+
+  // Word-for-word from thevaryboard.com. The short quote must be an exact excerpt of the full review.
+  const REVIEWS = [
+    { name:'Blake Cook', initials:'BC', lane:'Military', label:'26 years of military service', focal:true,
+      pull:'…the most versatile and expertly designed mobility gym equipment that I have ever used during my entire 26-year service in the military.',
+      full:'The Vary Board is the most versatile and expertly designed mobility gym equipment that I have ever used during my entire 26-year service in the military. VB’s versatility spans all ages, health conditions, physical capacities, and personal performance, as well as having the capability to exercise nearly all of the joints and muscle groups. I first used VB to recover from a potentially career ending surgery, and now, complete recovered, I continue to use VB to improve my strength and mobility for my entire body. I absolutely love Vary Board and wish all service men and women had access to VB’s career enhancing potential on their bases/posts/stations at home and in all deployed locations. My belief is so strong that I personally purchased a VB for my family and I to use in our home gym. Your joints and muscles will thank you, and you’ll have the rest of your life to enjoy its benefits!' },
+    { name:'Ashley Workman', initials:'AW', lane:'Clinic', label:'Outpatient orthopedic physical therapy clinic',
+      pull:'This single piece of equipment replaced 3 separate other pieces in my outpatient orthopedic physical therapy clinic.',
+      full:'This versatile device changed the physical therapy game. This single piece of equipment replaced 3 separate other pieces in my outpatient orthopedic physical therapy clinic. It is a space saver with potential to help perform resistance exercise, joint mobilizations, balance exercise, and stretching exercises, while also providing a comfortable and sturdy hand held assist.' },
+    { name:'J. Jones', initials:'JJ', lane:'Home', label:'Home user',
+      pull:'…I easily added 10-15 additional exercises right from home…',
+      full:'After I had herniated disc surgery, I struggled to find a piece of equipment that had the versatility I needed to regain my core strength. After utilizing the Vary Board, I easily added 10-15 additional exercises right from home which allowed me to dramatically improve my mobility and quality of life.' },
+    { name:'B. Castillo', initials:'BC', lane:'Home', label:'Home user',
+      pull:'The Vary Board is reliable and practical for home use, and easy to install.',
+      full:'The Vary Board is reliable and practical for home use, and easy to install. It allows my family to stay active without having to go to a gym.' },
+    { name:'D. Muhammad', initials:'DM', lane:'Home', label:'Home user',
+      pull:'The Vary Board is exactly what I have been looking for!',
+      full:'The Vary Board is exactly what I have been looking for! It will provide an effective means to attach all my resistance bands and allows me to perform my exercises with precision and accuracy.' }
+  ];
+  REVIEWS.forEach(r => { const core = r.pull.replace(/^…|…$/g, ''); if (r.full.indexOf(core) === -1) console.warn('Short quote is not word for word:', r.name); });
+
+  // one loop = the reviews plus an invitation cell; kept even so the zigzag lines up when it repeats
+  // two rows per column; the loop repeats the set (shifted) until it spans an even number of columns
+  const BASE = REVIEWS.map((r, k) => ({ kind: 'review', k })).concat([{ kind: 'invite' }]);
+  let LOOP = BASE.slice();
+  while ((LOOP.length / 2) % 2 !== 0 || LOOP.length < 12){ const off = 3 % BASE.length; LOOP = LOOP.concat(BASE.slice(off), BASE.slice(0, off)); }
+  if (LOOP.length % 2) LOOP.push({ kind: 'invite' });
+  const COLS = LOOP.length / 2;
+  const band = document.getElementById('band'), track = document.getElementById('track');
+  track.style.setProperty('--cols', COLS);
+  const reviewButtons = [];
+  for (let copy = 0; copy < 2; copy++){
+    LOOP.forEach((item, j) => {
+      const i = copy * LOOP.length + j;
+      let el;
+      if (item.kind === 'review'){
+        const rv = REVIEWS[item.k];
+        el = document.createElement('button'); el.type = 'button';
+        el.className = 'hex' + (rv.focal ? ' focal' : '');
+        el.setAttribute('aria-pressed', 'false');
+        el.setAttribute('aria-label', rv.name + ', ' + rv.label + '. Read full review.');
+        el.innerHTML = '<span class="shape"></span><span class="fill"></span><span class="body">' +
+          '<span class="i" aria-hidden="true">' + rv.initials + '</span>' +
+          '<span class="q">“' + rv.pull + '”</span>' +
+          '<span class="n">' + rv.name + '</span><span class="l">' + rv.lane + '</span></span>';
+        el.addEventListener('click', () => openReview(item.k, el));
+        reviewButtons.push({ el, k: item.k });
+      } else {
+        el = document.createElement('div');
+        el.className = 'hex invite';
+        el.innerHTML = '<span class="shape"></span><span class="fill"></span><span class="body"><span class="i" aria-hidden="true">+</span><span class="q">Own a Vary Board? Share how you use it.</span><span class="n">Your story</span></span>';
+      }
+      if (copy === 1){ el.setAttribute('aria-hidden', 'true'); el.tabIndex = -1; }
+      const col = Math.floor(i / 2), row = i % 2;
+      el.style.setProperty('--col', col); el.style.setProperty('--row', row); el.style.setProperty('--odd', col % 2);
+      track.appendChild(el);
+    });
+  }
+
+  // full review opens in a dialog
+  const $ = id => document.getElementById(id);
+  const reader = $('reader');
+  let bandPaused = reduce, pausedBeforeOpen = false;
+  function openReview(i, fromEl){
+    const rv = REVIEWS[i];
+    $('rTag').innerHTML = hexIcon + '<span>' + rv.lane + '</span>';
+    $('rQuote').textContent = rv.full;
+    $('rMono').textContent = rv.initials;
+    $('rName').textContent = rv.name; $('rLabel').textContent = rv.label;
+    reviewButtons.forEach(b => b.el.setAttribute('aria-pressed', String(b.k === i)));
+    pausedBeforeOpen = bandPaused; band.classList.add('paused');
+    reader.__from = fromEl;
+    if (reader.showModal) reader.showModal(); else reader.setAttribute('open', '');
+  }
+  function closeReview(){ if (reader.close) reader.close(); else reader.removeAttribute('open'); }
+  reader.addEventListener('close', () => {
+    reviewButtons.forEach(b => b.el.setAttribute('aria-pressed', 'false'));
+    if (!pausedBeforeOpen) band.classList.remove('paused');
+    if (reader.__from) reader.__from.focus({ preventScroll: true });
+  });
+  $('rClose').addEventListener('click', closeReview);
+  reader.addEventListener('click', e => { if (e.target === reader) closeReview(); });
+  function setPauseLabel(){ $('pause').textContent = bandPaused ? 'Play' : 'Pause'; $('pause').setAttribute('aria-pressed', String(bandPaused)); }
+  $('pause').addEventListener('click', () => { bandPaused = !bandPaused; band.classList.toggle('paused', bandPaused); setPauseLabel(); });
+  document.querySelector('.all').addEventListener('click', e => e.preventDefault());
+  if (reduce){ band.classList.add('paused'); $('pause').hidden = true; }
+  if ('IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => { track.style.animationPlayState = e.isIntersecting ? '' : 'paused'; })).observe(band);
+  }
+  setPauseLabel();
+})();
+</script>

@@ -11,6 +11,13 @@
 const vercelEnv = process.env.VERCEL_ENV; // "production" | "preview" | "development" | undefined
 export const isProduction = vercelEnv === "production";
 
+/**
+ * Launched = the production deployment AND SITE_LAUNCHED=true. Until then every deployment is
+ * noindex: robots.txt, meta robots, and the X-Robots-Tag header from proxy.ts. The site stays
+ * open to everyone. Flip SITE_LAUNCHED only as the last launch step (HANDOFF.md, "Launch blockers").
+ */
+export const isLaunched = isProduction && process.env.SITE_LAUNCHED === "true";
+
 const LEGACY_SHOP_HOST = "thevaryboard.com";
 
 function normalizeHost(v: string | undefined): string {

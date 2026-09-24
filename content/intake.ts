@@ -16,6 +16,7 @@
  * Exercise movements come from the existing library in ./exercises (never a second list).
  */
 import type { Goal, Region } from "./exercises";
+import { GENRE_KEYS, GENRE_LIST } from "./genres";
 
 export type Lane = "me" | "loved" | "mil" | "clinic" | "athlete";
 export type Genre = "climb" | "strengthen" | "stretch" | "loosen" | "steady" | "rise";
@@ -39,16 +40,11 @@ export const LANES: { key: Lane; label: string; line: string }[] = [
   { key: "athlete", label: "I train or compete", line: "Off-season, in-season, or coming back." },
 ];
 
-/** The six kinds of practice, in the order they sit on the hexagon (top, clockwise). */
-export const GENRES: Record<Genre, { label: string; clinical: string; line: string }> = {
-  climb: { label: "Climb", clinical: "Assisted range of motion", line: "Reach higher with the board as a guide." },
-  strengthen: { label: "Strengthen", clinical: "Strengthening", line: "Bands and bodyweight against a wall that does not move." },
-  stretch: { label: "Stretch", clinical: "Stretching", line: "Lengthen with a handhold at any height." },
-  loosen: { label: "Loosen", clinical: "Joint mobilization", line: "Free up stiff joints with slow, guided motion." },
-  steady: { label: "Steady", clinical: "Balance", line: "Practice standing steady with something to hold." },
-  rise: { label: "Rise", clinical: "Transfer training", line: "Get up, get down and get moving with a rail." },
-};
-export const GENRE_ORDER: Genre[] = ["climb", "strengthen", "stretch", "loosen", "steady", "rise"];
+/** The six kinds of practice, in hexagon order (top, clockwise). Derived from content/genres.ts. */
+export const GENRES: Record<Genre, { label: string; clinical: string; line: string }> = Object.fromEntries(
+  GENRE_LIST.map((g) => [g.key, { label: g.plainName, clinical: g.clinicalName, line: g.line }]),
+) as Record<Genre, { label: string; clinical: string; line: string }>;
+export const GENRE_ORDER: Genre[] = GENRE_KEYS;
 
 export interface Situation {
   key: string;
