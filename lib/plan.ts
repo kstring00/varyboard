@@ -7,9 +7,6 @@ export function detectCaution(note: string): boolean {
   return CAUTION.test(note);
 }
 
-export const CAUTION_MESSAGE =
-  "Thanks for telling us. Because you mentioned pain, surgery, an injury or a fall, please check with your physician or physical therapist before starting. Here is a gentle version to talk through with them.";
-
 export interface PlanInput {
   region: Region;
   goal: Goal;
@@ -57,27 +54,4 @@ export function buildPlan({ region, goal, note }: PlanInput): Plan {
   if (finisher) items.push({ exercise: finisher, role: "finisher", gentle: cautious && finisher.level !== "gentle" });
 
   return { items: items.slice(0, 5), cautious, usesUnapproved: items.some((i) => !i.exercise.approved), region, goal };
-}
-
-export function planToText(plan: Plan): string {
-  return plan.items.map((i, n) => `${n + 1}. ${i.exercise.name} (${i.role}) — ${i.exercise.reps}. Anchor row ${i.exercise.anchorRow}, ${i.exercise.anchorLandmark}. ${i.gentle ? "Gentle form: " + i.exercise.easier : ""}`).join("\n");
-}
-
-/* ---------- Deep link: pre-select a goal in the builder ----------
- * Pattern: #how-it-works?goal=strength | mobility | balance
- * The builder reads it on load and on hashchange, scrolls itself into view,
- * selects the goal and focuses the body figure. Same-page links from
- * "Who it's for" use planGoalHash(); goalFromHash() parses it back.
- */
-export const PLAN_ANCHOR = "how-it-works";
-
-export function planGoalHash(goal: Goal): string {
-  return `#${PLAN_ANCHOR}?goal=${goal}`;
-}
-
-export function goalFromHash(hash: string): Goal | null {
-  const m = /^#how-it-works\?(.*)$/.exec(hash);
-  if (!m) return null;
-  const g = new URLSearchParams(m[1]).get("goal");
-  return g === "strength" || g === "mobility" || g === "balance" ? g : null;
 }

@@ -68,7 +68,7 @@ export function HeroShader({ assets, review }: { assets: HeroAssets; review: Her
             <p className="hero__genres">{GENRE_ORDER.map((g) => GENRES[g].label).join(" · ")}</p>
             <p className="hero__sub">A wall-mounted training board that brings the physical therapy gym home, in just 3 × 3 feet.</p>
             <div className="hero__ctas">
-              <Link href="/plan" className="hero__btn hero__btn--primary">
+              <Link href="#find-your-plan" className="hero__btn hero__btn--primary">
                 Find your plan
               </Link>
               <Link href="#how-it-works" className="hero__btn hero__btn--secondary">
