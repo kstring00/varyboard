@@ -7,10 +7,13 @@ import { useEffect, useState } from "react";
 import { board, formatPrice, products, shipping } from "@/content/facts";
 import { buyLinks } from "@/lib/commerce";
 import { BoardPanel } from "./BoardPanel";
+import { AudienceTicker } from "./AudienceTicker";
 
 /**
  * Hero: plaster ground, honeycomb shader, copy only. No photo, no dark ground.
- * HexEdge at the bottom dissolves into the deep pine section beneath.
+ * Structure: .hero__stage (shader, wash, copy, HexEdge dissolve) then the audience ticker as
+ * the hero's closing element, floating on the same plaster. The hexagon edge is the only boundary.
+ * Live text always sits above the canvases (.hero__inner z-index 5 > HexEdge 4 > wash 1).
  */
 /** Shader density: 12 on desktop, 9 under 768px. Plain width query, no motion gating. */
 function useShaderDensity() {
@@ -30,6 +33,7 @@ export function HeroShader() {
   const density = useShaderDensity();
   return (
     <section aria-labelledby="hero-title" className="hero" style={{ "--section-bg": "var(--color-plaster-hero)", "--ink": "var(--color-ink)" } as React.CSSProperties}>
+      <div className="hero__stage">
       <HexShaderBackground variant="light" density={density} intensity={0.42} timeScale={0.35} className="absolute inset-0" />
       <div className="hero__wash" aria-hidden="true" />
 
@@ -71,7 +75,9 @@ export function HeroShader() {
         </div>
       </div>
 
-      <HexEdge />
+      <HexEdge heightPct={60} />
+      </div>
+      <AudienceTicker />
       <div id="hero-end" aria-hidden="true" className="absolute bottom-0 left-0 h-px w-px" />
     </section>
   );

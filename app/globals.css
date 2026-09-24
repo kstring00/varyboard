@@ -47,8 +47,16 @@
   @media (min-width: 1024px) {
     html { font-size: 15px; }
   }
+  html {
+    /* The overscroll region above the page reads as the header's plaster, never as content. */
+    background: #f2f0eb;
+  }
   body {
     @apply bg-paper text-ink font-sans antialiased;
+    /* No overflow on body: overflow on <body> propagates to the viewport and changes what a
+       sticky header sticks to in Firefox and WebKit. The scrolled regions clip themselves. */
+  }
+  main, footer {
     overflow-x: clip;
   }
   h1, h2, h3 {
@@ -99,18 +107,18 @@
 }
 
 /* ---------- Hero: plaster ground, honeycomb shader, copy only ---------- */
-.hero {
-  position: relative; isolation: isolate; overflow: hidden;
-  min-height: calc(100svh - 4rem); min-height: max(560px, calc(100svh - 4rem));
-  background: var(--color-plaster-hero); color: var(--color-ink);
+.hero { position: relative; background: var(--color-plaster-hero); color: var(--color-ink); }
+.hero__stage {
+  position: relative; isolation: isolate; overflow: hidden; contain: paint;
+  min-height: calc(100svh - 4rem - 3.5rem); min-height: max(540px, calc(100svh - 4rem - 3.5rem));
   display: flex; align-items: center;
 }
 .hero__wash {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: linear-gradient(90deg, rgb(242 240 235 / 0.92) 0%, rgb(242 240 235 / 0.55) 40%, rgb(242 240 235 / 0) 65%);
 }
-.hero__inner { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 3.5rem 5rem; }
-.hero__copy { max-width: 520px; }
+.hero__inner { position: relative; z-index: 5; width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 48px); padding-block: 3rem 4.5rem; }
+.hero__copy { max-width: 560px; }
 .hero__eyebrow { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-pine); }
 .hero__title {
   margin-top: 0.75rem;
@@ -118,7 +126,7 @@
   font-size: clamp(56px, 6.5vw, 104px); line-height: 0.92; letter-spacing: 0.01em; color: var(--color-ink);
 }
 .hero__pillars { margin-top: 0.8rem; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-pine); }
-.hero__inner--split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: end; gap: clamp(24px, 4vw, 64px); }
+.hero__inner--split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); align-items: end; gap: clamp(24px, 4vw, 64px); }
 .hero__panel { position: relative; }
 
 /* Product panel: two line drawings on a shared baseline, inside the shader */
@@ -168,19 +176,29 @@
 .hero__btn:focus-visible, .hero__note-link:focus-visible { outline: 2px solid var(--color-pine); outline-offset: 4px; }
 .hero__note { margin-top: 1rem; font-size: 1rem; color: var(--color-ink-2); }
 .hero__note-link { color: var(--color-pine); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-.hero__facts { margin-top: 1.5rem; display: flex; flex-wrap: wrap; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-ink-2); }
-.hero__facts li + li { margin-left: 1rem; padding-left: 1rem; border-left: 1px solid rgb(31 42 40 / 0.25); }
+.hero__facts { margin-top: 1.5rem; display: flex; flex-wrap: nowrap; align-items: center; width: max-content; max-width: none; white-space: nowrap; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ink-2); }
+.hero__facts li + li { margin-left: 0.9rem; padding-left: 0.9rem; border-left: 1px solid rgb(31 42 40 / 0.25); }
+@media (max-width: 767px) {
+  .hero__facts { display: grid; grid-template-columns: 1fr auto; gap: 0.55rem 0; width: 100%; white-space: normal; }
+  .hero__facts li { white-space: nowrap; }
+  .hero__facts li:first-child { grid-column: 1 / -1; }
+  .hero__facts li + li { margin-left: 0; padding-left: 0; border-left: 0; }
+  .hero__facts li:nth-child(3) { margin-left: 0.75rem; padding-left: 0.75rem; border-left: 1px solid rgb(31 42 40 / 0.25); }
+}
 @media (max-width: 768px) {
-  .hero__inner { padding-block: 3rem 5rem; }
+  .hero__inner { padding-block: 2.5rem 4rem; }
   .hero__title { font-size: clamp(48px, 13vw, 68px); }
   .hero__sub { font-size: 1.1rem; }
-  .hero__facts { gap: 0.5rem 0; }
-  .hero__facts li + li { margin-left: 0.75rem; padding-left: 0.75rem; }
   .hero__wash { background: linear-gradient(90deg, rgb(242 240 235 / 0.92) 0%, rgb(242 240 235 / 0.74) 55%, rgb(242 240 235 / 0.52) 100%); }
 }
 
 /* Header: plaster, ink text */
-.site-header { color: var(--color-ink); background-color: #f2f0eb; border-color: rgb(31 42 40 / 0.08); }
+.site-header {
+  color: var(--color-ink); background-color: #f2f0eb; border-color: rgb(31 42 40 / 0.08);
+  /* Own compositor layer and stacking context: the hero's WebGL and 2D canvases repaint every
+     frame and must never be composited over the pinned header during async scroll. */
+  isolation: isolate; transform: translateZ(0); backface-visibility: hidden;
+}
 
 
 /* ---------- Reveal (scroll fade-up) ---------- */
@@ -201,7 +219,7 @@
 }
 
 /* ---------- Plan builder ---------- */
-.plan { background: var(--color-plaster-hero); padding-block: 3.5rem 4.5rem; }
+.plan { background: var(--color-plaster-hero); padding-block: 1.5rem 4.5rem; }
 .plan__head { max-width: 40rem; }
 .plan__title { margin-top: 0.75rem; font-size: clamp(1.7rem, 2.8vw, 2.25rem); line-height: 1.08; font-weight: 500; }
 .plan__lede { margin-top: 0.9rem; font-size: 1.05rem; color: var(--color-ink-2); }
@@ -479,3 +497,51 @@
   .plan__item { break-inside: avoid; box-shadow: none; }
   a { color: inherit; text-decoration: none; }
 }
+
+/* ---------- Audience ticker: the hero's closing element ----------
+   Floats on the plaster ground. No band, no straight borders; the hexagon edge above it is the
+   hero's only boundary. Motion lives in AudienceTicker.tsx (rAF); this is the look and the
+   reduced-motion static layout. Fixed height so it never shifts layout. */
+.ticker { position: relative; z-index: 2; display: flex; align-items: center; gap: 0.5rem; height: 3.5rem; padding-inline: clamp(12px, 3vw, 40px); background: transparent; }
+.ticker__btn {
+  display: inline-grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 999px;
+  border: 1px solid rgb(31 42 40 / 0.16); background: rgb(255 255 255 / 0.45); color: var(--color-pine); cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+.ticker__btn:hover { border-color: var(--color-pine); background: #fff; }
+.ticker__viewport {
+  flex: 1; min-width: 0; overflow: hidden; touch-action: pan-y; cursor: grab;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+.ticker__viewport:active { cursor: grabbing; }
+.ticker__track { display: flex; width: max-content; will-change: transform; }
+.ticker__list { display: flex; align-items: center; margin: 0; padding: 0; list-style: none; }
+.ticker__item { display: flex; align-items: center; }
+.ticker__link {
+  display: inline-flex; align-items: center; gap: 0.55rem; min-height: 44px; padding: 0 0.85rem; border-radius: 999px;
+  color: var(--color-ink-2); text-decoration: none; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; white-space: nowrap;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.45s;
+}
+.ticker__hex { width: 32px; height: 36.8px; flex: none; overflow: visible; }
+.ticker__hex-cell { fill: rgb(255 255 255 / 0.35); stroke: var(--color-pine); stroke-width: 1.5; opacity: 0.55; transition: fill 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s; }
+.ticker__hex-icon { fill: none; stroke: var(--color-pine); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ticker__sep { width: 11px; height: 11px; flex: none; fill: none; stroke: var(--color-pine); stroke-width: 1.4; stroke-linecap: round; opacity: 0.4; }
+/* Hover: that item's hexagon fills mint; the others dim a little. Focus behaves the same. */
+.ticker__viewport:hover .ticker__link, .ticker:focus-within .ticker__link { opacity: 0.5; }
+.ticker__viewport:hover .ticker__link:hover, .ticker__link:focus-visible { opacity: 1; color: var(--color-ink); }
+.ticker__link:hover .ticker__hex-cell, .ticker__link:focus-visible .ticker__hex-cell { fill: rgb(133 181 178 / 0.55); opacity: 1; }
+.ticker__link:focus-visible { outline: 2px solid var(--color-pine); outline-offset: 2px; }
+/* Reduced motion, or the explicit static mode: a centred, wrapping row. Nothing moves. */
+@media (prefers-reduced-motion: reduce) {
+  .ticker { height: auto; padding-block: 0.75rem 1rem; }
+  .ticker__btn { display: none; }
+  .ticker__viewport { overflow: visible; -webkit-mask-image: none; mask-image: none; cursor: default; }
+  .ticker__track { width: auto; justify-content: center; transform: none !important; will-change: auto; }
+  .ticker__list { flex-wrap: wrap; justify-content: center; }
+  .ticker__list[aria-hidden="true"] { display: none; }
+}
+.ticker--static { height: auto; padding-block: 0.75rem 1rem; }
+.ticker--static .ticker__viewport { overflow: visible; -webkit-mask-image: none; mask-image: none; cursor: default; }
+.ticker--static .ticker__track { width: auto; justify-content: center; transform: none !important; }
+.ticker--static .ticker__list { flex-wrap: wrap; justify-content: center; }
