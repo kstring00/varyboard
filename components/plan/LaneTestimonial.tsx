@@ -26,7 +26,7 @@ export function LaneTestimonial({ lane }: { lane: Lane }) {
   if (!r) return null;
   return (
     <figure className="ix-review">
-      <Stars value={r.rating} />
+      {r.rating !== undefined && <Stars value={r.rating} />}
       {r.title && <p className="ix-review__title">{r.title}</p>}
       <blockquote className="ix-review__body">{r.body}</blockquote>
       <figcaption className="ix-review__by">

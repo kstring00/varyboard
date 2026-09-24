@@ -45,7 +45,7 @@ export const link = (path: string, opts: { hash?: string; query?: string; label?
 export const footerNav = [
   { title: "Shop", links: [link("/vary-board"), link("/vary-board-xt"), link("/resistance-bands")] },
   { title: "Learn", links: [link("/", { hash: "how-it-works", label: "How it works" }), link("/plan"), link("/fit"), link("/faq")] },
-  { title: "Professionals", links: [link("/professionals"), link("/plan", { query: "for=mil", label: "Military & VA" }), link("/professionals", { hash: "request", label: "Team pricing" })] },
+  { title: "Professionals", links: [link("/professionals"), link("/plan", { query: "for=mil", label: "Military & VA" }), link("/", { hash: "team-pricing", label: "Team pricing" })] },
 ] as const;
 
 /** Bottom legal row. */

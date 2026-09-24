@@ -75,6 +75,18 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 - three.js never ships with the page. The section shows a real still of the bedroom scene (`public/images/fit/poster-bedroom.jpg`) until the visitor taps; the chunk is prefetched when the section is within 400px. Browsers without WebGL get the still plus a written room-by-room summary.
 - To refresh the still after changing the bedroom or the board: run the site, then `node scripts/fit-poster.mjs` (Chromium with software GL; the script header says how).
 
+## Homepage: "What you can do" and "Who it's for"
+
+- **Genres** live in `content/genres.ts` (single source; the intake, hero and plan hexagon read from it). Clinical names are Eric's wording. Every health line is `rv("…")` and unreviewed until Eric signs it off. Anchor counts come from `content/facts.ts` through `{anchors}`-style tokens. Loosen (Joint Mobilizations) has no movements yet: its card shows "Coming soon from Dr. Eric" until the four fields are filled.
+- **Audiences** live in `content/audiences.ts`, military first. `proofReviewId` must match an id in `content/reviews.ts` or be null; the build fails on a missing id. The military CTA opens `public/docs/va-provider-packet.pdf` once it exists, and the military intake lane until then. "Team pricing" opens the team inquiry form in the athletes card (`/#team-pricing` from anywhere).
+- The hero ticker scrolls to the audience cards (`content/audience.ts`). Caregivers, aging well and post-surgery recovery go to patients & families.
+- `npm run audit:content`, the Draft banner and `npm run review:export` / `review:import` all cover both files.
+- **Reviews** (`content/reviews.ts`): five testimonials copied word for word from the old homepage. They carry no star rating or date because the source shows none, so no stars render. D. Muhammad's is still to paste.
+
+## Content gate on Vercel
+
+`npm run build` runs the gates (placeholders, safety, intake, content). Vercel runs the `vercel-build` script instead, which is plain `next build`, so **none of the gates run on Vercel builds today** and unreviewed content can reach production. To enforce them, change `vercel-build` to `npm run build`, or set Vercel's Build Command to `npm run build`. With 125 items unreviewed, production builds will then fail until Eric works through `content/review.csv`.
+
 ## Footer
 
 Brand + utility: honeycomb top edge, "VARY BOARD" built from hexagons (decorative, `aria-hidden`; one line on wide screens, VARY over BOARD under 760px), utility columns, legal row. Every footer link comes from `content/routes.ts` (`footerNav`, `legalNav`); the phone, email, city and social accounts come from `content/facts.ts` (`brand`). `/accessibility` is a short statement page linked from the legal row.

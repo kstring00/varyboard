@@ -704,3 +704,151 @@ button.link { display: inline-block; padding-block: 0.75rem; margin-block: -0.75
   .ft-vary--play .ft-cell { animation: none; }
   .ft-cell { transition: none; }
 }
+
+/* ---------- What you can do: the six-sided reveal (#how-it-works) ----------
+   Plaster ground so the hero's honeycomb dissolve runs straight into it. Desktop: hexagon +
+   one card (all six share one grid cell, so switching never moves the page). Below 1024px:
+   a compact hexagon index above a stack of all six cards. */
+.wycd { position: relative; background: var(--color-plaster-hero); padding-block: 3rem 4.5rem; }
+@media (min-width: 768px) { .wycd { padding-block: 3.5rem 5.5rem; } }
+.wycd__body { margin-top: 2.25rem; }
+.gx { position: relative; }
+@media (min-width: 1024px) { .gx { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 3rem; align-items: center; } }
+
+.gx-hex { display: none; }
+@media (min-width: 1024px) { .gx-hex { display: block; position: relative; width: 100%; max-width: 560px; aspect-ratio: 480 / 360; justify-self: center; } }
+.gx-hex__svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.gx-hex__body { fill: rgb(255 255 255 / 0.6); }
+.gx-hex__inner { fill: none; stroke: var(--color-line); stroke-width: 1.2; stroke-dasharray: 4 6; }
+.gx-side { stroke: #d3d8d0; stroke-width: 11; stroke-linecap: round; cursor: pointer; transition: stroke 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+.gx-side--hint { stroke: #a8d9cc; }
+.gx-side--on { stroke: #62bba6; filter: drop-shadow(0 0 6px rgb(98 187 166 / 0.55)); }
+.gx-hex__num, .gx-hex__name { text-anchor: middle; pointer-events: none; }
+.gx-hex__num { font-size: 15px; font-weight: 600; letter-spacing: 0.16em; fill: var(--color-teal-deep); }
+.gx-hex__name { font-family: var(--font-display); font-size: 36px; fill: var(--color-ink); }
+.gx-side-btn {
+  position: absolute; z-index: 1; display: inline-flex; min-height: 44px; align-items: center; padding: 0 16px; white-space: nowrap;
+  border: 1px solid var(--color-line); border-radius: 999px; background: #fff; color: var(--color-ink); font: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.gx-side-btn--top { transform: translate(-50%, -100%); }
+.gx-side-btn--bottom { transform: translate(-50%, 0); }
+.gx-side-btn--right { transform: translate(0, -50%); }
+.gx-side-btn--left { transform: translate(-100%, -50%); }
+.gx-side-btn:hover, .gx-side-btn.is-hint { border-color: #62bba6; background: var(--color-teal-soft); }
+.gx-side-btn[aria-pressed="true"] { background: var(--color-teal-deep); border-color: var(--color-teal-deep); color: #fff; }
+
+.gx-index ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (min-width: 560px) { .gx-index ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .gx-index { display: none; } }
+.gx-index__link {
+  display: flex; min-height: 52px; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 14px;
+  border: 1px solid var(--color-line); background: #fff; color: var(--color-ink); font-weight: 600; text-decoration: none;
+}
+.gx-index__link:hover, .gx-index__link.is-hint { border-color: #62bba6; background: var(--color-teal-soft); }
+.gx-mini { flex: none; }
+.gx-mini__hex { fill: none; stroke: #b5c7c1; stroke-width: 1.2; }
+.gx-mini__side { stroke: #62bba6; stroke-width: 3; stroke-linecap: round; }
+
+.gx-cards { display: grid; gap: 16px; margin-top: 20px; }
+@media (min-width: 1024px) {
+  .gx-cards { margin-top: 0; }
+  .gx-card { grid-area: 1 / 1; transition: opacity 0.35s ease, visibility 0.35s; }
+  .gx-card[data-on="false"] { visibility: hidden; opacity: 0; }
+}
+.gx-card { padding: 24px; border-radius: 20px; border: 1px solid var(--color-line); background: #fff; box-shadow: var(--shadow-soft); }
+.gx-card.is-hint { border-color: #62bba6; }
+.gx-card__head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.gx-card__num { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.16em; color: var(--color-teal-deep); }
+.gx-card__name { margin-top: 2px; font-size: 2rem; font-weight: 500; line-height: 1.05; }
+@media (min-width: 1024px) { .gx-card__name { font-size: 2.5rem; } }
+.gx-card__clinical { margin-top: 6px; font-size: 0.9rem; color: var(--color-muted); }
+.gx-card__anim { flex: none; width: 96px; height: 72px; }
+@media (min-width: 1024px) { .gx-card__anim { width: 132px; height: 99px; } }
+.gx-card__what { margin-top: 16px; font-size: var(--text-lg); line-height: 1.5; color: var(--color-ink); }
+.gx-card__how, .gx-card__try { margin-top: 14px; color: var(--color-ink-2); }
+.gx-card__label { display: block; margin-bottom: 2px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-teal-deep); }
+.gx-card__soon { margin-top: 16px; font-family: var(--font-display); font-size: 1.3rem; color: var(--color-teal-deep); }
+
+/* Genre line animations (components/genres/GenreAnim.tsx). Base styles are the still frame. */
+.ga { overflow: visible; }
+.ga-cell { fill: transparent; stroke: #9fb8b0; stroke-width: 1.2; }
+.ga-cell--on { fill: rgb(98 187 166 / 0.45); }
+.ga--climb .ga-cell { animation: ga-climb 3.2s ease-in-out infinite; }
+@keyframes ga-climb { 0% { fill: transparent; } 18% { fill: rgb(98 187 166 / 0.8); } 55% { fill: rgb(98 187 166 / 0.5); } 80%, 100% { fill: transparent; } }
+.ga-anchor { fill: rgb(98 187 166 / 0.35); stroke: #62bba6; stroke-width: 1.2; }
+.ga-band { fill: none; stroke: var(--color-teal-deep); stroke-width: 2.4; stroke-linecap: round; }
+.ga-band--taut { opacity: 0; }
+.ga-grip { fill: #62bba6; }
+.ga--strengthen .ga-band--slack { animation: ga-slack 2.6s ease-in-out infinite; }
+.ga--strengthen .ga-band--taut { animation: ga-taut 2.6s ease-in-out infinite; }
+.ga--strengthen .ga-handle { animation: ga-pull 2.6s ease-in-out infinite; }
+@keyframes ga-slack { 0%, 20%, 100% { opacity: 1; } 45%, 65% { opacity: 0; } }
+@keyframes ga-taut { 0%, 20%, 100% { opacity: 0; } 45%, 65% { opacity: 1; } }
+@keyframes ga-pull { 0%, 20%, 100% { transform: translateX(0); } 45%, 65% { transform: translateX(5px); } }
+.ga-ring { fill: none; stroke: #e0e6e2; stroke-width: 6; }
+.ga-ring-fill { fill: none; stroke: #62bba6; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 35; }
+.ga--stretch .ga-ring-fill { animation: ga-fill 5s ease-in-out infinite alternate; }
+@keyframes ga-fill { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+.ga-dot { fill: var(--color-teal-deep); }
+.ga-arc { fill: none; stroke: var(--color-teal-deep); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 0; }
+.ga--loosen .ga-arc { animation: ga-trace 3.4s ease-in-out infinite; }
+@keyframes ga-trace { 0% { stroke-dashoffset: 100; opacity: 1; } 60%, 82% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+.ga-rail { stroke: #9fb8b0; stroke-width: 3; stroke-linecap: round; }
+.ga-floor { fill: none; stroke: #c9d3cf; stroke-width: 2; stroke-linecap: round; }
+.ga-stem { stroke: var(--color-teal-deep); stroke-width: 2.2; stroke-linecap: round; }
+.ga-dot--big { fill: #62bba6; }
+.ga-wobble { transform-box: view-box; transform-origin: 60px 74px; }
+.ga--steady .ga-wobble { animation: ga-wobble 3.6s ease-out infinite; }
+@keyframes ga-wobble { 0% { transform: rotate(-14deg); } 12% { transform: rotate(11deg); } 24% { transform: rotate(-8deg); } 36% { transform: rotate(5deg); } 48% { transform: rotate(-3deg); } 60% { transform: rotate(1.5deg); } 72%, 100% { transform: rotate(0); } }
+.ga-body { fill: none; stroke: var(--color-teal-deep); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ga-head { fill: none; stroke: var(--color-teal-deep); stroke-width: 2.2; }
+.ga-frame--0 { opacity: 0.25; }
+.ga-frame--1 { opacity: 0.45; }
+.ga--rise .ga-frame { animation: ga-ghost 3s ease-in-out infinite; }
+.ga--rise .ga-frame--1 { animation-delay: 1s; }
+.ga--rise .ga-frame--2 { animation-delay: 2s; }
+@keyframes ga-ghost { 0% { opacity: 0.15; } 10%, 33% { opacity: 1; } 48%, 100% { opacity: 0.15; } }
+.gx[data-inview="false"] .ga, .gx[data-inview="false"] .ga * { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .ga, .ga * { animation: none !important; }
+  .gx-card, .gx-side, .gx-side-btn { transition: none; }
+}
+
+/* ---------- Who it's for: four audience cards (#who-its-for) ---------- */
+.aud { position: relative; background: var(--color-paper); padding-block: 3.5rem 4.5rem; }
+@media (min-width: 768px) { .aud { padding-block: 4.5rem 5.5rem; } }
+.aud__grid { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; gap: 20px; }
+@media (min-width: 900px) { .aud__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.aud-card {
+  display: flex; flex-direction: column; gap: 16px; padding: 24px; border-radius: 22px; border: 1px solid var(--color-line);
+  background: #fff; box-shadow: var(--shadow-soft);
+}
+.aud-card:target { animation: aud-target 2.6s ease-out 1; }
+@keyframes aud-target { 0%, 40% { box-shadow: 0 0 0 3px #62bba6, var(--shadow-soft); } 100% { box-shadow: 0 0 0 0 transparent, var(--shadow-soft); } }
+.aud-card__head { display: flex; align-items: center; gap: 12px; }
+.aud-card__icon { flex: none; width: 40px; height: 46px; }
+.aud-card__title { font-size: 1.5rem; font-weight: 500; line-height: 1.15; }
+.aud-card__problem { font-size: var(--text-lg); color: var(--color-ink-2); }
+.aud-card__help { display: flex; gap: 10px; font-size: var(--text-lg); font-weight: 500; color: var(--color-ink); }
+.aud-card__help svg { flex: none; margin-top: 5px; color: var(--color-teal-deep); }
+.aud-card__chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.gchip {
+  display: inline-flex; min-height: 44px; align-items: center; gap: 7px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--color-line); background: var(--color-plaster-hero); color: var(--color-pine); font-size: 0.9rem; font-weight: 600; text-decoration: none;
+  transition: background-color 0.25s, border-color 0.25s;
+}
+.gchip svg { fill: rgb(98 187 166 / 0.4); stroke: var(--color-teal-deep); stroke-width: 1.2; }
+.gchip:hover, .gchip:focus-visible { background: var(--color-teal-soft); border-color: var(--color-teal-deep); }
+.aud-proof { padding-left: 16px; border-left: 3px solid var(--color-teal-soft); }
+.aud-proof__title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; color: var(--color-teal-deep); }
+.aud-proof__quote p { margin-top: 4px; font-family: var(--font-display); font-size: 1.1rem; line-height: 1.45; color: var(--color-ink-2); }
+.aud-proof__more summary { display: inline-flex; min-height: 44px; align-items: center; font-weight: 600; color: var(--color-teal-deep); cursor: pointer; }
+.aud-proof__by { margin-top: 4px; font-size: 0.9rem; color: var(--color-muted); }
+.aud-card__foot { margin-top: auto; display: grid; gap: 10px; justify-items: start; padding-top: 4px; }
+.aud-card__note { display: flex; gap: 8px; align-items: center; font-size: 0.9rem; color: var(--color-teal-deeper); }
+.aud-card__note svg { flex: none; }
+.aud-team { width: 100%; }
+.aud-team__panel { margin-top: 12px; }
+@media (prefers-reduced-motion: reduce) { .aud-card:target { animation: none; box-shadow: 0 0 0 3px #62bba6, var(--shadow-soft); } }
+.wycd .ix-draft, .aud .ix-draft { margin-bottom: 1.25rem; }

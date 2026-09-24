@@ -21,9 +21,9 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <FindYourPlan />
-      <WhoItsFor />
       <WhatYouCanDo />
+      <WhoItsFor />
+      <FindYourPlan />
       <FitSection />
       <People />
       <Proof />

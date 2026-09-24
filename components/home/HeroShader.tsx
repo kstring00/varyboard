@@ -26,7 +26,7 @@ export interface HeroAssets {
 export interface HeroReview {
   text: string;
   author: string;
-  rating: number;
+  rating?: number;
 }
 
 /** Shader density: 12 on desktop, 9 under 768px. Read in the initializer so the canvas never remounts. */
@@ -77,7 +77,7 @@ export function HeroShader({ assets, review }: { assets: HeroAssets; review: Her
             </div>
             {review && (
               <figure className="hero__review">
-                <Stars value={review.rating} size={14} />
+                {review.rating !== undefined && <Stars value={review.rating} size={14} />}
                 <blockquote className="hero__review-text">&ldquo;{review.text}&rdquo;</blockquote>
                 <figcaption className="hero__review-by">{review.author}</figcaption>
               </figure>

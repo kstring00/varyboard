@@ -1,26 +1,27 @@
-import type { Lane } from "./intake";
+import type { AudienceKey } from "./audiences";
 
 /**
- * Who the Vary Board serves: the hero's closing ticker. Each item links into the intake at its
- * lane. Icons are simple line drawings; medical uses the Rod of Asclepius (one snake), never the
+ * Who the Vary Board serves: the hero's closing ticker. Each item scrolls to one of the four
+ * audience cards in "Who it's for" (content/audiences.ts); caregivers and aging well at home
+ * fold into patients & families. Icons are simple line drawings; medical uses the Rod of Asclepius (one snake), never the
  * caduceus, and there is no VA seal or branch insignia anywhere.
  */
 export type AudienceIcon = "star" | "shield" | "asclepius" | "clinic" | "heart" | "home" | "bandage" | "dumbbell" | "clipboard";
 
 export interface AudienceItem {
   label: string;
-  lane: Lane;
+  audience: AudienceKey;
   icon: AudienceIcon;
 }
 
 export const audience: AudienceItem[] = [
-  { label: "Veterans", lane: "mil", icon: "star" },
-  { label: "Active Duty", lane: "mil", icon: "shield" },
-  { label: "Physical Therapists", lane: "clinic", icon: "asclepius" },
-  { label: "Clinics & Hospitals", lane: "clinic", icon: "clinic" },
-  { label: "Caregivers", lane: "loved", icon: "heart" },
-  { label: "Aging Well at Home", lane: "me", icon: "home" },
-  { label: "Post-Surgery Recovery", lane: "me", icon: "bandage" },
-  { label: "Athletes", lane: "athlete", icon: "dumbbell" },
-  { label: "Coaches & Trainers", lane: "athlete", icon: "clipboard" },
+  { label: "Veterans", audience: "military", icon: "star" },
+  { label: "Active Duty", audience: "military", icon: "shield" },
+  { label: "Physical Therapists", audience: "clinics", icon: "asclepius" },
+  { label: "Clinics & Hospitals", audience: "clinics", icon: "clinic" },
+  { label: "Caregivers", audience: "patients", icon: "heart" },
+  { label: "Aging Well at Home", audience: "patients", icon: "home" },
+  { label: "Post-Surgery Recovery", audience: "patients", icon: "bandage" },
+  { label: "Athletes", audience: "athletes", icon: "dumbbell" },
+  { label: "Coaches & Trainers", audience: "athletes", icon: "clipboard" },
 ];
