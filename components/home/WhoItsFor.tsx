@@ -1,129 +1,89 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
 import { DraftBanner } from "@/components/plan/DraftBanner";
-import { HexIcon } from "@/components/plan/HexIcon";
-import { GenreChip } from "@/components/genres/GenreChip";
 import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { AUDIENCES, audienceAnchor, unreviewedAudiences, type Audience, type AudienceKey } from "@/content/audiences";
-import { vaPacket } from "@/content/config";
-import { fillFacts, genreByKey } from "@/content/genres";
-import { canFeature, reviewById, type Review } from "@/content/reviews";
-import type { AudienceIcon } from "@/content/audience";
+import { AUDIENCES, WHO, audienceAnchor, unreviewedAudiences, type Audience } from "@/content/audiences";
+import { SOURCES } from "@/content/sources";
 import { TeamPricing } from "./TeamPricing";
 
 /**
- * WHO IT'S FOR (#who-its-for). Four audiences from content/audiences.ts, military first.
- * Each card: problem -> how it helps, its genres as chips (hover lights the hexagon above),
- * a real review if one is assigned, and exactly one CTA.
+ * WHO IT'S FOR (#who-its-for), built first for those who served: a teal DoD & VA block (about 70%
+ * of the section's weight) with two equal paths, then three slim cards. Copy: content/audiences.ts.
+ * Exactly one link or button per card.
  */
-const ICON: Record<AudienceKey, AudienceIcon> = { military: "shield", patients: "heart", clinics: "asclepius", athletes: "dumbbell" };
+const hexPts = (x: number, y: number, r: number) =>
+  Array.from({ length: 6 }, (_, i) => {
+    const a = Math.PI / 2 + (i * Math.PI) / 3;
+    return `${(x + r * Math.cos(a)).toFixed(1)},${(y + r * Math.sin(a)).toFixed(1)}`;
+  }).join(" ");
 
-/** Whole sentences up to ~190 characters shown first; the rest opens in place. Never reworded. */
-function splitQuote(body: string): [string, string] {
-  const sentences = body.split(/(?<=[.!?])\s+/);
-  let head = sentences[0];
-  let i = 1;
-  while (i < sentences.length && head.length + 1 + sentences[i].length <= 190) head += " " + sentences[i++];
-  return [head, sentences.slice(i).join(" ")];
-}
-
-function Proof({ review }: { review: Review }) {
-  const [head, rest] = splitQuote(review.body);
+/** The block's honeycomb corner (6 x 6 cells, every fifth filled). */
+function MilComb() {
+  const cells: { x: number; y: number; fill: boolean }[] = [];
+  const R = 26;
+  for (let r = 0; r < 6; r++) for (let q = 0; q < 6; q++) cells.push({ x: q * R * 1.732 + (r % 2) * R * 0.866, y: r * R * 1.5, fill: (q + r) % 5 === 0 });
   return (
-    <figure className="aud-proof">
-      {review.title && <p className="aud-proof__title">{review.title}</p>}
-      <blockquote className="aud-proof__quote">
-        <p>&ldquo;{head}{rest ? "" : "”"}</p>
-        {rest && (
-          <details className="aud-proof__more">
-            <summary>Read the full review</summary>
-            <p>{rest}&rdquo;</p>
-          </details>
-        )}
-      </blockquote>
-      <figcaption className="aud-proof__by">
-        {review.author}
-        {review.context ? <span> · {review.context}</span> : null}
-      </figcaption>
-    </figure>
+    <svg className="who-mil__comb" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
+      {cells.map((c) => (
+        <polygon key={`${c.x}-${c.y}`} points={hexPts(c.x, c.y, R * 0.92)} fill={c.fill ? "rgba(158,214,198,.9)" : "none"} stroke="#9ED6C6" strokeWidth={1.2} />
+      ))}
+    </svg>
   );
 }
 
-function Cta({ a }: { a: Audience }) {
-  const c = a.primaryCta;
-  if (c.kind === "teamForm") return <TeamPricing label={c.label} />;
-  if (c.kind === "vaPacket") {
-    const pdf = existsSync(path.join(process.cwd(), "public", vaPacket.pdfPath));
-    return (
-      <a href={pdf ? vaPacket.pdfPath : c.fallbackHref} className="btn-primary" {...(pdf ? { download: true } : {})} data-aud-cta={a.key}>
-        {c.label}
-      </a>
-    );
-  }
+function CardCta({ a }: { a: Audience }) {
+  if (a.cta.kind === "teamForm") return <TeamPricing label={a.cta.label} />;
   return (
-    <a href={c.href} className="btn-primary" data-aud-cta={a.key}>
-      {c.label}
+    <a className="who-card__more" href={a.cta.href}>
+      {a.cta.label}
     </a>
   );
 }
 
 export function WhoItsFor() {
+  const m = WHO.military;
   return (
-    <section id="who-its-for" aria-labelledby="who-title" className="aud">
-      <div className="container-site">
+    <section id="who-its-for" aria-labelledby="who-title" className="who">
+      <div className="who__inner">
         <DraftBanner items={unreviewedAudiences()} />
-        <Reveal>
-          <SectionHeading eyebrow="Who it's for" title={<span id="who-title">Built for four kinds of people.</span>} intro="Pick the one that sounds like you. The hexagons show which kinds of practice matter most; point at one to see it above." />
-        </Reveal>
-        <ul className="aud__grid">
-          {AUDIENCES.map((a) => {
-            const review = a.proofReviewId ? reviewById(a.proofReviewId) : undefined;
-            if (a.proofReviewId && !review) throw new Error(`content/audiences.ts: ${a.key} points at review "${a.proofReviewId}", which is not in content/reviews.ts`);
-            if (review && !canFeature(review)) throw new Error(`content/audiences.ts: ${a.key} points at "${review.id}", which is list-only and cannot sit on a card`);
-            return (
-              <li key={a.key} id={audienceAnchor(a.key)} className="aud-card" data-audience={a.key}>
-                <div className="aud-card__head">
-                  <HexIcon icon={ICON[a.key]} className="aud-card__icon" />
-                  <h3 className="aud-card__title">{a.label}</h3>
-                </div>
-                <p className="aud-card__problem">
-                  <span className="sr-only">The problem: </span>
-                  {fillFacts(a.problem.value)}
-                </p>
-                <p className="aud-card__help">
-                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                  <span>
-                    <span className="sr-only">How it helps: </span>
-                    {fillFacts(a.howItHelps.value)}
-                  </span>
-                </p>
-                <ul className="aud-card__chips" aria-label="Kinds of practice that matter most">
-                  {a.topGenres.map((g) => (
-                    <li key={g}>
-                      <GenreChip genre={g} label={genreByKey(g).plainName} />
-                    </li>
-                  ))}
-                </ul>
-                {review && <Proof review={review} />}
-                <div className="aud-card__foot">
-                  <Cta a={a} />
-                  {a.note && (
-                    <p className="aud-card__note">
-                      <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true">
-                        <path d="M10 1.5 17.4 5.75v8.5L10 18.5 2.6 14.25v-8.5Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="m10 6 1.2 2.5 2.7.4-2 1.9.5 2.7L10 12.2l-2.4 1.3.5-2.7-2-1.9 2.7-.4Z" fill="currentColor" />
-                      </svg>
-                      {a.note}
-                    </p>
-                  )}
-                </div>
+        <p className="cl__eyebrow">{WHO.eyebrow}</p>
+        <h2 id="who-title" className="cl__title">
+          {WHO.headline}
+        </h2>
+        <div className="who__grid">
+          <Reveal className="who-mil">
+            <div id={audienceAnchor("military")}>
+              <MilComb />
+              <p className="who-mil__eyebrow">{m.eyebrow}</p>
+              <h3 className="who-mil__title">{m.headline}</h3>
+              <p className="who-mil__text">{m.body.value}</p>
+              <div className="who-mil__paths">
+                <a className="who-mil__path who-mil__path--primary" href={m.veteran.href}>
+                  {m.veteran.label}
+                </a>
+                <a className="who-mil__path" href={m.clinician.href}>
+                  {m.clinician.label}
+                </a>
+              </div>
+              <p className="who-mil__note">
+                {m.coverage.value} {m.discount}
+              </p>
+            </div>
+          </Reveal>
+          <ul className="who__slim">
+            {AUDIENCES.map((a) => (
+              <li key={a.key} id={audienceAnchor(a.key)} className="who-card">
+                <h3 className="who-card__title">{a.title}</h3>
+                <p className="who-card__body">{a.body.value}</p>
+                {a.source && (
+                  <a className="who-card__src" href={SOURCES[a.source].url} rel="noopener" target="_blank">
+                    {SOURCES[a.source].authors}, {SOURCES[a.source].journal}, {SOURCES[a.source].year}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
+                <CardCta a={a} />
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

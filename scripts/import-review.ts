@@ -1,5 +1,5 @@
 /**
- * Reads the CSV Eric edited and writes it back into content/intake.ts, exercises.ts, genres.ts and audiences.ts:
+ * Reads the CSV Eric edited and writes it back into content/intake.ts, exercises.ts, genres.ts, audiences.ts, hero.ts and clinic.ts:
  *   - "approve (Y/N)" = Y  -> reviewedByEric: true (or approved: true for exercises)
  *   - "Eric's edit" filled -> replaces the current text (approved or not)
  *   npm run review:import              (reads content/review.csv)

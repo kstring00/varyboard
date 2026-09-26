@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Genre } from "@/content/intake";
 import { GenreAnim } from "./GenreAnim";
-import { GENRE_HINT, GENRE_SELECT, genreCardId } from "./genreBus";
+import { genreCardId } from "@/content/genres";
 
 export interface GenreCard {
   key: Genre;
@@ -65,7 +65,6 @@ function MiniHex({ side }: { side: number }) {
 export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
   const root = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState<Genre>(cards[0].key);
-  const [hint, setHint] = useState<Genre | null>(null);
   const [announce, setAnnounce] = useState("");
   const [inView, setInView] = useState(false);
 
@@ -73,7 +72,7 @@ export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
     const c = cards.find((x) => x.key === g)!;
     return `${c.plainName}, ${c.clinicalName}. ${c.whatItIs ?? "Coming soon from Dr. Eric."}`;
   };
-  /** A deliberate choice (click, tap, key, chip): select and announce. Hover only previews. */
+  /** A deliberate choice (click, tap, key): select and announce. Hover only previews. */
   const choose = (g: Genre) => {
     setActive(g);
     setAnnounce(describe(g));
@@ -88,38 +87,21 @@ export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
     return () => io.disconnect();
   }, []);
 
-  // Chips in "Who it's for" and #genre-* links.
+  // #genre-* links (the hero's six hexagons, the phone index): select that card; on desktop bring the hexagon into view.
   useEffect(() => {
     const desktop = () => window.matchMedia("(min-width: 1024px)").matches;
     const reduce = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const reveal = (g: Genre) => {
-      const target = desktop() ? root.current : document.getElementById(genreCardId(g));
-      target?.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "start" });
-    };
-    const onHint = (e: Event) => setHint((e as CustomEvent<Genre | null>).detail);
-    const onSelect = (e: Event) => {
-      const g = (e as CustomEvent<Genre>).detail;
-      setActive(g);
-      setAnnounce(cards.find((x) => x.key === g) ? `${cards.find((x) => x.key === g)!.plainName} selected above.` : "");
-      reveal(g);
-    };
     const fromHash = () => {
       const m = window.location.hash.match(/^#genre-(\w+)$/);
       const g = m?.[1] as Genre | undefined;
       if (g && cards.some((c) => c.key === g)) {
         setActive(g);
-        if (desktop()) reveal(g);
+        if (desktop()) root.current?.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "start" });
       }
     };
-    window.addEventListener(GENRE_HINT, onHint);
-    window.addEventListener(GENRE_SELECT, onSelect);
     window.addEventListener("hashchange", fromHash);
     fromHash();
-    return () => {
-      window.removeEventListener(GENRE_HINT, onHint);
-      window.removeEventListener(GENRE_SELECT, onSelect);
-      window.removeEventListener("hashchange", fromHash);
-    };
+    return () => window.removeEventListener("hashchange", fromHash);
   }, [cards]);
 
   const idx = (g: Genre) => cards.findIndex((c) => c.key === g);
@@ -138,7 +120,7 @@ export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
           {cards.map((c, i) => {
             const a = corner(i);
             const b = corner((i + 1) % 6);
-            const state = c.key === active ? "on" : c.key === hint ? "hint" : "off";
+            const state = c.key === active ? "on" : "off";
             return (
               <line
                 key={c.key}
@@ -163,7 +145,7 @@ export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
           <button
             key={c.key}
             type="button"
-            className={`gx-side-btn gx-side-btn--${LABEL[i].align}${c.key === hint ? " is-hint" : ""}`}
+            className={`gx-side-btn gx-side-btn--${LABEL[i].align}`}
             style={{ left: `${LABEL[i].x}%`, top: `${LABEL[i].y}%` }}
             aria-pressed={c.key === active}
             aria-controls={genreCardId(c.key)}
@@ -182,7 +164,7 @@ export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
         <ul>
           {cards.map((c, i) => (
             <li key={c.key}>
-              <a href={`#${genreCardId(c.key)}`} className={`gx-index__link${c.key === hint ? " is-hint" : ""}`} onClick={() => setActive(c.key)} data-genre-index={c.key}>
+              <a href={`#${genreCardId(c.key)}`} className="gx-index__link" onClick={() => setActive(c.key)} data-genre-index={c.key}>
                 <MiniHex side={i} />
                 <span>{c.plainName}</span>
               </a>
@@ -193,7 +175,7 @@ export function GenreExplorer({ cards }: { cards: GenreCard[] }) {
 
       <div className="gx-cards">
         {cards.map((c, i) => (
-          <article key={c.key} id={genreCardId(c.key)} className={`gx-card${c.key === hint ? " is-hint" : ""}`} data-on={c.key === active} aria-labelledby={`${genreCardId(c.key)}-title`}>
+          <article key={c.key} id={genreCardId(c.key)} className="gx-card" data-on={c.key === active} aria-labelledby={`${genreCardId(c.key)}-title`}>
             <div className="gx-card__head">
               <div>
                 <p className="gx-card__num">{String(i + 1).padStart(2, "0")}</p>
