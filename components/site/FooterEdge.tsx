@@ -1,9 +1,8 @@
 /**
- * The footer never starts with a straight line. Mirrors the hero's bottom edge, upside down:
- * a row of whole hexagons at the top dissolving downward into hexagon outlines and small
- * Y vertex marks. Static, server-rendered SVG with a seeded layout, so it is identical on
- * the server and the client and costs nothing at runtime. Same tokens as HexEdge: the
- * fill is the next background (here the mint wash), the strokes are low-alpha ink.
+ * The footer never starts with a straight line: a row of whole hexagons at the top dissolving
+ * downward into hexagon outlines and small Y vertex marks. Static, server-rendered SVG with a
+ * seeded layout, so it is identical on the server and the client and costs nothing at runtime.
+ * The fill is the next background (here the mint wash), the strokes are low-alpha ink.
  */
 const R = 26;
 const DX = Math.sqrt(3) * R;

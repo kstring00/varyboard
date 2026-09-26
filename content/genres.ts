@@ -1,4 +1,4 @@
-import { board, products } from "./facts";
+import { board, formatPrice, products } from "./facts";
 import type { Genre, Reviewed } from "./intake";
 
 /**
@@ -12,7 +12,8 @@ import type { Genre, Reviewed } from "./intake";
  *    Draft banner on previews. `npm run review:export` puts them in content/review.csv.
  *  - Clinical names are Eric's existing wording.
  *  - Numbers come from content/facts.ts through the {tokens} below, never typed here.
- *    {perSection} {anchors} {anchorsXT} {space}
+ *    {perSection} {anchors} {anchorsXT} {space} {spaceFeet} {depth} {price}
+ *    (content/hero.ts, clinic.ts and audiences.ts use the same tokens)
  *  - A field set to null renders "Coming soon from Dr. Eric".
  */
 const rv = (value: string, reviewedByEric = false): Reviewed => ({ value, reviewedByEric });
@@ -29,7 +30,10 @@ export function fillFacts(text: string): string {
     .replace(/\{perSection\}/g, String(ANCHORS.perSection))
     .replace(/\{anchors\}/g, String(ANCHORS.board))
     .replace(/\{anchorsXT\}/g, String(ANCHORS.xt))
-    .replace(/\{space\}/g, board.minSpacePerUser.replace("x", "×"));
+    .replace(/\{spaceFeet\}/g, board.minSpacePerUser.replace("x", "×").replace(/\bft\b/, "feet"))
+    .replace(/\{space\}/g, board.minSpacePerUser.replace("x", "×"))
+    .replace(/\{depth\}/g, `${board.section.depthIn} inches`)
+    .replace(/\{price\}/g, formatPrice(products.board.price));
 }
 
 export interface GenreInfo {
@@ -114,6 +118,9 @@ export const GENRE_LIST: GenreInfo[] = [
 ];
 
 export const GENRE_KEYS: Genre[] = GENRE_LIST.map((g) => g.key);
+
+/** Each genre's card in "What you can do": #genre-climb … The hero's six hexagons link here. */
+export const genreCardId = (g: Genre) => `genre-${g}`;
 
 export function genreByKey(key: Genre): GenreInfo {
   const g = GENRE_LIST.find((x) => x.key === key);

@@ -36,7 +36,7 @@ export interface ReviewItem {
   /** Group id: rows that share one reviewed flag (try-today fields). Equals id for single-field items. */
   group: string;
   lane: string;
-  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience" | "review";
+  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience" | "hero" | "clinic" | "who" | "review";
   text: string;
   reviewed: boolean;
   file: string;
@@ -49,6 +49,8 @@ export const FILES = {
   exercises: path.join(process.cwd(), "content", "exercises.ts"),
   genres: path.join(process.cwd(), "content", "genres.ts"),
   audiences: path.join(process.cwd(), "content", "audiences.ts"),
+  hero: path.join(process.cwd(), "content", "hero.ts"),
+  clinic: path.join(process.cwd(), "content", "clinic.ts"),
   reviews: path.join(process.cwd(), "content", "reviews.ts"),
 };
 
@@ -179,8 +181,8 @@ export function collectItems(): ReviewItem[] {
     const id = `exercise:${idNode.text}`;
     items.push({ id, group: id, lane: "all", type: "exercise", text: (nameNode as ts.StringLiteral).text, reviewed, file: "content/exercises.ts", textSpan: strSpan(nameNode), flag });
   }
-  // genres.ts GENRE_LIST[].<field> and audiences.ts AUDIENCES[].<field>: rv("…") calls
-  const keyed = (rel: string, abs: string, list: string, type: "genre" | "audience") => {
+  // genres.ts GENRE_LIST[].<field>: rv("…") calls
+  const keyed = (rel: string, abs: string, list: string, type: "genre") => {
     const { sf: s2 } = parse(abs);
     const arr = topLevel(s2, list) as ts.ArrayLiteralExpression;
     for (const el of arr.elements) {
@@ -189,12 +191,38 @@ export function collectItems(): ReviewItem[] {
       for (const p of el.properties) {
         if (!ts.isPropertyAssignment(p) || !ts.isCallExpression(p.initializer) || p.initializer.expression.getText() !== "rv") continue;
         const id = `${type}:${key}:${keyOf(p)}`;
-        items.push({ id, group: id, lane: type === "audience" ? key : "all", type, file: rel, ...truthCall(p.initializer, "rv") });
+        items.push({ id, group: id, lane: "all", type, file: rel, ...truthCall(p.initializer, "rv") });
       }
     }
   };
   keyed("content/genres.ts", FILES.genres, "GENRE_LIST", "genre");
-  keyed("content/audiences.ts", FILES.audiences, "AUDIENCES", "audience");
+
+  // hero.ts, clinic.ts and audiences.ts: every rv("…") call anywhere inside the named objects,
+  // id'd by its path (array items by their `key`), the same ids content/reviewed.ts unreviewedIn() prints.
+  const nested = (rel: string, abs: string, roots: [name: string, prefix: "hero" | "clinic" | "who" | "audience"][]) => {
+    const { sf: s3 } = parse(abs);
+    const unwrap = (n: ts.Expression): ts.Expression => (ts.isSatisfiesExpression(n) || ts.isAsExpression(n) || ts.isParenthesizedExpression(n) ? unwrap(n.expression) : n);
+    const walk = (node: ts.Expression, at: string, prefix: "hero" | "clinic" | "who" | "audience") => {
+      const n = unwrap(node);
+      if (ts.isCallExpression(n) && n.expression.getText() === "rv") {
+        const id = `${prefix}:${at}`;
+        items.push({ id, group: id, lane: prefix === "audience" ? at.split(".")[0] : "all", type: prefix === "audience" ? "audience" : prefix, file: rel, ...truthCall(n, "rv") });
+      } else if (ts.isObjectLiteralExpression(n)) {
+        for (const p of n.properties) if (ts.isPropertyAssignment(p)) walk(p.initializer, at ? `${at}.${keyOf(p)}` : keyOf(p), prefix);
+      } else if (ts.isArrayLiteralExpression(n)) {
+        n.elements.forEach((el, i) => {
+          const e = unwrap(el);
+          const k = ts.isObjectLiteralExpression(e) ? prop(e, "key") : undefined;
+          const name = k && ts.isStringLiteral(k) ? k.text : String(i);
+          walk(el, at ? `${at}.${name}` : name, prefix);
+        });
+      }
+    };
+    for (const [name, prefix] of roots) walk(topLevel(s3, name), "", prefix);
+  };
+  nested("content/hero.ts", FILES.hero, [["HERO", "hero"]]);
+  nested("content/clinic.ts", FILES.clinic, [["CLINIC", "clinic"]]);
+  nested("content/audiences.ts", FILES.audiences, [["WHO", "who"], ["AUDIENCES", "audience"]]);
 
   // reviews.ts: an open ericQuestion on a review. Y = keep (question closed). Reviews are never
   // edited: the importer refuses text in "Eric's edit" for these rows; to remove, delete the entry.

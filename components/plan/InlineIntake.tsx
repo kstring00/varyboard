@@ -4,18 +4,18 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AreaStep } from "@/components/plan/AreaStep";
 import { ConcernOptions, Crumbs, LaneOptions, SituationOptions, StepFoot, stepTitle } from "@/components/plan/StepParts";
 import { type Concern, type Lane } from "@/content/intake";
+import { INLINE_ANCHOR } from "@/content/routes";
 import { concernFor, isLane } from "@/lib/intake";
 
 /**
  * The intake, inline on the homepage (section #find-your-plan). Steps 1 and 2 are local state;
  * the final tap is a link to /plan/result with the same params the standalone /plan produces.
  *
- * Deep link: #find-your-plan?for=mil[&c=surgery] pre-selects and scrolls here (ticker links use it).
+ * Deep link: #find-your-plan?for=mil[&c=surgery] pre-selects and scrolls here.
  * Motion: the stage's height eases between steps and each new step assembles cell by cell
  * (ixAssemble). Static under prefers-reduced-motion. The heading is announced and focused on
  * every step change after the first interaction, never on page load.
  */
-export const INLINE_ANCHOR = "find-your-plan";
 
 function fromHash(hash: string): { lane?: Lane; concern?: string } | null {
   const m = new RegExp(`^#${INLINE_ANCHOR}(?:\\?(.*))?$`).exec(hash);
