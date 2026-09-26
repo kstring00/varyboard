@@ -26,17 +26,25 @@ const Bg = ({ className }: { className?: string }) => (
 
 /** The small board scene inside one genre hexagon (inches, floor at y = 78). */
 function MiniScene({ genre, index }: { genre: string; index: number }) {
-  const holes: [number, number][] = [];
-  for (let r = 0; r < 28; r++) for (const x of r % 2 ? [-19.3, -17, -14.7] : [-18.2, -15.8]) holes.push([x, 5.5 + r * 2.6]);
   const railLit = genre === "steady" || genre === "rise" || genre === "loosen";
+  const dots = `sb-dots-${index}`;
   return (
     <svg className="sb-hx__ic" viewBox="-24 -4 46 84" aria-hidden="true" focusable="false">
+      {/* 28 anchor rows alternating 2 and 3 (y = 5.5 + 2.6 row), drawn as one pattern: two rows per 5.2-unit tile */}
+      <defs>
+        <pattern id={dots} patternUnits="userSpaceOnUse" x={-21} y={4.88} width={8} height={5.2}>
+          {[2.8, 5.2].map((x) => (
+            <circle key={x} cx={x} cy={0.62} r={0.62} fill="#1F3E4A" />
+          ))}
+          {[1.7, 4, 6.3].map((x) => (
+            <circle key={x} cx={x} cy={3.22} r={0.62} fill="#1F3E4A" />
+          ))}
+        </pattern>
+      </defs>
       <rect x={-21} y={3} width={8} height={75} rx={1.4} fill="#4fa5c6" />
       <rect x={-21} y={3.5} width={1.1} height={74} rx={0.5} fill="#8C979C" />
       <rect x={-14.1} y={3.5} width={1.1} height={74} rx={0.5} fill={railLit ? "#62BBA6" : "#8C979C"} />
-      {holes.map(([x, y]) => (
-        <circle key={`${x}-${y}`} cx={x} cy={y} r={0.62} fill="#1F3E4A" />
-      ))}
+      <rect x={-21} y={4.88} width={8} height={72.8} fill={`url(#${dots})`} />
       <line x1={-24} y1={78.2} x2={22} y2={78.2} stroke="#CFC9BF" strokeWidth={0.8} />
       {genre === "rise" && (
         <>
