@@ -97,7 +97,7 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 
 ## Homepage sections, in order
 
-Hero (scroll-build) → Why it's different → What you can do → Who it's for → Find your plan → Will it fit? → The people behind it → Fits your space → In their words → Pricing.
+Hero (scroll-build) → Why it's different → What you can do → Who it's for → Find your plan → Will it fit? → The people behind it → In their words → Pricing.
 
 - **Why it's different** (`#clinic`, `content/clinic.ts`): the usual PT gym next to one wall, an illustration of one day of sessions (the page says it is not measured data). One CTA: the clinic request form (`/professionals#request`). The page's **Sources** list sits at the bottom of this section, from `content/sources.ts`.
 - **Genres** live in `content/genres.ts` (single source; the intake, hero and plan hexagon read from it). Clinical names are Eric's wording. Every health line is `rv("…")` and unreviewed until Eric signs it off. Anchor counts come from `content/facts.ts` through `{anchors}`-style tokens. Loosen (Joint Mobilizations) has no movements yet: its card shows "Coming soon from Dr. Eric" until the four fields are filled.
