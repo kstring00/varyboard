@@ -67,7 +67,7 @@ export function Accordion({
         const panelId = `${base}-p-${item.id}`;
         return (
           <div key={item.id} className="acc-item" data-open={isOpen}>
-            <Heading className="m-0 font-sans text-base font-medium">
+            <Heading className="m-0 font-body text-base font-medium">
               <button
                 id={headerId}
                 ref={(n) => {

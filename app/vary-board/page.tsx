@@ -32,7 +32,7 @@ export default function VaryBoardPage() {
         <div className="container-site">
           <Reveal className="flex flex-col gap-4 rounded-3xl border border-line bg-white/60 p-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-xl font-medium">{board.heightGuidance.xt}?</h2>
+              <h2 className="text-xl font-semibold">{board.heightGuidance.xt}?</h2>
               <p className="mt-1 text-lg text-ink-2">
                 The {products.boardXT.name} adds a fourth section for a {products.boardXT.specs[1].value} board.
               </p>

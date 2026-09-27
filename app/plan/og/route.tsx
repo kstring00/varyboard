@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { GENRES, GENRE_ORDER } from "@/content/intake";
 import { brand } from "@/content/facts";
@@ -13,7 +15,11 @@ const corner = (i: number) => {
   return { x: C.x + R * Math.cos(a), y: C.y + R * Math.sin(a) };
 };
 
+/** The site's one family, Figtree (SIL OFL; assets/fonts), since next/font's CSS variables do not reach the image renderer. */
+const FONT = (w: number) => readFile(join(process.cwd(), `assets/fonts/Figtree-${w}.ttf`));
+
 export async function GET(req: Request) {
+  const [regular, semibold] = await Promise.all([FONT(400), FONT(600)]);
   const sp = Object.fromEntries(new URL(req.url).searchParams.entries());
   const parsed = parseIntake(sp, true);
   let headline = "Find your plan";
@@ -29,7 +35,7 @@ export async function GET(req: Request) {
   const used = new Set(genres);
   return new ImageResponse(
     (
-      <div style={{ width: 1200, height: 630, display: "flex", background: "#f2f0eb", color: "#17211f", fontFamily: "Georgia, serif", padding: 64, alignItems: "center" }}>
+      <div style={{ width: 1200, height: 630, display: "flex", background: "#f2f0eb", color: "#17211f", fontFamily: "Figtree", padding: 64, alignItems: "center" }}>
         <svg width="380" height="380" viewBox="0 0 380 380">
           <polygon points={GENRE_ORDER.map((_, i) => `${corner(i).x},${corner(i).y}`).join(" ")} fill="rgba(133,181,178,0.14)" />
           {GENRE_ORDER.map((g, i) => {
@@ -43,12 +49,12 @@ export async function GET(req: Request) {
           ))}
         </svg>
         <div style={{ display: "flex", flexDirection: "column", marginLeft: 56, flex: 1 }}>
-          <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#1f3d48", fontFamily: "Arial, sans-serif" }}>{`${brand.name} · Find your plan`}</div>
-          <div style={{ fontSize: headline.length > 60 ? 44 : 54, lineHeight: 1.1, marginTop: 20, fontWeight: 500 }}>{headline}</div>
-          <div style={{ fontSize: 26, marginTop: 24, color: "#3b4745", fontFamily: "Arial, sans-serif" }}>{sub}</div>
+          <div style={{ fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#1f3d48", fontWeight: 600 }}>{`${brand.name} · Find your plan`}</div>
+          <div style={{ fontSize: headline.length > 60 ? 44 : 54, lineHeight: 1.1, marginTop: 20, fontWeight: 600, letterSpacing: "-0.035em" }}>{headline}</div>
+          <div style={{ fontSize: 26, marginTop: 24, color: "#3b4745" }}>{sub}</div>
           <div style={{ display: "flex", gap: 14, marginTop: 28, flexWrap: "wrap" }}>
             {GENRE_ORDER.map((g) => (
-              <div key={g} style={{ padding: "8px 16px", borderRadius: 999, fontSize: 20, fontFamily: "Arial, sans-serif", background: used.has(g) ? "#1f3d48" : "transparent", color: used.has(g) ? "#f2f0eb" : "#55615e", border: "2px solid " + (used.has(g) ? "#1f3d48" : "#cfd6d4") }}>
+              <div key={g} style={{ padding: "8px 16px", borderRadius: 999, fontSize: 20, background: used.has(g) ? "#1f3d48" : "transparent", color: used.has(g) ? "#f2f0eb" : "#55615e", border: "2px solid " + (used.has(g) ? "#1f3d48" : "#cfd6d4") }}>
                 {GENRES[g].label}
               </div>
             ))}
@@ -56,6 +62,13 @@ export async function GET(req: Request) {
         </div>
       </div>
     ),
-    { width: 1200, height: 630 },
+    {
+      width: 1200,
+      height: 630,
+      fonts: [
+        { name: "Figtree", data: regular, weight: 400, style: "normal" },
+        { name: "Figtree", data: semibold, weight: 600, style: "normal" },
+      ],
+    },
   );
 }

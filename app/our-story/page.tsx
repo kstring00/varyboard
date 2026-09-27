@@ -48,7 +48,7 @@ export default function OurStoryPage() {
               <Reveal key={p.name} className={`grid gap-8 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-start ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>
                 <Portrait person={p} />
                 <div>
-                  <h3 className="text-2xl font-medium">{p.name}</h3>
+                  <h3 className="text-2xl font-semibold">{p.name}</h3>
                   <p className="mt-1 text-lg font-semibold text-teal-deep">{p.credentialsSpelledOut}</p>
                   <p className="text-ink-2">{p.role}</p>
                   <div className="mt-5 space-y-4 text-xl text-ink-2">

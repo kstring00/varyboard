@@ -25,9 +25,9 @@ export function PriceCta() {
           {/* Standard */}
           <Reveal className="relative flex flex-col rounded-3xl border-2 border-teal-deep bg-white p-6 shadow-soft">
             <span className="absolute -top-3.5 left-8 rounded-full bg-teal-deep px-3 py-1 text-sm font-semibold uppercase tracking-wider text-white">Most people</span>
-            <h3 className="text-2xl font-medium">{products.board.name}</h3>
+            <h3 className="text-2xl font-semibold">{products.board.name}</h3>
             <p className="mt-1 text-ink-2">{board.heightGuidance.standard}</p>
-            <p className="mt-5 font-display text-4xl font-medium">{formatPrice(products.board.price)}</p>
+            <p className="mt-5 font-display text-4xl font-semibold">{formatPrice(products.board.price)}</p>
             <ul className="mt-6 space-y-2 text-lg">
               {products.board.specs.slice(0, 3).map((s) => (
                 <li key={s.label} className="flex justify-between gap-4 border-b border-line py-2">
@@ -45,9 +45,9 @@ export function PriceCta() {
           </Reveal>
           {/* XT */}
           <Reveal delay={90} className="flex flex-col rounded-3xl border border-line bg-white/70 p-6">
-            <h3 className="text-2xl font-medium">{products.boardXT.name}</h3>
+            <h3 className="text-2xl font-semibold">{products.boardXT.name}</h3>
             <p className="mt-1 text-ink-2">{board.heightGuidance.xt}</p>
-            <p className="mt-5 font-display text-4xl font-medium">{formatPrice(products.boardXT.price)}</p>
+            <p className="mt-5 font-display text-4xl font-semibold">{formatPrice(products.boardXT.price)}</p>
             <ul className="mt-6 space-y-2 text-lg">
               {products.boardXT.specs.slice(0, 3).map((s) => (
                 <li key={s.label} className="flex justify-between gap-4 border-b border-line py-2">
@@ -68,7 +68,7 @@ export function PriceCta() {
         {/* Board + bands */}
         <Reveal className="mx-auto mt-6 flex max-w-4xl flex-col gap-4 rounded-2xl border border-line bg-white/70 p-6 md:flex-row md:items-center md:justify-between">
           <div>
-            <h3 className="text-xl font-medium">Board + Bands</h3>
+            <h3 className="text-xl font-semibold">Board + Bands</h3>
             <p className="text-ink-2">
               {products.board.name} with the {products.bands.name}: {products.bands.summary}
             </p>
@@ -80,7 +80,7 @@ export function PriceCta() {
 
         <div className="mx-auto mt-12 max-w-3xl">
           <Reveal>
-            <h3 className="text-2xl font-medium">Quick answers</h3>
+            <h3 className="text-2xl font-semibold">Quick answers</h3>
           </Reveal>
           <Reveal className="mt-5">
             <Accordion items={homeFaq.map((f) => ({ id: f.id, title: f.q, content: <FaqAnswer item={f} /> }))} defaultOpen={[homeFaq[0].id]} />
@@ -93,7 +93,7 @@ export function PriceCta() {
         </div>
 
         <Reveal className="mx-auto mt-12 max-w-3xl rounded-3xl bg-ink px-7 py-10 text-center text-paper">
-          <h3 className="text-2xl font-medium">Ready when you are.</h3>
+          <h3 className="text-2xl font-semibold">Ready when you are.</h3>
           <p className="mt-3 text-xl text-paper/80">
             {board.trustLine} {shipping.flatRateLine}.
           </p>

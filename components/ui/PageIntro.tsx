@@ -5,7 +5,7 @@ export function PageIntro({ eyebrow, title, intro, children }: { eyebrow?: strin
   return (
     <header className="container-site pb-8 pt-10 md:pb-10 md:pt-14">
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h1 className="mt-3 max-w-3xl text-[1.8rem] font-medium leading-[1.05] sm:text-[2.2rem] lg:text-[2.6rem]">{title}</h1>
+      <h1 className="mt-3 max-w-3xl text-[1.8rem] font-semibold leading-[1.05] sm:text-[2.2rem] lg:text-[2.6rem]">{title}</h1>
       {intro && <div className="mt-5 max-w-2xl text-lg text-ink-2">{intro}</div>}
       {children}
     </header>

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { figtree } from "@/lib/fonts";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StickyBuyBar } from "@/components/site/StickyBuyBar";
@@ -43,7 +43,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable}`}>
+    <html lang="en" className={figtree.variable}>
       <body className="flex min-h-dvh flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-teal-deep focus:px-5 focus:py-3 focus:text-white">

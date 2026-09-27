@@ -32,7 +32,7 @@ export default function VaryBoardXTPage() {
         <div className="container-site">
           <Reveal className="flex flex-col gap-4 rounded-3xl border border-line bg-white/60 p-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-xl font-medium">Under 6&apos;3&quot;?</h2>
+              <h2 className="text-xl font-semibold">Under 6&apos;3&quot;?</h2>
               <p className="mt-1 text-lg text-ink-2">
                 The standard {products.board.name} ({products.board.specs[1].value}) fits most adults.
               </p>

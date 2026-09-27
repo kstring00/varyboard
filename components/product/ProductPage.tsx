@@ -78,9 +78,9 @@ export function ProductPage({
 
           <div className="lg:sticky lg:top-24">
             <p className="eyebrow">{product.name}</p>
-            <h1 className="mt-3 text-[1.97rem] font-medium leading-[1.05] sm:text-[2.46rem]">{headline}</h1>
+            <h1 className="mt-3 text-[1.97rem] font-semibold leading-[1.05] sm:text-[2.46rem]">{headline}</h1>
             <p className="mt-4 text-xl text-ink-2">{intro}</p>
-            <p className="mt-6 font-display text-4xl font-medium">{formatPrice(product.price)}</p>
+            <p className="mt-6 font-display text-4xl font-semibold">{formatPrice(product.price)}</p>
             <div className="mt-6 flex flex-col gap-3">
               <a href={buyHref} className="btn-primary text-lg">
                 {buyLabel}
@@ -91,7 +91,7 @@ export function ProductPage({
                 </a>
               )}
             </div>
-            {addOn && <p className="mt-2 text-[0.95rem] text-ink-2">{addOn.note}</p>}
+            {addOn && <p className="mt-2 text-base text-ink-2">{addOn.note}</p>}
             <ul className="mt-6 space-y-2 text-ink-2">
               <li className="flex items-center gap-2">
                 <Check /> {shipping.flatRateLine}
@@ -124,7 +124,7 @@ export function ProductPage({
           <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.4fr]">
             <Reveal>
               <p className="eyebrow">Specifications</p>
-              <h2 id="specs-title" className="mt-3 text-[1.72rem] font-medium leading-[1.08] sm:text-[2.13rem]">
+              <h2 id="specs-title" className="mt-3 text-[1.72rem] font-semibold leading-[1.08] sm:text-[2.13rem]">
                 The details.
               </h2>
               <p className="mt-4 text-lg text-ink-2">
@@ -148,7 +148,7 @@ export function ProductPage({
       <section aria-labelledby="pfaq-title" className="bg-paper py-12 md:py-12">
         <div className="container-site max-w-3xl">
           <Reveal>
-            <h2 id="pfaq-title" className="text-[1.72rem] font-medium leading-[1.08] sm:text-[2.13rem]">
+            <h2 id="pfaq-title" className="text-[1.72rem] font-semibold leading-[1.08] sm:text-[2.13rem]">
               Good to know.
             </h2>
           </Reveal>
@@ -172,7 +172,7 @@ export function ProductPage({
       <section className="bg-paper-2 py-12">
         <div className="container-site flex flex-col items-start gap-5 rounded-3xl bg-ink p-6 text-paper md:flex-row md:items-center md:justify-between md:p-10">
           <div>
-            <h2 className="text-2xl font-medium">{product.name}</h2>
+            <h2 className="text-2xl font-semibold">{product.name}</h2>
             <p className="mt-1 text-xl text-paper/80">
               {formatPrice(product.price)} · {shipping.flatRateLine.toLowerCase()}
             </p>
@@ -199,7 +199,7 @@ export function UsesStrip() {
     <section className="bg-paper pb-4">
       <div className="container-site">
         <Reveal className="rounded-3xl border border-line bg-white/60 p-6">
-          <h2 className="text-xl font-medium">Six kinds of practice, one board</h2>
+          <h2 className="text-xl font-semibold">Six kinds of practice, one board</h2>
           <ul className="mt-4 flex flex-wrap gap-3">
             {board.uses.map((u) => (
               <li key={u} className="rounded-full bg-teal-soft px-5 py-2.5 font-medium text-teal-deeper">
