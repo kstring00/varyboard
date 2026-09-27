@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Accordion } from "@/components/ui/Accordion";
-import { FaqAnswer } from "@/components/ui/FaqAnswer";
+import { FaqDetails } from "@/components/faq/FaqDetails";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { board, brand, discounts, formatPrice, products, shipping, type Product } from "@/content/facts";
 import type { SiteImage } from "@/content/images";
-import { faq } from "@/content/faq";
+import { faqById, isVisible, toView } from "@/content/faq";
 import { siteUrl } from "@/lib/site";
 
 export function ProductPage({
@@ -33,7 +32,7 @@ export function ProductPage({
   children?: ReactNode;
   faqIds: string[];
 }) {
-  const items = faq.filter((f) => faqIds.includes(f.id));
+  const items = faqIds.map((id) => faqById(id)).filter((e) => e !== undefined && isVisible(e)).map((e) => toView(e!));
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -153,7 +152,9 @@ export function ProductPage({
             </h2>
           </Reveal>
           <Reveal className="mt-6">
-            <Accordion items={items.map((f) => ({ id: f.id, title: f.q, content: <FaqAnswer item={f} /> }))} />
+            {items.map((f) => (
+              <FaqDetails key={f.id} item={f} placement="product" variant="row" />
+            ))}
           </Reveal>
           <Reveal className="mt-6 flex flex-wrap gap-4">
             <Link href="/faq" className="btn-secondary">

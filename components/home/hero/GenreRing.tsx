@@ -34,25 +34,25 @@ function MiniScene({ genre, index }: { genre: string; index: number }) {
       <defs>
         <pattern id={dots} patternUnits="userSpaceOnUse" x={-21} y={4.88} width={8} height={5.2}>
           {[2.8, 5.2].map((x) => (
-            <circle key={x} cx={x} cy={0.62} r={0.62} fill="#1F3E4A" />
+            <circle key={x} cx={x} cy={0.62} r={0.62} fill="var(--board-hole)" />
           ))}
           {[1.7, 4, 6.3].map((x) => (
-            <circle key={x} cx={x} cy={3.22} r={0.62} fill="#1F3E4A" />
+            <circle key={x} cx={x} cy={3.22} r={0.62} fill="var(--board-hole)" />
           ))}
         </pattern>
       </defs>
-      <rect x={-21} y={3} width={8} height={75} rx={1.4} fill="#4fa5c6" />
-      <rect x={-21} y={3.5} width={1.1} height={74} rx={0.5} fill="#8C979C" />
-      <rect x={-14.1} y={3.5} width={1.1} height={74} rx={0.5} fill={railLit ? "#62BBA6" : "#8C979C"} />
+      <rect x={-21} y={3} width={8} height={75} rx={1.4} fill="var(--product)" />
+      <rect x={-21} y={3.5} width={1.1} height={74} rx={0.5} fill="var(--board-rail)" />
+      <rect x={-14.1} y={3.5} width={1.1} height={74} rx={0.5} fill={railLit ? "var(--progress)" : "var(--board-rail)"} />
       <rect x={-21} y={4.88} width={8} height={72.8} fill={`url(#${dots})`} />
-      <line x1={-24} y1={78.2} x2={22} y2={78.2} stroke="#CFC9BF" strokeWidth={0.8} />
+      <line x1={-24} y1={78.2} x2={22} y2={78.2} stroke="var(--floor-line)" strokeWidth={0.8} />
       {genre === "rise" && (
         <>
-          <rect x={-7} y={42} width={14} height={18} rx={1.2} fill="#D6CDBF" />
-          <rect x={-9} y={59} width={18} height={1.8} rx={0.6} fill="#C4B7A4" />
+          <rect x={-7} y={42} width={14} height={18} rx={1.2} fill="var(--wood)" />
+          <rect x={-9} y={59} width={18} height={1.8} rx={0.6} fill="var(--wood-dark)" />
         </>
       )}
-      {genre === "strengthen" && <line data-sb="miniband" x1={-15.2} y1={1.5} x2={-15.2} y2={1.5} stroke="#E5484D" strokeWidth={0.9} strokeLinecap="round" />}
+      {genre === "strengthen" && <line data-sb="miniband" x1={-15.2} y1={1.5} x2={-15.2} y2={1.5} stroke="var(--band)" strokeWidth={0.9} strokeLinecap="round" />}
       <Mannequin pose={MINI[index](MINI_REST)} u={1} ox={0} oy={78} />
     </svg>
   );

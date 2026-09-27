@@ -1,4 +1,4 @@
-import { board, formatPrice, products } from "./facts";
+import { board, discounts, formatPrice, products } from "./facts";
 import type { Genre, Reviewed } from "./intake";
 
 /**
@@ -12,7 +12,8 @@ import type { Genre, Reviewed } from "./intake";
  *    Draft banner on previews. `npm run review:export` puts them in content/review.csv.
  *  - Clinical names are Eric's existing wording.
  *  - Numbers come from content/facts.ts through the {tokens} below, never typed here.
- *    {perSection} {anchors} {anchorsXT} {space} {spaceFeet} {depth} {price}
+ *    {perSection} {anchors} {anchorsXT} {space} {spaceFeet} {depth} {depthIn} {price}
+ *    {heightIn} {heightInXT} {heroesPercent}
  *    (content/hero.ts, clinic.ts and audiences.ts use the same tokens)
  *  - A field set to null renders "Coming soon from Dr. Eric".
  */
@@ -33,6 +34,10 @@ export function fillFacts(text: string): string {
     .replace(/\{spaceFeet\}/g, board.minSpacePerUser.replace("x", "×").replace(/\bft\b/, "feet"))
     .replace(/\{space\}/g, board.minSpacePerUser.replace("x", "×"))
     .replace(/\{depth\}/g, `${board.section.depthIn} inches`)
+    .replace(/\{depthIn\}/g, `${board.section.depthIn} in`)
+    .replace(/\{heightIn\}/g, String(products.board.heightIn))
+    .replace(/\{heightInXT\}/g, String(products.boardXT.heightIn))
+    .replace(/\{heroesPercent\}/g, String(discounts.heroesPercent))
     .replace(/\{price\}/g, formatPrice(products.board.price));
 }
 

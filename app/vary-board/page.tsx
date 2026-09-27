@@ -25,7 +25,7 @@ export default function VaryBoardPage() {
       addOn={{ label: `Board + Bands (${formatPrice(p.price + products.bands.price)})`, href: buyLinks.boardPlusBands, note: `Adds the ${products.bands.name}: ${products.bands.summary}` }}
       headline="The board for most adults."
       intro={`Three modular sections stack to a ${p.specs[1].value} board on your wall. ${board.anchorPointsPerSection} hexagonal anchor points per section for bands and handholds. ${board.material}, indoors or out.`}
-      faqIds={["size", "space", "install", "shipping", "discount"]}
+      faqIds={["which-model", "floor-space", "install", "shipping", "military-discount"]}
     >
       <UsesStrip />
       <section className="bg-paper py-12">

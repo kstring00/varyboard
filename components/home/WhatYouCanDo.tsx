@@ -2,6 +2,7 @@ import { DraftBanner } from "@/components/plan/DraftBanner";
 import { GenreExplorer, type GenreCard } from "@/components/genres/GenreExplorer";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { InlineFaq } from "@/components/faq/InlineFaq";
 import { ANCHORS, GENRE_LIST, fillFacts, unreviewedGenres } from "@/content/genres";
 import { products } from "@/content/facts";
 
@@ -32,6 +33,7 @@ export function WhatYouCanDo() {
         <div className="wycd__body">
           <GenreExplorer cards={cards} />
         </div>
+        <InlineFaq placement="genres" className="wycd__faq" />
       </div>
     </section>
   );

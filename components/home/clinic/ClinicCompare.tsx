@@ -128,7 +128,7 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
       const path = document.createElementNS(NS, "path");
       path.setAttribute("d", d);
       path.setAttribute("fill", "none");
-      path.setAttribute("stroke", "#62BBA6");
+      path.setAttribute("stroke", "var(--progress)");
       path.setAttribute("stroke-width", "2.4");
       path.setAttribute("stroke-linecap", "round");
       path.setAttribute("stroke-linejoin", "round");
@@ -158,8 +158,8 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
       const rnd = rng(7);
       runs = ROUTES.map((r, i) => buildPath(r, i ? 22 : 0, rnd));
       for (const ch of chips) {
-        ch.setAttribute("fill", "#E7EBE8");
-        ch.setAttribute("stroke", "#C4CEC9");
+        ch.setAttribute("fill", "var(--chip)");
+        ch.setAttribute("stroke", "var(--chip-line)");
       }
       for (const k of ["oEx", "oTrips", "nEx", "nTrips"] as const) if (c[k]) c[k]!.textContent = "0";
     }
@@ -195,8 +195,8 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
           for (const sg of r.segs) {
             const g = sg.tag ? GEN[sg.tag] : undefined;
             if (g !== undefined && len >= sg.end - 0.5) {
-              chips[g].setAttribute("fill", "#9ED6C6");
-              chips[g].setAttribute("stroke", "#62BBA6");
+              chips[g].setAttribute("fill", "var(--progress-soft)");
+              chips[g].setAttribute("stroke", "var(--progress)");
             }
           }
       });
@@ -244,7 +244,7 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
     };
   }, []);
 
-  const eq = { fill: "#DCE4E1", stroke: "#A9B8B4", strokeWidth: 1.4 };
+  const eq = { fill: "var(--equip)", stroke: "var(--equip-line)", strokeWidth: 1.4 };
   const [table, ladder, pulley, bands, stairs, mat, pad, bars] = copy.stations;
 
   return (
@@ -256,13 +256,13 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
             <span className="cl-panel__tag">{copy.oldTag}</span>
           </div>
           <svg viewBox="0 0 400 400" role="img" aria-label={copy.oldLabel}>
-            <rect x={8} y={8} width={384} height={384} rx={12} fill="#F6F4EF" stroke="#C9D1CE" strokeWidth={2} />
+            <rect x={8} y={8} width={384} height={384} rx={12} fill="var(--room)" stroke="var(--room-line)" strokeWidth={2} />
             <g>
               <rect x={52} y={314} width={76} height={34} rx={5} {...eq} />
-              <rect x={44} y={14} width={56} height={10} rx={2} {...eq} fill="#B9C7C4" />
+              <rect x={44} y={14} width={56} height={10} rx={2} {...eq} fill="var(--equip-dark)" />
               <circle cx={196} cy={30} r={11} {...eq} fill="none" />
               <line x1={196} y1={14} x2={196} y2={19} {...eq} />
-              <rect x={374} y={60} width={12} height={62} rx={2} {...eq} fill="#B9C7C4" />
+              <rect x={374} y={60} width={12} height={62} rx={2} {...eq} fill="var(--equip-dark)" />
               <rect x={300} y={176} width={70} height={62} rx={3} {...eq} />
               {[1, 2, 3, 4].map((i) => (
                 <line key={i} x1={300} y1={176 + i * 12.4} x2={370} y2={176 + i * 12.4} {...eq} />
@@ -282,7 +282,7 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
               <Lbl x={86} y={222}>{mat}</Lbl>
               <Lbl x={212} y={234}>{pad}</Lbl>
               <Lbl x={227} y={368}>{bars}</Lbl>
-              <circle ref={walkerRef} r={7} fill="#1B4753" stroke="#fff" strokeWidth={2.5} opacity={0} />
+              <circle ref={walkerRef} r={7} fill="var(--brand)" stroke="var(--surface)" strokeWidth={2.5} opacity={0} />
             </g>
           </svg>
           <div className="cl-meters">
@@ -297,21 +297,21 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
             <span className="cl-panel__tag">{copy.newTag}</span>
           </div>
           <svg viewBox="0 0 400 400" role="img" aria-label={copy.newLabel}>
-            <rect x={8} y={8} width={384} height={384} rx={12} fill="#F6F4EF" stroke="#C9D1CE" strokeWidth={2} />
+            <rect x={8} y={8} width={384} height={384} rx={12} fill="var(--room)" stroke="var(--room-line)" strokeWidth={2} />
             <g>
-              <rect x={181} y={14} width={38} height={9} rx={2} fill="#4fa5c6" />
+              <rect x={181} y={14} width={38} height={9} rx={2} fill="var(--product)" />
               <Lbl x={244} y={22} dark anchor="start">{copy.board}</Lbl>
-              <rect x={172} y={26} width={56} height={56} rx={3} fill="rgba(98,187,166,.16)" stroke="#62BBA6" strokeWidth={1.8} strokeDasharray="5 4" />
+              <rect x={172} y={26} width={56} height={56} rx={3} fill="rgba(98,187,166,.16)" stroke="var(--progress)" strokeWidth={1.8} strokeDasharray="5 4" />
               <Lbl x={200} y={98}>{copy.spot}</Lbl>
-              <circle cx={200} cy={54} r={7} fill="#1B4753" stroke="#fff" strokeWidth={2.5} />
-              <circle ref={pulseRef} cx={200} cy={54} r={8} fill="none" stroke="#62BBA6" strokeWidth={2} opacity={0} />
+              <circle cx={200} cy={54} r={7} fill="var(--brand)" stroke="var(--surface)" strokeWidth={2.5} />
+              <circle ref={pulseRef} cx={200} cy={54} r={8} fill="none" stroke="var(--progress)" strokeWidth={2} opacity={0} />
               <g ref={chipsRef}>
                 {copy.genres.map((n, i) => {
                   const x = 120 + (i % 3) * 80;
                   const y = 142 + Math.floor(i / 3) * 70;
                   return (
                     <g key={n}>
-                      <polygon points={hex(x, y, 17)} fill="#E7EBE8" stroke="#C4CEC9" strokeWidth={1.4} />
+                      <polygon points={hex(x, y, 17)} fill="var(--chip)" stroke="var(--chip-line)" strokeWidth={1.4} />
                       <Lbl x={x} y={y + 33} dark>
                         {n}
                       </Lbl>
@@ -320,7 +320,7 @@ export function ClinicCompare({ copy }: { copy: ClinicCompareCopy }) {
                 })}
               </g>
             </g>
-            <rect x={60} y={296} width={280} height={74} rx={10} fill="none" stroke="#D2D9D5" strokeWidth={1.4} strokeDasharray="6 6" />
+            <rect x={60} y={296} width={280} height={74} rx={10} fill="none" stroke="var(--spare-line)" strokeWidth={1.4} strokeDasharray="6 6" />
             <Lbl x={200} y={338}>{copy.spare}</Lbl>
           </svg>
           <div className="cl-meters">

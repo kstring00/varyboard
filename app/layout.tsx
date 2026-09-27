@@ -4,9 +4,11 @@ import { figtree } from "@/lib/fonts";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StickyBuyBar } from "@/components/site/StickyBuyBar";
+import { AnchorLayout } from "@/components/site/AnchorLayout";
 import { brand } from "@/content/facts";
 import { isLaunched } from "@/lib/env";
 import { siteUrl } from "@/lib/site";
+import { COLORS } from "@/lib/colors";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -38,7 +40,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   // Pinch-zoom stays allowed on purpose (no maximumScale / userScalable=no).
-  themeColor: "#f7f6f2",
+  themeColor: COLORS.bg,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -55,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <StickyBuyBar />
+        <AnchorLayout />
       </body>
     </html>
   );

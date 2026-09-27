@@ -35,7 +35,7 @@ export default function InstallPage() {
           <ol className="mt-10 grid gap-5 md:grid-cols-3">
             {BEFORE.map((b, i) => (
               <Reveal as="li" key={b.t} delay={i * 80} className="rounded-2xl border border-line bg-white/60 p-6">
-                <span className="font-display text-2xl font-semibold text-teal">0{i + 1}</span>
+                <span className="font-display text-2xl font-semibold text-accent">0{i + 1}</span>
                 <h3 className="mt-3 text-xl font-semibold">{b.t}</h3>
                 <p className="mt-2 text-lg text-ink-2">{b.d}</p>
               </Reveal>
@@ -53,7 +53,7 @@ export default function InstallPage() {
             <ol className="mt-8 space-y-7">
               {installSteps.map((s, i) => (
                 <Reveal as="li" key={s.title} className="grid grid-cols-[3rem_1fr] gap-4">
-                  <span className="font-display text-xl font-semibold text-teal">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-display text-xl font-semibold text-accent">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="text-xl font-semibold">{s.title}</h3>
                     <p className="mt-2 text-lg text-ink-2">{s.body}</p>

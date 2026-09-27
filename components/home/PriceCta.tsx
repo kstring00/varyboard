@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { Accordion } from "@/components/ui/Accordion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { board, brand, discounts, formatPrice, products, shipping } from "@/content/facts";
-import { homeFaq } from "@/content/faq";
-import { FaqAnswer } from "@/components/ui/FaqAnswer";
+import { InlineFaq } from "@/components/faq/InlineFaq";
 import { buyLinks } from "@/lib/commerce";
 
 export function PriceCta() {
@@ -39,7 +37,7 @@ export function PriceCta() {
             <a href={buyLinks.board} className="btn-primary mt-8 text-lg">
               Get the Vary Board ({formatPrice(products.board.price)})
             </a>
-            <Link href={products.board.path} className="mt-3 inline-flex min-h-12 items-center justify-center font-semibold text-teal-deep no-underline">
+            <Link href={products.board.path} className="mt-3 inline-flex min-h-12 items-center justify-center font-semibold text-accent no-underline">
               Details and specs
             </Link>
           </Reveal>
@@ -59,10 +57,16 @@ export function PriceCta() {
             <a href={buyLinks.boardXT} className="btn-secondary mt-8 text-lg">
               Get the XT ({formatPrice(products.boardXT.price)})
             </a>
-            <Link href={products.boardXT.path} className="mt-3 inline-flex min-h-12 items-center justify-center font-semibold text-teal-deep no-underline">
+            <Link href={products.boardXT.path} className="mt-3 inline-flex min-h-12 items-center justify-center font-semibold text-accent no-underline">
               Details and specs
             </Link>
           </Reveal>
+        </div>
+
+        {/* Before you buy: the three questions people ask at the button */}
+        <div className="buy-faq mx-auto mt-6 max-w-4xl">
+          <h3 className="buy-faq__title">Before you buy</h3>
+          <InlineFaq placement="buy" max={3} />
         </div>
 
         {/* Board + bands */}
@@ -77,20 +81,6 @@ export function PriceCta() {
             Add both ({formatPrice(bundle)})
           </a>
         </Reveal>
-
-        <div className="mx-auto mt-12 max-w-3xl">
-          <Reveal>
-            <h3 className="text-2xl font-semibold">Quick answers</h3>
-          </Reveal>
-          <Reveal className="mt-5">
-            <Accordion items={homeFaq.map((f) => ({ id: f.id, title: f.q, content: <FaqAnswer item={f} /> }))} defaultOpen={[homeFaq[0].id]} />
-          </Reveal>
-          <Reveal className="mt-4">
-            <Link href="/faq" className="inline-flex min-h-12 items-center font-semibold text-teal-deep no-underline">
-              All questions
-            </Link>
-          </Reveal>
-        </div>
 
         <Reveal className="mx-auto mt-12 max-w-3xl rounded-3xl bg-ink px-7 py-10 text-center text-paper">
           <h3 className="text-2xl font-semibold">Ready when you are.</h3>

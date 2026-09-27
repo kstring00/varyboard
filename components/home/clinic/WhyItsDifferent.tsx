@@ -6,6 +6,7 @@ import { unreviewedHero } from "@/content/hero";
 import { link } from "@/content/routes";
 import { ClinicCompare } from "./ClinicCompare";
 import { Sources } from "./Sources";
+import { InlineFaq } from "@/components/faq/InlineFaq";
 
 /**
  * WHY IT'S DIFFERENT (#clinic), directly under the hero: the usual PT gym next to one wall,
@@ -53,6 +54,7 @@ export function WhyItsDifferent() {
             </li>
           ))}
         </ul>
+        <InlineFaq placement="clinic" className="cl__faq" />
         <Reveal className="cl-capstone">
           <p>{c.capstone.value}</p>
           <a className="sb-btn" href={link("/professionals", { hash: "request" }).href}>

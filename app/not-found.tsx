@@ -20,7 +20,7 @@ export default function NotFound() {
           { href: "/contact", label: "Contact" },
         ].map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="flex min-h-14 items-center rounded-2xl border border-line bg-white/60 px-5 font-semibold text-teal-deep no-underline hover:border-teal-deep">
+            <Link href={l.href} className="flex min-h-14 items-center rounded-2xl border border-line bg-white/60 px-5 font-semibold text-accent no-underline hover:border-teal-deep">
               {l.label}
             </Link>
           </li>

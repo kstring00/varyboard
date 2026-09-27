@@ -104,8 +104,8 @@ export default function RoomPlanner({ initialRoom = "bedroom", initialModel = "s
       </div>
       <div className={`fit-hint${hint ? "" : " fit-hint--gone"}`} aria-hidden={!hint}>
         <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-          <path d="M11 1.8 18.9 6.4v9.2L11 20.2 3.1 15.6V6.4Z" fill="#E1EFEC" stroke="#2D6A60" strokeWidth="1.3" />
-          <path d="M6.5 11h9M6.5 11l2.3-2.3M6.5 11l2.3 2.3M15.5 11l-2.3-2.3M15.5 11l-2.3 2.3" fill="none" stroke="#1E4D46" strokeWidth="1.5" strokeLinecap="round" />
+          <path d="M11 1.8 18.9 6.4v9.2L11 20.2 3.1 15.6V6.4Z" fill="var(--progress-wash)" stroke="var(--progress)" strokeWidth="1.3" />
+          <path d="M6.5 11h9M6.5 11l2.3-2.3M6.5 11l2.3 2.3M15.5 11l-2.3-2.3M15.5 11l-2.3 2.3" fill="none" stroke="var(--brand)" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
         <span>{coarse ? "Drag the board to another wall" : "Drag the board to any wall"}</span>
       </div>

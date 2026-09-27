@@ -47,7 +47,7 @@ export function People() {
               <Portrait person={p} />
               <div>
                 <h3 className="text-2xl font-semibold">{p.name}</h3>
-                <p className="mt-1 font-semibold text-teal-deep">{p.credentialsSpelledOut}</p>
+                <p className="mt-1 font-semibold text-accent">{p.credentialsSpelledOut}</p>
                 <p className="text-ink-2">{p.role}</p>
                 <ul className="mt-4 space-y-2 text-lg text-ink-2">
                   {p.lines.map((l) => (

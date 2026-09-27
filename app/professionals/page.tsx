@@ -64,7 +64,7 @@ export default function ProfessionalsPage() {
         </div>
       </section>
 
-      <section aria-labelledby="six-title" className="bg-ink py-12 text-paper md:py-16">
+      <section aria-labelledby="six-title" className="bg-teal-deep py-12 text-paper md:py-16">
         <div className="container-site grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
           <Reveal>
             <SectionHeading tone="dark" eyebrow="6-in-1" title={<span id="six-title">Six pieces of equipment. One board.</span>} intro="Everything on the list below happens on the same wall, at whatever height the patient needs." />
@@ -73,7 +73,7 @@ export default function ProfessionalsPage() {
             <ol className="grid gap-3 sm:grid-cols-2">
               {board.uses.map((u, i) => (
                 <li key={u} className="flex items-center gap-4 rounded-2xl bg-white/5 px-5 py-4 ring-1 ring-white/10">
-                  <span className="font-display text-2xl font-semibold text-teal">0{i + 1}</span>
+                  <span className="font-display text-2xl font-semibold text-accent">0{i + 1}</span>
                   <span className="text-lg font-medium">{u}</span>
                 </li>
               ))}
@@ -95,7 +95,7 @@ export default function ProfessionalsPage() {
                 <p className="mt-3 text-lg">
                   Retail {formatPrice(p.price)} · SKU {p.sku}
                 </p>
-                <Link href={p.path} className="mt-4 inline-flex min-h-12 items-center font-semibold text-teal-deep no-underline">
+                <Link href={p.path} className="mt-4 inline-flex min-h-12 items-center font-semibold text-accent no-underline">
                   Full specs
                 </Link>
               </Reveal>
