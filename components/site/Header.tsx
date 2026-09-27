@@ -35,13 +35,17 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-1 sm:gap-2">
-          <PhoneLink compact className="px-2 text-[0.92rem] text-ink-2 hover:text-ink sm:px-3" />
-          <Link href="/#pricing" className="btn-primary header-cta hidden px-5 text-[0.92rem] sm:inline-flex">
+          {/* Narrow phones: the number moves into the menu so Shop always fits. */}
+          <span className="hidden min-[420px]:contents">
+            <PhoneLink compact className="px-2 text-[0.92rem] text-ink-2 hover:text-ink sm:px-3" />
+          </span>
+          {/* Always visible, including over the pinned hero. */}
+          <Link href="/#pricing" className="btn-primary whitespace-nowrap px-3 text-[0.8rem] sm:px-5 sm:text-[0.92rem]">
             Shop · from {formatPrice(products.board.price)}
           </Link>
           <button
             type="button"
-            className="btn-ghost min-w-12 px-3 lg:hidden"
+            className="btn-ghost min-w-11 px-2.5 lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((v) => !v)}
@@ -60,9 +64,7 @@ export function Header() {
               {n.label}
             </Link>
           ))}
-          <Link href="/#pricing" onClick={() => setOpen(false)} className="btn-primary my-3 sm:hidden">
-            Shop · from {formatPrice(products.board.price)}
-          </Link>
+          <PhoneLink className="my-2 justify-start self-start px-1 text-lg text-ink" />
         </nav>
       </div>
     </header>

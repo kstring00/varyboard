@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Hero } from "@/components/home/Hero";
+import { ScrollBuildHero } from "@/components/home/hero/ScrollBuildHero";
+import { WhyItsDifferent } from "@/components/home/clinic/WhyItsDifferent";
 import { FindYourPlan } from "@/components/home/FindYourPlan";
 import { WhoItsFor } from "@/components/home/WhoItsFor";
 import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <ScrollBuildHero />
+      <WhyItsDifferent />
       <WhatYouCanDo />
       <WhoItsFor />
       <FindYourPlan />

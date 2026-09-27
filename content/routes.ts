@@ -41,6 +41,9 @@ export const link = (path: string, opts: { hash?: string; query?: string; label?
   return { href: `${r.path}${opts.query ? `?${opts.query}` : ""}${opts.hash ? `#${opts.hash}` : ""}`, label: opts.label ?? r.label };
 };
 
+/** The homepage's inline "Find your plan" intake (components/plan/InlineIntake.tsx). */
+export const INLINE_ANCHOR = "find-your-plan";
+
 /** Footer utility columns, in order. */
 export const footerNav = [
   { title: "Shop", links: [link("/vary-board"), link("/vary-board-xt"), link("/resistance-bands")] },

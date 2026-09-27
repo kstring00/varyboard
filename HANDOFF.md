@@ -58,15 +58,15 @@ Save the photos as `public/images/founders/eric-santiago.jpg` and `public/images
 
 To pull the remaining photos from the old Shopify store, run `npm run assets:fetch` on a computer that can reach thevaryboard.com, then the two steps above.
 
-## Change the hero image
+## The homepage hero (scroll-build)
 
-The home hero is copy on the left and a real photo on the right (a man pulling a red band anchored high on the Vary Board), over the existing honeycomb shader. The photo is graded at build time, never with CSS filters:
+The hero is a scroll-driven drawing of the Vary Board being built on an empty wall, ported from `reference/varyboard-scroll-build.html`: the hook ("The appointment ends. Your recovery doesn't."), three published findings, the 3 × 3 ft space, "For those who served", the program with Blake Cook's quote, and the finale (the six ways, one "Find your plan" button, the VA line).
 
-1. Put the full-resolution original at `public/images/hero/hero-strength-original.jpg`. **Not added yet:** until it is, the 600 px copy already on the site (`public/images/originals/mantoleft.webp`) is used, and the hero looks soft on large screens.
-2. Run `npm run assets:hero`. It applies the grade (gamma 0.78, R ×1.0, G ×0.99, B ×0.965, so the gray studio wall reads as plaster), writes AVIF and WebP at 1x and 2x for a desktop and a mobile crop, and records them in `content/hero-photo.generated.json`.
-3. Commit the new files in `public/images/hero/` and the JSON.
-
-`components/home/Hero.tsx` holds the alt text and preloads the photo (it is the page's LCP). The photo's left edge fade and the crop are in `app/globals.css` (`.hero__photo`).
+- **Copy and statistics:** `content/hero.ts`, in beat order. Every statistic names its source (`content/sources.ts`) and every statistic, caption and health line is `rv("…")` until Eric approves it. Specs and prices come from `content/facts.ts` through `{tokens}`: `{spaceFeet}`, `{depth}`, `{price}`. Blake Cook's quote is read from `content/reviews.ts`, never retyped. The review count is `storeReviews` in `content/facts.ts` ([VERIFY]).
+- **VA wording** is fixed: "may be covered when your provider finds it medically necessary." The build fails if a VA line loses it or says "free" (`checkCoverage` in `content/hero.ts`).
+- **The drawing** (`components/home/hero/BoardSvg.tsx`) is on spec: 25 × 8 × 3 in sections, 47 anchors each, 141 in all. The figures are placeholder mannequins, not people. `TODO(real-cutouts)`: swap the drawing for cutouts of the real board photographed flat. `npm run check:placeholders` lists this TODO on every run and fails on any other.
+- **Motion:** `components/home/hero/choreography.ts`, scroll only, no libraries. The timeline mapping (`KN`), poses and the board's geometry are in `rig.ts`. With reduced motion the finale is drawn once and nothing is pinned.
+- **Links:** "Get the provider packet" opens `public/docs/va-provider-packet.pdf` once it exists and the military plan (`/plan?for=mil`) until then. The six hexagons open their cards in "What you can do" (`#genre-climb` …).
 
 ## Add the install steps and the spec sheet
 
@@ -95,13 +95,28 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 - three.js never ships with the page. The section shows a real still of the bedroom scene (`public/images/fit/poster-bedroom.jpg`) until the visitor taps; the chunk is prefetched when the section is within 400px. Browsers without WebGL get the still plus a written room-by-room summary.
 - To refresh the still after changing the bedroom or the board: run the site, then `node scripts/fit-poster.mjs` (Chromium with software GL; the script header says how).
 
-## Homepage: "What you can do" and "Who it's for"
+## Homepage sections, in order
 
+Hero (scroll-build) → Why it's different → What you can do → Who it's for → Find your plan → Will it fit? → The people behind it → Fits your space → In their words → Pricing.
+
+- **Why it's different** (`#clinic`, `content/clinic.ts`): the usual PT gym next to one wall, an illustration of one day of sessions (the page says it is not measured data). One CTA: the clinic request form (`/professionals#request`). The page's **Sources** list sits at the bottom of this section, from `content/sources.ts`.
 - **Genres** live in `content/genres.ts` (single source; the intake, hero and plan hexagon read from it). Clinical names are Eric's wording. Every health line is `rv("…")` and unreviewed until Eric signs it off. Anchor counts come from `content/facts.ts` through `{anchors}`-style tokens. Loosen (Joint Mobilizations) has no movements yet: its card shows "Coming soon from Dr. Eric" until the four fields are filled.
-- **Audiences** live in `content/audiences.ts`, military first. `proofReviewId` must match an id in `content/reviews.ts` or be null; the build fails on a missing id. The military CTA opens `public/docs/va-provider-packet.pdf` once it exists, and the military intake lane until then. "Team pricing" opens the team inquiry form in the athletes card (`/#team-pricing` from anywhere).
-- The hero ticker scrolls to the audience cards (`content/audience.ts`). Caregivers, aging well and post-surgery recovery go to patients & families.
-- `npm run audit:content`, the Draft banner and `npm run review:export` / `review:import` all cover both files.
-- **Reviews** (`content/reviews.ts`): five testimonials copied word for word from the old homepage. They carry no star rating or date because the source shows none, so no stars render. D. Muhammad's is still to paste.
+- **Who it's for** (`content/audiences.ts`): the DoD & VA block first, with "I'm a veteran →" (the military plan) and "I'm a VA clinician →" (the clinic request form until a VA clinician page exists), then three slim cards. "Outfit your team" opens the team inquiry form in the athletes card (`/#team-pricing` from anywhere).
+- `npm run audit:content`, the Draft banner and `npm run review:export` / `review:import` cover the hero, clinic, genre and audience files.
+- **Reviews** (`content/reviews.ts`): testimonials copied word for word. They carry no star rating or date because the source shows none, so no per-review stars render (Blake Cook's quote in the hero included) until a rating is added from the Shopify reviews app.
+
+### Files Eric edits for copy and statistics
+
+| What | File |
+|---|---|
+| Hero copy, six of the seven study statistics and their captions, the demo moves | `content/hero.ts` |
+| The seventh statistic (Sherrington, falls) | `content/audiences.ts` |
+| Citations and links | `content/sources.ts` |
+| Why it's different | `content/clinic.ts` |
+| Who it's for | `content/audiences.ts` |
+| The six genres | `content/genres.ts` |
+| Prices, specs, review count | `content/facts.ts` |
+| All of the above, as a spreadsheet | `content/review.csv` (`npm run review:export`, then `review:import`) |
 
 ## Content gate on Vercel
 
@@ -168,7 +183,7 @@ Old Shopify URLs (`/products/vb`, `/pages/our-story`, `/cart/...` and so on) red
 | What / who / why clear in 5 s; one dominant CTA per page | Yes: "One wall. Six ways to move better.", the six genres, the 3 × 3 ft subhead, "Find your plan" |
 | Phone tappable on every page | Yes: header and footer `tel:` links on all 15 routes |
 | Real-phone mobile check | 390 px emulation: no horizontal overflow on any route, 18 px base type, 48 px tap targets |
-| Images compressed and sized | AVIF/WebP via next/image plus pre-generated sets; hero LCP image preloaded |
+| Images compressed and sized | AVIF/WebP via next/image plus pre-generated sets; the hero is drawn in SVG (no image) |
 | Lighthouse mobile performance | Home 87, product 92, professionals 93 (accessibility 96, best practices 100) |
 | Real founder photo | Slots ready; initials shown until the files are added (see above) |
 | Testimonials | Section built; hidden until real reviews are pasted |

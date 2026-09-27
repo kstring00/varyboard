@@ -1,6 +1,6 @@
 /**
  * A single hexagon cell. `lit` = mint glow (active, "you"); otherwise gray (dormant).
- * Pointy-top, so it sits on the same grid as HexEdge and the shader.
+ * Pointy-top, so it sits on the same grid as the rest of the site's honeycombs.
  */
 export function HexMark({ lit = false, size = 40, children, className = "" }: { lit?: boolean; size?: number; children?: React.ReactNode; className?: string }) {
   return (
