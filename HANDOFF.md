@@ -97,7 +97,7 @@ A three.js room planner ported from the client's prototype (kept at `reference/r
 
 ## Homepage sections, in order
 
-Hero (scroll-build) → Why it's different → What you can do → Who it's for → Find your plan → Will it fit? → The people behind it → Fits your space → In their words → Pricing.
+Hero (scroll-build) → Why it's different → What you can do → Who it's for → Find your plan → Will it fit? → The people behind it → In their words → Pricing.
 
 - **Why it's different** (`#clinic`, `content/clinic.ts`): the usual PT gym next to one wall, an illustration of one day of sessions (the page says it is not measured data). One CTA: the clinic request form (`/professionals#request`). The page's **Sources** list sits at the bottom of this section, from `content/sources.ts`.
 - **Genres** live in `content/genres.ts` (single source; the intake, hero and plan hexagon read from it). Clinical names are Eric's wording. Every health line is `rv("…")` and unreviewed until Eric signs it off. Anchor counts come from `content/facts.ts` through `{anchors}`-style tokens. Loosen (Joint Mobilizations) has no movements yet: its card shows "Coming soon from Dr. Eric" until the four fields are filled.
@@ -116,7 +116,22 @@ Hero (scroll-build) → Why it's different → What you can do → Who it's for 
 | Who it's for | `content/audiences.ts` |
 | The six genres | `content/genres.ts` |
 | Prices, specs, review count | `content/facts.ts` |
+| FAQ questions and answers | `content/faq.ts` |
 | All of the above, as a spreadsheet | `content/review.csv` (`npm run review:export`, then `review:import`) |
+
+## FAQ: one file, answered where the doubt starts
+
+Every question lives in `content/faq.ts`. Each entry lists its `placements` (the sections where it shows as a small question chip), whether it is `featured` in the FAQ section above the Buy block, its `status` and `reviewedByEric`.
+
+- **Production shows only `status: "verified"` entries with an answer.** Previews also show pending ones with a "Pending Eric" badge and "Waiting on Dr. Eric.", so the preview is Eric's review copy.
+- **To publish an answer:** write it in `a` (or in the "Eric's edit" column of `content/review.csv`, then `npm run review:import`), set `status: "verified"`, and once Eric has read it set `reviewedByEric: true`. Only verified and reviewed answers go into the FAQPage structured data.
+- At most 2 chips per section (3 in "Before you buy"), taken in file order: to change which show, reorder the file.
+- The 3 × 3 ft line in the hero is built from each placed entry's `fact`. Add the install fact once `install` is verified.
+- Analytics: `lib/track.ts` fires `faq_open` and `faq_more_click` as a window event ("vb:track"). No analytics library is installed; add `@vercel/analytics` there to send them.
+
+## Colours
+
+All colours are tokens in the `:root` block at the top of `app/globals.css`, one job each (the table is in the comments there). `lib/colors.ts` mirrors them for the OG images and the 3D room. `npm run check:colors` (part of the build) fails on a hard-coded hex anywhere else, on the mint progress colours used as text, and on the board's blue used off the board. The 3D room planner's material palette (`components/fit/scene.ts`, `content/rooms.ts`) is allowed.
 
 ## Content gate on Vercel
 

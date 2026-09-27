@@ -14,7 +14,7 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
       </label>
       <div className="mt-1.5">{children}</div>
       {error && (
-        <p id={`${id}-error`} className="mt-1.5 text-[0.95rem] font-medium text-[#9b3b2f]">
+        <p id={`${id}-error`} className="mt-1.5 text-[0.95rem] font-medium text-[var(--danger-text)]">
           {error}
         </p>
       )}
@@ -32,8 +32,8 @@ export function InquiryForm({ kind, page, defaultInterest }: { kind: FormKind; p
 
   if (state.status === "ok") {
     return (
-      <div role="status" className="rounded-2xl border border-teal/60 bg-teal-soft/60 p-6">
-        <h3 className="text-xl font-medium">Message sent</h3>
+      <div role="status" className="rounded-2xl border border-mint/60 bg-teal-soft/60 p-6">
+        <h3 className="text-xl font-semibold">Message sent</h3>
         <p className="mt-2 text-lg text-ink-2">{state.message}</p>
         <p className="mt-4 text-ink-2">
           Need something sooner? Call{" "}
@@ -103,7 +103,7 @@ export function InquiryForm({ kind, page, defaultInterest }: { kind: FormKind; p
       </Field>
 
       {state.status === "error" && (
-        <p role="alert" className="rounded-xl border border-[#e0b4ad] bg-[#fbeeec] px-4 py-3 font-medium text-[#7d2e24]">
+        <p role="alert" className="rounded-xl border border-[var(--danger-line)] bg-[var(--danger-wash)] px-4 py-3 font-medium text-[var(--danger-text)]">
           {state.message}
         </p>
       )}

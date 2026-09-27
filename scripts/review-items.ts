@@ -36,7 +36,7 @@ export interface ReviewItem {
   /** Group id: rows that share one reviewed flag (try-today fields). Equals id for single-field items. */
   group: string;
   lane: string;
-  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience" | "hero" | "clinic" | "who" | "review";
+  type: "truth" | "try today" | "week note" | "question" | "exercise" | "genre" | "audience" | "hero" | "clinic" | "who" | "faq" | "review";
   text: string;
   reviewed: boolean;
   file: string;
@@ -51,6 +51,7 @@ export const FILES = {
   audiences: path.join(process.cwd(), "content", "audiences.ts"),
   hero: path.join(process.cwd(), "content", "hero.ts"),
   clinic: path.join(process.cwd(), "content", "clinic.ts"),
+  faq: path.join(process.cwd(), "content", "faq.ts"),
   reviews: path.join(process.cwd(), "content", "reviews.ts"),
 };
 
@@ -223,6 +224,24 @@ export function collectItems(): ReviewItem[] {
   nested("content/hero.ts", FILES.hero, [["HERO", "hero"]]);
   nested("content/clinic.ts", FILES.clinic, [["CLINIC", "clinic"]]);
   nested("content/audiences.ts", FILES.audiences, [["WHO", "who"], ["AUDIENCES", "audience"]]);
+
+  // faq.ts FAQ[]: the answer `a` (empty until written) with the entry's `reviewedByEric`. An edit
+  // writes the answer; Y marks it reviewed. Publishing also needs status "verified" (HANDOFF.md).
+  {
+    const { sf: s4 } = parse(FILES.faq);
+    const arr = topLevel(s4, "FAQ") as ts.ArrayLiteralExpression;
+    for (const el of arr.elements) {
+      if (!ts.isObjectLiteralExpression(el)) continue;
+      const fid = (prop(el, "id") as ts.StringLiteral).text;
+      const q = (prop(el, "q") as ts.StringLiteral).text;
+      const aNode = prop(el, "a")!;
+      const status = (prop(el, "status") as ts.StringLiteral).text;
+      const { reviewed, flag } = boolProp(el, "reviewedByEric");
+      const a = (aNode as ts.StringLiteral).text;
+      const id = `faq:${fid}`;
+      items.push({ id, group: id, lane: "all", type: "faq", text: `${q} → ${a || "[answer needed]"}${status === "pending-eric" ? " (pending-eric)" : ""}`, reviewed: reviewed && status === "verified", file: "content/faq.ts", textSpan: strSpan(aNode), flag });
+    }
+  }
 
   // reviews.ts: an open ericQuestion on a review. Y = keep (question closed). Reviews are never
   // edited: the importer refuses text in "Eric's edit" for these rows; to remove, delete the entry.

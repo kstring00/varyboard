@@ -25,14 +25,14 @@ export default function VaryBoardXTPage() {
       addOn={{ label: `XT + Bands (${formatPrice(p.price + products.bands.price)})`, href: buyLinks.boardXTPlusBands, note: `Adds the ${products.bands.name}: ${products.bands.summary}` }}
       headline="More reach for taller users."
       intro={`Four modular sections stack to a ${p.specs[1].value} board. Made for ${board.heightGuidance.xt.replace("Users ", "people ")}, and for clinics that serve everyone. Same anchors, same ${board.material}, one more section.`}
-      faqIds={["size", "space", "install", "shipping", "clinics"]}
+      faqIds={["which-model", "floor-space", "install", "shipping", "clinics"]}
     >
       <UsesStrip />
       <section className="bg-paper py-12">
         <div className="container-site">
           <Reveal className="flex flex-col gap-4 rounded-3xl border border-line bg-white/60 p-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-xl font-medium">Under 6&apos;3&quot;?</h2>
+              <h2 className="text-xl font-semibold">Under 6&apos;3&quot;?</h2>
               <p className="mt-1 text-lg text-ink-2">
                 The standard {products.board.name} ({products.board.specs[1].value}) fits most adults.
               </p>

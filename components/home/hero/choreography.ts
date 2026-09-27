@@ -162,7 +162,8 @@ export function mountScrollBuild(build: HTMLElement): () => void {
         const p = document.createElementNS(SVG, "polygon");
         p.setAttribute("points", hexPts(x, r * dy, R * 0.92));
         p.setAttribute("fill", "none");
-        p.setAttribute("stroke", `rgba(63,157,192,${(0.05 + (x / w) * 0.12).toFixed(3)})`);
+        // Wall honeycomb: brand teal at low alpha (the product blue is reserved for the board itself).
+        p.setAttribute("stroke", `rgba(27,71,83,${(0.035 + (x / w) * 0.085).toFixed(3)})`);
         p.setAttribute("stroke-width", "1");
         frag.appendChild(p);
       }

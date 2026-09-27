@@ -4,6 +4,7 @@
  *   - exercises.ts rows with `approved: false` (the library's review flag)
  *   - genres.ts, audiences.ts, hero.ts and clinic.ts lines with `reviewedByEric: false` (homepage sections)
  *   - reviews.ts entries with an open `ericQuestion` (e.g. keep or remove?)
+ *   - faq.ts entries that are pending-eric or not yet reviewedByEric
  *
  * Exit code: 1 only on production builds (VERCEL_ENV=production) while anything is unreviewed.
  * Preview builds pass and show the "Draft, not reviewed by Eric" banner on affected pages.
@@ -14,6 +15,7 @@ import { unreviewedAudiences } from "../content/audiences";
 import { unreviewedClinic } from "../content/clinic";
 import { unreviewedHero } from "../content/hero";
 import { unreviewedGenres } from "../content/genres";
+import { unreviewedFaq } from "../content/faq";
 import { AREA_REFLECT, QUESTIONS, REFLECT, TRY_TODAY, WEEK_NOTES } from "../content/intake";
 import { openReviewQuestions } from "../content/reviews";
 
@@ -29,6 +31,7 @@ for (const c of unreviewedClinic()) items.push(`homepage      ${c}`);
 for (const g of unreviewedGenres()) items.push(`homepage      ${g}`);
 for (const a of unreviewedAudiences()) items.push(`homepage      ${a}`);
 for (const q of openReviewQuestions()) items.push(`review        ${q}`);
+for (const f of unreviewedFaq()) items.push(`faq           ${f}`);
 
 if (items.length === 0) {
   console.log("✓ every content item is reviewed");

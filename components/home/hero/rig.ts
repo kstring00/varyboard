@@ -58,7 +58,7 @@ export const lerpPose = (A: Pose, B: Pose, t: number): Pose => {
 };
 
 /** Rig colors: a neutral gray-teal figure. Placeholder illustrations, not people. */
-export const FIG = { base: "#A9BFC0", dark: "#7E999B", hi: "#DCE7E6" } as const;
+export const FIG = { base: "var(--fig-base)", dark: "var(--fig-dark)", hi: "var(--fig-hi)" } as const;
 
 /** Limb segments [from, to, width in inches], in paint order around the torso and head. */
 export const LEGS: [Joint, Joint, number][] = [["kb", "fb", 3.7], ["pb", "kb", 4.9], ["fb", "tb", 2.5], ["ka", "fa", 3.7], ["pa", "ka", 4.9], ["fa", "ta", 2.5], ["pa", "pb", 6.2]];

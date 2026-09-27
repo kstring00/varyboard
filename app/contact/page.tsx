@@ -22,11 +22,11 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         <div className="space-y-4">
           <a href={brand.phoneHref} className="block rounded-2xl border border-line bg-white/60 p-6 no-underline transition-colors hover:border-teal-deep">
             <span className="eyebrow">Call</span>
-            <span className="mt-1 block text-xl font-semibold text-teal-deep">{brand.phone}</span>
+            <span className="mt-1 block text-xl font-semibold text-accent">{brand.phone}</span>
           </a>
           <a href={`mailto:${brand.email}`} className="block rounded-2xl border border-line bg-white/60 p-6 no-underline transition-colors hover:border-teal-deep">
             <span className="eyebrow">Email</span>
-            <span className="mt-1 block break-all text-xl font-semibold text-teal-deep">{brand.email}</span>
+            <span className="mt-1 block break-all text-xl font-semibold text-accent">{brand.email}</span>
           </a>
           <div className="rounded-2xl border border-line bg-white/60 p-6">
             <span className="eyebrow">Clinics</span>

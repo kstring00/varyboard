@@ -28,7 +28,7 @@ export function Portrait({ person, size = "lg" }: { person: (typeof founders)[ke
   // Portrait not supplied yet: a quiet monogram tile. Never a stock photo, never an invented person.
   return (
     <div className={`grid ${box} place-items-center rounded-2xl bg-teal-soft text-teal-deep shadow-soft`} role="img" aria-label={`${person.name} (portrait coming)`}>
-      <span className="font-display text-5xl font-medium">{initials}</span>
+      <span className="font-display text-5xl font-semibold">{initials}</span>
     </div>
   );
 }
@@ -46,8 +46,8 @@ export function People() {
             <Reveal key={p.name} delay={i * 120} className="grid gap-6 sm:grid-cols-[minmax(0,200px)_1fr] sm:items-start">
               <Portrait person={p} />
               <div>
-                <h3 className="text-2xl font-medium">{p.name}</h3>
-                <p className="mt-1 font-semibold text-teal-deep">{p.credentialsSpelledOut}</p>
+                <h3 className="text-2xl font-semibold">{p.name}</h3>
+                <p className="mt-1 font-semibold text-accent">{p.credentialsSpelledOut}</p>
                 <p className="text-ink-2">{p.role}</p>
                 <ul className="mt-4 space-y-2 text-lg text-ink-2">
                   {p.lines.map((l) => (

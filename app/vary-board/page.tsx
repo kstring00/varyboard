@@ -25,14 +25,14 @@ export default function VaryBoardPage() {
       addOn={{ label: `Board + Bands (${formatPrice(p.price + products.bands.price)})`, href: buyLinks.boardPlusBands, note: `Adds the ${products.bands.name}: ${products.bands.summary}` }}
       headline="The board for most adults."
       intro={`Three modular sections stack to a ${p.specs[1].value} board on your wall. ${board.anchorPointsPerSection} hexagonal anchor points per section for bands and handholds. ${board.material}, indoors or out.`}
-      faqIds={["size", "space", "install", "shipping", "discount"]}
+      faqIds={["which-model", "floor-space", "install", "shipping", "military-discount"]}
     >
       <UsesStrip />
       <section className="bg-paper py-12">
         <div className="container-site">
           <Reveal className="flex flex-col gap-4 rounded-3xl border border-line bg-white/60 p-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-xl font-medium">{board.heightGuidance.xt}?</h2>
+              <h2 className="text-xl font-semibold">{board.heightGuidance.xt}?</h2>
               <p className="mt-1 text-lg text-ink-2">
                 The {products.boardXT.name} adds a fourth section for a {products.boardXT.specs[1].value} board.
               </p>

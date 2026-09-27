@@ -1,13 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { figtree } from "@/lib/fonts";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { StickyBuyBar } from "@/components/site/StickyBuyBar";
-import { MotionProvider } from "@/components/motion/MotionProvider";
+import { AnchorLayout } from "@/components/site/AnchorLayout";
 import { brand } from "@/content/facts";
 import { isLaunched } from "@/lib/env";
 import { siteUrl } from "@/lib/site";
+import { COLORS } from "@/lib/colors";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,25 +40,24 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   // Pinch-zoom stays allowed on purpose (no maximumScale / userScalable=no).
-  themeColor: "#f7f6f2",
+  themeColor: COLORS.bg,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable}`}>
+    <html lang="en" className={figtree.variable}>
       <body className="flex min-h-dvh flex-col">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
-        <MotionProvider>
-          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-teal-deep focus:px-5 focus:py-3 focus:text-white">
-            Skip to content
-          </a>
-          <Header />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-          <StickyBuyBar />
-        </MotionProvider>
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-teal-deep focus:px-5 focus:py-3 focus:text-white">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
+        <StickyBuyBar />
+        <AnchorLayout />
       </body>
     </html>
   );

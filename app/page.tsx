@@ -7,8 +7,8 @@ import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
 import { FitSection } from "@/components/fit/FitSection";
 import { People } from "@/components/home/People";
 import { Testimonials } from "@/components/home/Testimonials";
-import { FitsYourSpace } from "@/components/home/FitsYourSpace";
 import { PriceCta } from "@/components/home/PriceCta";
+import { FaqSection } from "@/components/faq/FaqSection";
 import { brand, formatPrice, products } from "@/content/facts";
 
 export const metadata: Metadata = {
@@ -28,8 +28,8 @@ export default function HomePage() {
       <FindYourPlan />
       <FitSection />
       <People />
-      <FitsYourSpace />
       <Testimonials />
+      <FaqSection />
       <PriceCta />
     </>
   );

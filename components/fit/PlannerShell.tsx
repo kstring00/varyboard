@@ -12,14 +12,14 @@ export const SPACE = board.minSpacePerUser.replace("x", "×");
 
 const HexOk = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-    <path d="M10 1.5 17.4 5.75v8.5L10 18.5 2.6 14.25v-8.5Z" fill="#E1EFEC" stroke="#2D6A60" strokeWidth="1.4" />
-    <path d="m6.6 10.2 2.3 2.3 4.6-4.9" fill="none" stroke="#1E4D46" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M10 1.5 17.4 5.75v8.5L10 18.5 2.6 14.25v-8.5Z" fill="var(--progress-wash)" stroke="var(--progress)" strokeWidth="1.4" />
+    <path d="m6.6 10.2 2.3 2.3 4.6-4.9" fill="none" stroke="var(--brand)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 const HexBad = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-    <path d="M10 1.5 17.4 5.75v8.5L10 18.5 2.6 14.25v-8.5Z" fill="#F7E4DF" stroke="#AE3F2E" strokeWidth="1.4" />
-    <path d="m7.4 7.4 5.2 5.2m0-5.2-5.2 5.2" fill="none" stroke="#AE3F2E" strokeWidth="1.8" strokeLinecap="round" />
+    <path d="M10 1.5 17.4 5.75v8.5L10 18.5 2.6 14.25v-8.5Z" fill="var(--danger-wash)" stroke="var(--danger)" strokeWidth="1.4" />
+    <path d="m7.4 7.4 5.2 5.2m0-5.2-5.2 5.2" fill="none" stroke="var(--danger)" strokeWidth="1.8" strokeLinecap="round" />
   </svg>
 );
 

@@ -34,6 +34,7 @@ import {
   WebGLRenderer,
   type BufferGeometry,
 } from "three";
+import { COLORS } from "@/lib/colors";
 import { fitPlanner } from "@/content/config";
 import { board } from "@/content/facts";
 import { roomByKey, type Material, type Piece, type RoomDef, type Side, type WallPiece } from "@/content/rooms";
@@ -511,7 +512,7 @@ export function createPlanner(o: PlannerOptions): Planner | null {
 
   const reduce = o.reduceMotion;
   const scene = new Scene();
-  scene.background = new Color("#E8E5DE");
+  scene.background = new Color(COLORS.fitStage);
   const camera = new PerspectiveCamera(38, 1, 1, 6000);
 
   const hemi = new HemisphereLight(0xffffff, 0xd8d1c3, 0.85 * LEGACY);
@@ -612,7 +613,7 @@ export function createPlanner(o: PlannerOptions): Planner | null {
   /* ---- board ---- */
   let modelKey: ModelKey = o.model;
   const model = () => MODELS[modelKey];
-  const platformMat = std("#62BBA6", 0.45, { emissive: new Color("#9FE3D0"), emissiveIntensity: 0 });
+  const platformMat = std(COLORS.product, 0.45, { emissive: new Color("#9FE3D0"), emissiveIntensity: 0 });
   const backerMat = std("#2B4F4A", 0.7);
   const screwMat = std("#1D2B29", 0.35, { metalness: 0.6 });
   const SECTION_GEO = sectionGeometry();

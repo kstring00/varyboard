@@ -3,6 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { AUDIENCES, WHO, audienceAnchor, unreviewedAudiences, type Audience } from "@/content/audiences";
 import { SOURCES } from "@/content/sources";
 import { TeamPricing } from "./TeamPricing";
+import { InlineFaq } from "@/components/faq/InlineFaq";
 
 /**
  * WHO IT'S FOR (#who-its-for), built first for those who served: a teal DoD & VA block (about 70%
@@ -23,7 +24,7 @@ function MilComb() {
   return (
     <svg className="who-mil__comb" viewBox="0 0 320 320" aria-hidden="true" focusable="false">
       {cells.map((c) => (
-        <polygon key={`${c.x}-${c.y}`} points={hexPts(c.x, c.y, R * 0.92)} fill={c.fill ? "rgba(158,214,198,.9)" : "none"} stroke="#9ED6C6" strokeWidth={1.2} />
+        <polygon key={`${c.x}-${c.y}`} points={hexPts(c.x, c.y, R * 0.92)} fill={c.fill ? "rgba(158,214,198,.9)" : "none"} stroke="var(--progress-soft)" strokeWidth={1.2} />
       ))}
     </svg>
   );
@@ -66,6 +67,7 @@ export function WhoItsFor() {
               <p className="who-mil__note">
                 {m.coverage.value} {m.discount}
               </p>
+              <InlineFaq placement="military" tone="dark" className="who-mil__faq" />
             </div>
           </Reveal>
           <ul className="who__slim">
@@ -80,6 +82,7 @@ export function WhoItsFor() {
                   </a>
                 )}
                 <CardCta a={a} />
+                {a.key === "athletes" && <InlineFaq placement="athletes" className="who-card__faq" />}
               </li>
             ))}
           </ul>

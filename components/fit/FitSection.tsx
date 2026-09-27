@@ -3,6 +3,7 @@ import { fitPlanner } from "@/content/config";
 import { board, products } from "@/content/facts";
 import { SNAPS_TO_STUDS } from "@/lib/fit";
 import { RoomPlannerLazy } from "./RoomPlannerLazy";
+import { InlineFaq } from "@/components/faq/InlineFaq";
 
 export const FIT_ANCHOR = "will-it-fit";
 
@@ -32,6 +33,7 @@ export function FitSection({ standalone = false }: { standalone?: boolean }) {
         <p className="fit__note">
           Board drawn to spec: each section is {s.heightIn} × {s.widthIn} × {s.depthIn} in with {board.anchorPointsPerSection} hexagon anchor points. The {products.board.name} stacks {products.board.sections} sections to {products.board.heightIn} in; the XT stacks {products.boardXT.sections} to {products.boardXT.heightIn} in. Shown mounted {fitPlanner.mountBottomIn} in above the floor. Rooms and furniture are for scale.
         </p>
+        <InlineFaq placement="fit" className="fit__faq" />
       </div>
     </section>
   );

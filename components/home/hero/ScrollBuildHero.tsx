@@ -8,6 +8,7 @@ import { BoardSvg } from "./BoardSvg";
 import { GenreRing, GenreRingBackground } from "./GenreRing";
 import { ScrollBuildStage } from "./ScrollBuildStage";
 import { StakesHexes } from "./StakesHexes";
+import { InlineFact } from "@/components/faq/InlineFact";
 
 /**
  * HERO: the scroll-build (reference/varyboard-scroll-build.html). A 760vh section with a sticky
@@ -110,6 +111,7 @@ export function ScrollBuildHero() {
               <h2>{fill(space.headline.value)}</h2>
               <p>{fill(space.lead.value)}</p>
               <p>{space.swap.value}.</p>
+              <InlineFact placement="space" />
               <p>{served.eyebrow}</p>
               <h2>{served.headline.value}</h2>
               <ul>
@@ -163,6 +165,7 @@ export function ScrollBuildHero() {
                   <span key={it}>{it}</span>
                 ))}
               </p>
+              <InlineFact placement="space" className="sb-fact" />
             </div>
 
             <div className="sb-beat" data-b="3" aria-hidden="true">
